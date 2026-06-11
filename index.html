@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edu Partner — Acelerando tus sueños | Sorteos de Autos de Lujo</title>
+<meta name="description" content="Gana el auto de tus sueños. Sorteos oficiales de autos de lujo, en vivo y 100% transparentes. Tu ticket al éxito está aquí.">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   EDU PARTNER — DARK LUXURY AUTOMOTIVE
+   Paleta: #CC0000 / #8C0000 / #000000 / #1A1A1A / #4D4D4D / #FFFFFF
+   ============================================================ */
+
+:root{
+  --red:#CC0000;
+  --red-deep:#8C0000;
+  --black:#000000;
+  --near-black:#1A1A1A;
+  --slate:#4D4D4D;
+  --white:#FFFFFF;
+  --font-display:'Barlow Condensed',sans-serif;
+  --font-primary:'Montserrat',sans-serif;
+  --font-secondary:'Inter',sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:var(--font-secondary);
+  font-weight:300;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--font-primary);cursor:pointer;border:none;background:none;color:inherit}
+input{font-family:var(--font-secondary)}
+
+::selection{background:var(--red);color:var(--white)}
+
+/* ---------- Utilidades ---------- */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+.section{padding:100px 0}
+
+.section-title{
+  font-family:var(--font-display);
+  font-weight:900;
+  font-size:clamp(40px,5vw,64px);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  line-height:1;
+  margin-bottom:16px;
+}
+.section-title .dot{color:var(--red)}
+
+.title-line{
+  width:80px;height:4px;background:var(--red);
+  margin:0 0 48px;border-radius:2px;
+}
+.title-line.center{margin-left:auto;margin-right:auto}
+
+.text-center{text-align:center}
+
+.eyebrow{
+  font-family:var(--font-primary);
+  font-weight:700;font-size:13px;
+  text-transform:uppercase;letter-spacing:4px;
+  color:var(--red);margin-bottom:12px;display:block;
+}
+
+/* ---------- Botones ---------- */
+.btn{
+  display:inline-block;
+  font-family:var(--font-primary);
+  font-weight:700;font-size:15px;
+  text-transform:uppercase;letter-spacing:2px;
+  padding:16px 36px;
+  border-radius:4px;
+  transition:all .25s ease;
+  text-align:center;
+}
+.btn-primary{
+  background:var(--red);color:var(--white);
+  box-shadow:0 0 24px rgba(204,0,0,.35);
+}
+.btn-primary:hover{
+  background:var(--red-deep);
+  transform:translateY(-2px);
+  box-shadow:0 6px 32px rgba(204,0,0,.5);
+}
+.btn-ghost{
+  background:transparent;color:var(--white);
+  border:2px solid var(--white);
+}
+.btn-ghost:hover{border-color:var(--red);color:var(--red)}
+.btn:disabled,.btn[disabled]{
+  background:var(--slate);color:rgba(255,255,255,.5);
+  cursor:not-allowed;box-shadow:none;transform:none;
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:64px;
+  display:flex;align-items:center;
+  background:transparent;
+  transition:background .3s ease,box-shadow .3s ease;
+}
+.navbar.scrolled{
+  background:var(--black);
+  box-shadow:0 2px 20px rgba(0,0,0,.8);
+  border-bottom:1px solid rgba(204,0,0,.3);
+}
+.nav-inner{
+  width:100%;max-width:1280px;margin:0 auto;padding:0 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nav-logo .wordmark{
+  font-family:var(--font-display);font-weight:800;
+  font-size:22px;text-transform:uppercase;letter-spacing:1px;
+}
+.nav-logo .wordmark span{color:var(--red)}
+
+.live-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-primary);font-weight:700;font-size:11px;
+  color:var(--red);letter-spacing:2px;text-transform:uppercase;
+  border:1px solid var(--red);border-radius:99px;
+  padding:3px 10px;margin-left:8px;white-space:nowrap;
+}
+.live-badge .pulse{
+  width:8px;height:8px;border-radius:50%;background:var(--red);
+  animation:pulse 1.2s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(204,0,0,.6)}
+  50%{opacity:.4;box-shadow:0 0 0 6px rgba(204,0,0,0)}
+}
+
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{
+  font-family:var(--font-primary);font-weight:600;font-size:13px;
+  text-transform:uppercase;letter-spacing:1.5px;
+  color:var(--white);transition:color .2s;
+  position:relative;
+}
+.nav-links a:hover{color:var(--red)}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:-6px;
+  width:0;height:2px;background:var(--red);transition:width .25s;
+}
+.nav-links a:hover::after{width:100%}
+
+.nav-ctas{display:flex;align-items:center;gap:12px}
+.btn-nav-ghost{
+  font-weight:600;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:9px 18px;border:1px solid var(--slate);border-radius:4px;
+  color:var(--white);transition:all .2s;
+}
+.btn-nav-ghost:hover{border-color:var(--white)}
+.btn-nav-primary{
+  font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:10px 20px;background:var(--red);border-radius:4px;color:var(--white);
+  transition:background .2s;
+}
+.btn-nav-primary:hover{background:var(--red-deep)}
+
+/* Hamburger */
+.hamburger{display:none;flex-direction:column;gap:5px;padding:8px;z-index:1102}
+.hamburger span{width:26px;height:2px;background:var(--white);transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile menu */
+.mobile-menu{
+  position:fixed;top:0;right:-100%;width:min(320px,85vw);height:100vh;
+  background:var(--near-black);z-index:1101;
+  display:flex;flex-direction:column;gap:8px;
+  padding:96px 32px 32px;
+  transition:right .35s cubic-bezier(.4,0,.2,1);
+  border-left:2px solid var(--red);
+  box-shadow:-10px 0 40px rgba(0,0,0,.8);
+}
+.mobile-menu.open{right:0}
+.mobile-menu a{
+  font-family:var(--font-display);font-weight:700;font-size:26px;
+  text-transform:uppercase;letter-spacing:1px;
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08);
+  transition:color .2s,padding-left .2s;
+}
+.mobile-menu a:hover{color:var(--red);padding-left:8px}
+.mobile-menu .btn-primary{margin-top:24px}
+.menu-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1100;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.menu-overlay.open{opacity:1;pointer-events:auto}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 110%, rgba(140,0,0,.55) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(204,0,0,.12) 0%, transparent 70%),
+    linear-gradient(180deg,#000 0%,#0d0203 55%,#1a0405 100%);
+  overflow:hidden;
+}
+/* Líneas de velocidad decorativas */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(105deg,transparent 0 140px,rgba(255,255,255,.018) 140px 142px);
+  pointer-events:none;
+}
+.hero-overlay-bottom{
+  position:absolute;left:0;right:0;bottom:0;height:200px;
+  background:linear-gradient(180deg,transparent,var(--black));
+  pointer-events:none;
+}
+.hero-car{
+  position:absolute;bottom:6%;left:50%;transform:translateX(-50%);
+  width:min(720px,90vw);opacity:.35;pointer-events:none;
+  filter:drop-shadow(0 0 60px rgba(204,0,0,.4));
+}
+.hero-content{position:relative;z-index:2;padding:120px 24px 80px;max-width:980px}
+.hero h1{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(48px,7.5vw,80px);
+  line-height:.95;text-transform:uppercase;
+  letter-spacing:1px;
+  text-shadow:0 4px 40px rgba(0,0,0,.8);
+}
+.hero h1 .red{color:var(--red)}
+.hero-sub{
+  font-family:var(--font-primary);font-weight:600;
+  font-size:clamp(16px,2vw,22px);
+  letter-spacing:3px;text-transform:uppercase;
+  margin-top:16px;color:rgba(255,255,255,.85);
+}
+.hero-sub .dot{color:var(--red);font-size:1.4em}
+
+/* Countdown */
+.countdown{
+  display:flex;justify-content:center;gap:14px;
+  margin:44px 0 32px;flex-wrap:wrap;
+}
+.cd-block{
+  background:rgba(0,0,0,.7);
+  border:2px solid var(--red);
+  border-radius:8px;
+  min-width:92px;padding:14px 10px 10px;
+  box-shadow:0 0 20px rgba(204,0,0,.25), inset 0 0 16px rgba(204,0,0,.08);
+}
+.cd-num{
+  font-family:'Courier New',monospace;font-weight:700;
+  font-size:clamp(34px,4.5vw,48px);line-height:1;
+  color:var(--white);text-shadow:0 0 14px rgba(204,0,0,.7);
+}
+.cd-label{
+  font-family:var(--font-primary);font-weight:600;font-size:11px;
+  text-transform:uppercase;letter-spacing:2px;color:var(--red);margin-top:6px;
+}
+
+/* Barra de progreso hero */
+.progress-wrap{max-width:520px;margin:0 auto 36px}
+.progress-label{
+  display:flex;justify-content:space-between;
+  font-family:var(--font-primary);font-weight:600;font-size:13px;
+  letter-spacing:1px;margin-bottom:8px;
+}
+.progress-label .pct{color:var(--red)}
+.progress-bar{
+  height:10px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;
+  border:1px solid rgba(204,0,0,.4);
+}
+.progress-fill{
+  height:100%;width:0;
+  background:linear-gradient(90deg,var(--red-deep),var(--red));
+  border-radius:99px;
+  transition:width 1.6s cubic-bezier(.22,1,.36,1);
+  box-shadow:0 0 12px rgba(204,0,0,.8);
+}
+
+.hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+/* Scroll indicator */
+.scroll-indicator{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(255,255,255,.5);font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  font-family:var(--font-primary);
+}
+.scroll-indicator .mouse{
+  width:24px;height:38px;border:2px solid rgba(255,255,255,.4);border-radius:14px;
+  position:relative;
+}
+.scroll-indicator .mouse::after{
+  content:'';position:absolute;top:7px;left:50%;transform:translateX(-50%);
+  width:4px;height:8px;background:var(--red);border-radius:2px;
+  animation:scrollDot 1.6s infinite;
+}
+@keyframes scrollDot{
+  0%{opacity:1;top:7px}
+  70%{opacity:0;top:20px}
+  100%{opacity:0;top:7px}
+}
+
+/* ============================================================
+   SECCIÓN 2 — SORTEO ACTIVO
+   ============================================================ */
+.sorteo-grid{
+  display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;
+}
+.car-visual{
+  position:relative;border-radius:12px;overflow:hidden;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 65%, rgba(204,0,0,.3) 0%, transparent 70%),
+    linear-gradient(145deg,#1A1A1A 0%,#000 60%,#1a0405 100%);
+  border:1px solid rgba(255,255,255,.08);
+  aspect-ratio:16/10;
+  display:flex;align-items:center;justify-content:center;
+}
+.car-visual svg{width:78%;filter:drop-shadow(0 12px 30px rgba(0,0,0,.9))}
+.car-visual .tag{
+  position:absolute;top:16px;left:16px;
+  background:var(--red);color:var(--white);
+  font-family:var(--font-primary);font-weight:700;font-size:11px;
+  letter-spacing:2px;text-transform:uppercase;
+  padding:6px 14px;border-radius:4px;
+}
+
+.sorteo-info .sorteo-name{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(36px,4vw,52px);line-height:1;text-transform:uppercase;
+}
+.sorteo-info .sorteo-value{
+  font-family:var(--font-primary);font-weight:700;font-size:18px;
+  color:var(--red);margin:8px 0 28px;letter-spacing:1px;
+}
+
+.specs{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:28px;
+}
+.spec{
+  background:var(--near-black);border:1px solid rgba(255,255,255,.07);
+  border-radius:8px;padding:14px 16px;
+  display:flex;align-items:center;gap:12px;
+}
+.spec .ico{font-size:22px;line-height:1}
+.spec .spec-label{font-size:11px;color:var(--slate);text-transform:uppercase;letter-spacing:1.5px;font-family:var(--font-primary);font-weight:600}
+.spec .spec-val{font-family:var(--font-primary);font-weight:700;font-size:15px;color:var(--white)}
+
+.sorteo-meta{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  font-size:13px;color:rgba(255,255,255,.7);margin:10px 0 24px;
+}
+.sorteo-meta strong{color:var(--white);font-family:var(--font-primary)}
+
+.sorteo-price-row{
+  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:28px;
+}
+.sorteo-price{
+  font-family:var(--font-display);font-weight:900;font-size:44px;color:var(--white);line-height:1;
+}
+.sorteo-price small{font-size:16px;color:var(--slate);font-family:var(--font-primary);font-weight:600}
+.sorteo-date{
+  font-family:var(--font-primary);font-weight:600;font-size:13px;
+  color:var(--red);letter-spacing:1px;text-transform:uppercase;
+}
+
+/* ============================================================
+   SECCIÓN 3 — CÓMO FUNCIONA
+   ============================================================ */
+.como-funciona{
+  background:
+    repeating-linear-gradient(90deg,transparent 0 80px,rgba(255,255,255,.015) 80px 82px),
+    var(--near-black);
+  border-top:1px solid rgba(204,0,0,.2);
+  border-bottom:1px solid rgba(204,0,0,.2);
+}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:56px}
+.step{
+  position:relative;padding:36px 28px;
+  background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.07);
+  border-radius:12px;
+  transition:transform .3s,border-color .3s;
+}
+.step:hover{transform:translateY(-6px);border-color:rgba(204,0,0,.5)}
+.step-num{
+  font-family:var(--font-display);font-weight:900;font-size:72px;line-height:1;
+  color:var(--red);opacity:.9;
+}
+.step-ico{font-size:34px;margin:14px 0 10px}
+.step h3{
+  font-family:var(--font-display);font-weight:800;font-size:26px;
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;
+}
+.step p{font-size:14px;color:rgba(255,255,255,.65)}
+
+.como-cta{
+  margin-top:64px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:20px;
+}
+.como-cta p{
+  font-family:var(--font-display);font-weight:700;font-size:30px;text-transform:uppercase;
+}
+.como-cta p span{color:var(--red)}
+
+/* ============================================================
+   SECCIÓN 4 — PREMIOS
+   ============================================================ */
+.premio-main{
+  position:relative;border-radius:16px;overflow:hidden;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 80%, rgba(140,0,0,.5) 0%, transparent 65%),
+    linear-gradient(160deg,#111 0%,#000 70%);
+  border:1px solid rgba(204,0,0,.35);
+  padding:64px 40px 48px;text-align:center;margin-bottom:32px;
+}
+.premio-badge{
+  display:inline-block;background:var(--red);color:var(--white);
+  font-family:var(--font-primary);font-weight:800;font-size:14px;
+  letter-spacing:2px;padding:10px 24px;border-radius:99px;
+  margin-bottom:24px;text-transform:uppercase;
+  box-shadow:0 0 28px rgba(204,0,0,.5);
+}
+.premio-main h3{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(48px,7vw,88px);line-height:.95;text-transform:uppercase;
+}
+.premio-main .premio-car{width:min(560px,85%);margin:32px auto 8px;opacity:.9}
+
+.premio-specs{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:16px;
+  max-width:680px;margin:32px auto 0;
+}
+.premio-specs .spec{background:rgba(255,255,255,.04)}
+
+.premios-secundarios{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px}
+.premio-card{
+  background:var(--near-black);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:32px;text-align:center;
+  transition:border-color .3s,transform .3s;
+}
+.premio-card:hover{border-color:rgba(204,0,0,.5);transform:translateY(-4px)}
+.premio-card .place{
+  font-family:var(--font-display);font-weight:900;font-size:20px;
+  color:var(--red);letter-spacing:2px;text-transform:uppercase;
+}
+.premio-card h4{
+  font-family:var(--font-display);font-weight:800;font-size:32px;
+  text-transform:uppercase;margin:10px 0 6px;
+}
+.premio-card p{font-size:14px;color:rgba(255,255,255,.6)}
+
+.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.galeria-item{
+  position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:center;
+}
+.galeria-item:nth-child(1){background:linear-gradient(135deg,#1a0405,#000 70%)}
+.galeria-item:nth-child(2){background:linear-gradient(135deg,#1A1A1A,#000 70%)}
+.galeria-item:nth-child(3){background:linear-gradient(135deg,#2a0608,#000 70%)}
+.galeria-item .gal-num{
+  font-family:var(--font-display);font-weight:900;font-size:64px;
+  color:rgba(255,255,255,.08);
+}
+.galeria-item .gal-label{
+  position:absolute;bottom:12px;left:16px;
+  font-family:var(--font-primary);font-weight:600;font-size:12px;
+  letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.5);
+}
+
+/* ============================================================
+   SECCIÓN 5 — CHECKOUT
+   ============================================================ */
+.checkout{background:var(--near-black);border-top:1px solid rgba(204,0,0,.2)}
+.checkout-grid{
+  display:grid;grid-template-columns:1.5fr 1fr;gap:48px;align-items:start;margin-top:48px;
+}
+
+/* Paquetes */
+.paquetes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.paquete{
+  position:relative;background:var(--black);
+  border:2px solid rgba(255,255,255,.12);border-radius:10px;
+  padding:28px 16px 22px;text-align:center;cursor:pointer;
+  transition:all .25s;
+}
+.paquete:hover{border-color:rgba(204,0,0,.6)}
+.paquete.selected{
+  border-color:var(--red);
+  background:rgba(204,0,0,.08);
+  box-shadow:0 0 24px rgba(204,0,0,.25);
+}
+.paquete.featured{border-width:3px;border-color:rgba(204,0,0,.6)}
+.paquete .pq-badge{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--red);color:var(--white);
+  font-family:var(--font-primary);font-weight:800;font-size:10px;
+  letter-spacing:1.5px;padding:4px 12px;border-radius:99px;white-space:nowrap;
+  text-transform:uppercase;
+}
+.paquete .pq-badge.alt{background:var(--white);color:var(--black)}
+.paquete .pq-qty{
+  font-family:var(--font-display);font-weight:900;font-size:44px;line-height:1;
+}
+.paquete .pq-unit{
+  font-family:var(--font-primary);font-weight:600;font-size:11px;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--slate);margin:4px 0 10px;
+}
+.paquete .pq-price{
+  font-family:var(--font-primary);font-weight:800;font-size:19px;color:var(--red);
+}
+
+/* Cantidad manual */
+.qty-row{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  background:var(--black);border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;padding:16px 20px;margin-bottom:32px;flex-wrap:wrap;
+}
+.qty-row .qty-label{font-family:var(--font-primary);font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.qty-controls{display:flex;align-items:center;gap:0;border:1px solid var(--slate);border-radius:6px;overflow:hidden}
+.qty-btn{
+  width:44px;height:44px;background:var(--near-black);color:var(--white);
+  font-size:22px;font-weight:700;transition:background .2s;
+  display:flex;align-items:center;justify-content:center;
+}
+.qty-btn:hover{background:var(--red)}
+.qty-input{
+  width:70px;height:44px;background:var(--black);color:var(--white);
+  border:none;border-left:1px solid var(--slate);border-right:1px solid var(--slate);
+  text-align:center;font-family:var(--font-primary);font-weight:700;font-size:18px;
+  -moz-appearance:textfield;
+}
+.qty-input::-webkit-inner-spin-button,.qty-input::-webkit-outer-spin-button{-webkit-appearance:none}
+.qty-total{
+  font-family:var(--font-display);font-weight:900;font-size:30px;
+}
+.qty-total span{color:var(--red)}
+
+/* Formulario */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.form-field{display:flex;flex-direction:column;gap:6px}
+.form-field.full{grid-column:1/-1}
+.form-field label{
+  font-family:var(--font-primary);font-weight:600;font-size:12px;
+  letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.7);
+}
+.form-field input{
+  background:var(--black);border:1px solid rgba(255,255,255,.15);
+  border-radius:6px;padding:14px 16px;color:var(--white);font-size:15px;
+  transition:border-color .2s,box-shadow .2s;
+}
+.form-field input:focus{
+  outline:none;border-color:var(--red);
+  box-shadow:0 0 0 3px rgba(204,0,0,.15);
+}
+.form-field input.error{border-color:var(--red);background:rgba(204,0,0,.06)}
+.field-error{font-size:12px;color:var(--red);display:none}
+.form-field.invalid .field-error{display:block}
+
+/* Métodos de pago */
+.pay-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.pay-tab{
+  background:var(--black);border:1px solid rgba(255,255,255,.15);
+  border-radius:6px;padding:14px 8px;
+  font-family:var(--font-primary);font-weight:700;font-size:13px;
+  letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.7);
+  transition:all .2s;
+}
+.pay-tab:hover{border-color:rgba(204,0,0,.5);color:var(--white)}
+.pay-tab.active{border-color:var(--red);background:rgba(204,0,0,.1);color:var(--white)}
+.pay-panel{
+  display:none;background:var(--black);border:1px solid rgba(255,255,255,.08);
+  border-radius:8px;padding:20px;font-size:14px;color:rgba(255,255,255,.75);
+  margin-bottom:28px;
+}
+.pay-panel.active{display:block}
+.pay-panel strong{color:var(--white);font-family:var(--font-primary)}
+.pay-panel ul{list-style:none;margin-top:8px}
+.pay-panel li{padding:4px 0;border-bottom:1px dashed rgba(255,255,255,.08)}
+.pay-panel li:last-child{border:none}
+
+/* Checkbox términos */
+.terms-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:24px}
+.terms-row input[type=checkbox]{
+  appearance:none;width:22px;height:22px;flex-shrink:0;margin-top:2px;
+  border:2px solid var(--slate);border-radius:4px;cursor:pointer;
+  position:relative;transition:all .2s;background:var(--black);
+}
+.terms-row input[type=checkbox]:checked{background:var(--red);border-color:var(--red)}
+.terms-row input[type=checkbox]:checked::after{
+  content:'✓';position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--white);font-size:14px;font-weight:700;
+}
+.terms-row label{font-size:13px;color:rgba(255,255,255,.7);cursor:pointer}
+.terms-row a{color:var(--red);text-decoration:underline}
+
+.trust-badges{
+  display:flex;justify-content:center;gap:8px;flex-wrap:wrap;
+  margin-top:18px;font-size:12px;color:rgba(255,255,255,.55);
+  font-family:var(--font-primary);font-weight:600;letter-spacing:.5px;
+}
+
+/* Resumen sticky */
+.order-summary{
+  position:sticky;top:88px;
+  background:var(--black);border:1px solid rgba(204,0,0,.4);
+  border-radius:12px;padding:28px;
+}
+.order-summary h3{
+  font-family:var(--font-display);font-weight:800;font-size:26px;
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.1);
+}
+.summary-row{
+  display:flex;justify-content:space-between;font-size:14px;
+  padding:8px 0;color:rgba(255,255,255,.75);
+}
+.summary-row strong{color:var(--white);font-family:var(--font-primary)}
+.summary-total{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-top:14px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);
+}
+.summary-total .lbl{font-family:var(--font-primary);font-weight:700;font-size:14px;letter-spacing:2px;text-transform:uppercase}
+.summary-total .amt{font-family:var(--font-display);font-weight:900;font-size:38px;color:var(--red)}
+.summary-note{font-size:12px;color:var(--slate);margin-top:12px;text-align:center}
+
+/* ============================================================
+   SECCIÓN 6 — GANADORES
+   ============================================================ */
+.stats-row{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  margin:48px 0 64px;text-align:center;
+}
+.stat .stat-num{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(44px,5vw,64px);line-height:1;color:var(--red);
+}
+.stat .stat-label{
+  font-family:var(--font-primary);font-weight:600;font-size:13px;
+  letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:8px;
+}
+
+.ganadores-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.ganador-card{
+  background:var(--near-black);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;overflow:hidden;
+  transition:transform .3s,border-color .3s;
+}
+.ganador-card:hover{transform:translateY(-6px);border-color:rgba(204,0,0,.5)}
+.ganador-photo{
+  height:170px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-weight:900;font-size:72px;
+  color:rgba(255,255,255,.9);text-shadow:0 4px 20px rgba(0,0,0,.6);
+}
+.ganador-photo.g1{background:linear-gradient(135deg,var(--red-deep),#2a0507)}
+.ganador-photo.g2{background:linear-gradient(135deg,#333,#0d0d0d)}
+.ganador-photo.g3{background:linear-gradient(135deg,#5e0000,#1a0405)}
+.ganador-body{padding:22px 24px 26px}
+.ganador-body .g-name{font-family:var(--font-primary);font-weight:700;font-size:18px}
+.ganador-body .g-city{font-size:13px;color:var(--slate);margin-bottom:12px}
+.ganador-body .g-prize{
+  font-family:var(--font-display);font-weight:800;font-size:24px;
+  text-transform:uppercase;color:var(--red);line-height:1.1;
+}
+.ganador-body .g-sorteo{
+  font-size:12px;color:rgba(255,255,255,.5);margin-top:8px;
+  font-family:var(--font-primary);font-weight:600;letter-spacing:1px;text-transform:uppercase;
+}
+
+/* ============================================================
+   SECCIÓN 7 — TRANSPARENCIA
+   ============================================================ */
+.transparencia{background:var(--near-black);border-top:1px solid rgba(204,0,0,.2)}
+.trust-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin:48px 0}
+.trust-col{text-align:center;padding:32px 24px}
+.trust-col .t-ico{
+  font-size:52px;line-height:1;margin-bottom:18px;
+  filter:drop-shadow(0 0 16px rgba(204,0,0,.4));
+}
+.trust-col h3{
+  font-family:var(--font-display);font-weight:800;font-size:26px;
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;
+}
+.trust-col p{font-size:14px;color:rgba(255,255,255,.65)}
+
+.trust-statement{
+  max-width:760px;margin:0 auto;text-align:center;
+  background:rgba(204,0,0,.07);border:1px solid rgba(204,0,0,.35);
+  border-radius:12px;padding:36px 32px;
+}
+.trust-statement p{
+  font-size:17px;line-height:1.7;color:rgba(255,255,255,.85);
+}
+.trust-statement strong{color:var(--red);font-family:var(--font-primary)}
+.trust-statement .yt-link{
+  display:inline-block;margin-top:18px;
+  font-family:var(--font-primary);font-weight:700;font-size:14px;
+  letter-spacing:1px;color:var(--red);text-transform:uppercase;
+  border-bottom:2px solid var(--red);padding-bottom:2px;
+  transition:opacity .2s;
+}
+.trust-statement .yt-link:hover{opacity:.7}
+
+/* ============================================================
+   SECCIÓN 8 — TESTIMONIOS
+   ============================================================ */
+.slider{position:relative;max-width:820px;margin:48px auto 0;overflow:hidden}
+.slider-track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+.slide{flex:0 0 100%;padding:0 8px}
+.testimonio{
+  background:var(--near-black);border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:44px 40px;text-align:center;
+}
+.testimonio .t-avatar{
+  width:72px;height:72px;border-radius:50%;margin:0 auto 16px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-weight:900;font-size:32px;
+  background:linear-gradient(135deg,var(--red),var(--red-deep));
+  border:2px solid rgba(255,255,255,.15);
+}
+.testimonio .t-stars{color:var(--red);font-size:20px;letter-spacing:4px;margin-bottom:16px}
+.testimonio .t-text{
+  font-size:16px;line-height:1.8;color:rgba(255,255,255,.85);
+  max-width:560px;margin:0 auto 20px;font-style:italic;
+}
+.testimonio .t-name{font-family:var(--font-primary);font-weight:700;font-size:16px}
+.testimonio .t-meta{font-size:13px;color:var(--slate);margin-top:4px}
+
+.slider-controls{
+  display:flex;align-items:center;justify-content:center;gap:24px;margin-top:28px;
+}
+.slider-arrow{
+  width:44px;height:44px;border:1px solid var(--slate);border-radius:50%;
+  color:var(--white);font-size:18px;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;
+}
+.slider-arrow:hover{border-color:var(--red);color:var(--red)}
+.slider-dots{display:flex;gap:10px}
+.slider-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:rgba(255,255,255,.2);transition:all .25s;
+}
+.slider-dot.active{background:var(--red);transform:scale(1.3)}
+
+/* ============================================================
+   SECCIÓN 9 — FAQ
+   ============================================================ */
+.faq-list{max-width:780px;margin:48px auto 0}
+.faq-item{
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+.faq-q{
+  width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:24px 4px;text-align:left;
+  font-family:var(--font-primary);font-weight:700;font-size:17px;
+  color:var(--white);transition:color .2s;
+}
+.faq-q:hover{color:var(--red)}
+.faq-q .faq-ico{
+  font-size:26px;font-weight:300;color:var(--red);
+  transition:transform .35s;flex-shrink:0;line-height:1;
+  font-family:var(--font-secondary);
+}
+.faq-item.open .faq-ico{transform:rotate(45deg)}
+.faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .4s ease,padding .4s ease;
+}
+.faq-a p{
+  padding:0 4px 26px;font-size:15px;color:rgba(255,255,255,.7);line-height:1.8;
+  max-width:680px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer{
+  background:var(--black);
+  border-top:2px solid var(--red);
+  padding:72px 0 0;
+}
+.footer-grid{
+  display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr;gap:40px;
+  padding-bottom:56px;
+}
+.footer h4{
+  font-family:var(--font-primary);font-weight:700;font-size:13px;
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;color:var(--white);
+}
+.footer-col p{font-size:13px;color:rgba(255,255,255,.55);margin-top:12px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col li a{
+  font-size:14px;color:rgba(255,255,255,.6);transition:color .2s;
+}
+.footer-col li a:hover{color:var(--red)}
+
+.social-row{display:flex;gap:12px;margin-top:18px}
+.social-row a{
+  width:38px;height:38px;border:1px solid var(--slate);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.social-row a:hover{border-color:var(--red);background:rgba(204,0,0,.12)}
+.social-row svg{width:17px;height:17px;fill:rgba(255,255,255,.8)}
+.social-row a:hover svg{fill:var(--red)}
+
+.newsletter{display:flex;gap:0;margin-top:4px}
+.newsletter input{
+  flex:1;background:var(--near-black);border:1px solid rgba(255,255,255,.15);
+  border-right:none;border-radius:6px 0 0 6px;padding:12px 14px;
+  color:var(--white);font-size:14px;min-width:0;
+}
+.newsletter input:focus{outline:none;border-color:var(--red)}
+.newsletter button{
+  background:var(--red);color:var(--white);
+  font-family:var(--font-primary);font-weight:700;font-size:12px;
+  letter-spacing:1px;text-transform:uppercase;
+  padding:0 18px;border-radius:0 6px 6px 0;transition:background .2s;white-space:nowrap;
+}
+.newsletter button:hover{background:var(--red-deep)}
+.newsletter-note{font-size:12px;color:var(--slate);margin-top:10px}
+
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:22px 0;text-align:center;
+  font-size:12px;color:var(--slate);
+}
+
+/* ============================================================
+   MODAL TICKET
+   ============================================================ */
+.modal-overlay{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(0,0,0,.8);
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.ticket-modal{
+  position:relative;width:min(480px,100%);
+  background:var(--near-black);
+  border:2px dashed var(--red);
+  border-radius:16px;
+  padding:48px 36px 40px;text-align:center;
+  transform:scale(0);transition:transform .4s cubic-bezier(.34,1.4,.64,1);
+  box-shadow:0 0 80px rgba(204,0,0,.4);
+}
+.modal-overlay.open .ticket-modal{transform:scale(1)}
+/* Perforaciones laterales tipo ticket */
+.ticket-modal::before,.ticket-modal::after{
+  content:'';position:absolute;top:50%;transform:translateY(-50%);
+  width:28px;height:28px;border-radius:50%;background:var(--black);
+  border:2px dashed var(--red);
+}
+.ticket-modal::before{left:-16px;border-left-color:transparent}
+.ticket-modal::after{right:-16px;border-right-color:transparent}
+
+.ticket-modal h2{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(40px,8vw,56px);line-height:1;
+  color:var(--red);text-transform:uppercase;
+}
+.ticket-modal .tm-sub{
+  font-family:var(--font-primary);font-weight:600;font-size:15px;
+  margin:14px 0 28px;color:rgba(255,255,255,.85);
+}
+.ticket-num-label{
+  font-family:var(--font-primary);font-weight:600;font-size:11px;
+  letter-spacing:3px;text-transform:uppercase;color:var(--slate);
+}
+.ticket-num{
+  font-family:'Courier New',monospace;font-weight:700;
+  font-size:clamp(48px,10vw,64px);letter-spacing:8px;
+  color:var(--white);text-shadow:0 0 24px rgba(204,0,0,.8);
+  margin:8px 0 6px;
+}
+.ticket-modal .tm-email{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:30px}
+.ticket-modal .tm-btns{display:flex;flex-direction:column;gap:12px}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1024px){
+  .nav-links{display:none}
+  .nav-ctas .btn-nav-ghost{display:none}
+  .hamburger{display:flex}
+  .sorteo-grid{grid-template-columns:1fr;gap:40px}
+  .checkout-grid{grid-template-columns:1fr}
+  .order-summary{position:static}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+
+@media (max-width:768px){
+  .section{padding:72px 0}
+  .steps{grid-template-columns:1fr}
+  .premios-secundarios{grid-template-columns:1fr}
+  .galeria{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr;gap:36px}
+  .ganadores-grid{grid-template-columns:1fr}
+  .trust-cols{grid-template-columns:1fr}
+  .paquetes{grid-template-columns:1fr;gap:20px}
+  .form-grid{grid-template-columns:1fr}
+  .premio-specs{grid-template-columns:1fr}
+  .specs{grid-template-columns:1fr}
+  .cd-block{min-width:74px}
+  .nav-ctas .btn-nav-primary{display:none}
+  .live-badge{display:none}
+}
+
+@media (max-width:480px){
+  .footer-grid{grid-template-columns:1fr}
+  .hero-ctas .btn{width:100%}
+  .pay-tabs{grid-template-columns:1fr}
+  .testimonio{padding:32px 22px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Edu Partner — Inicio">
+      <!-- Isotipo EP: E y P solapadas -->
+      <svg width="40" height="40" viewBox="0 0 48 48" aria-hidden="true">
+        <rect x="2" y="2" width="44" height="44" rx="8" fill="#1A1A1A" stroke="#CC0000" stroke-width="2"/>
+        <path d="M12 12h14v5H18v4h10v5H18v4h12v5H12z" fill="#FFFFFF"/>
+        <path d="M26 12h9c5 0 8 3 8 7.5S40 27 35 27h-3v8h-6V12zm6 5v5h2.6c1.8 0 2.8-1 2.8-2.5S36.4 17 34.6 17H32z" fill="#CC0000" opacity="0.92"/>
+      </svg>
+      <span class="wordmark">Edu <span>Partner</span></span>
+      <span class="live-badge"><span class="pulse"></span>EN VIVO</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#sorteo">Sorteos</a></li>
+      <li><a href="#premios">Premios</a></li>
+      <li><a href="#ganadores">Ganadores</a></li>
+      <li><a href="#como-funciona">Cómo funciona</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+
+    <div class="nav-ctas">
+      <a href="#" class="btn-nav-ghost">Mi Cuenta</a>
+      <a href="#checkout" class="btn-nav-primary">Comprar Ticket</a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Menú móvil -->
+<div class="menu-overlay" id="menuOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#sorteo">Sorteos</a>
+  <a href="#premios">Premios</a>
+  <a href="#ganadores">Ganadores</a>
+  <a href="#como-funciona">Cómo funciona</a>
+  <a href="#faq">FAQ</a>
+  <a href="#">Mi Cuenta</a>
+  <a href="#checkout" class="btn btn-primary">Comprar Ticket</a>
+</div>
+
+<!-- ============================================================
+     SECCIÓN 1 — HERO
+     ============================================================ -->
+<header class="hero">
+  <!-- Silueta de auto deportivo -->
+  <svg class="hero-car" viewBox="0 0 720 200" aria-hidden="true">
+    <path d="M40 150c0-6 8-12 30-16 18-22 52-50 110-58 70-10 160-8 230 6 40 8 80 28 104 44 50 6 116 10 140 22 10 5 14 10 14 16v18c0 6-4 10-10 10H62c-14 0-22-8-22-18v-24z" fill="#0a0a0a" stroke="#CC0000" stroke-opacity=".5" stroke-width="2"/>
+    <path d="M190 84c50-8 130-8 190 2 26 4 56 18 74 30H160c4-12 14-26 30-32z" fill="#000" stroke="#4D4D4D" stroke-width="1.5"/>
+    <circle cx="170" cy="178" r="32" fill="#000" stroke="#CC0000" stroke-width="4"/>
+    <circle cx="170" cy="178" r="14" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
+    <circle cx="560" cy="178" r="32" fill="#000" stroke="#CC0000" stroke-width="4"/>
+    <circle cx="560" cy="178" r="14" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
+    <path d="M640 138l36 6" stroke="#CC0000" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+
+  <div class="hero-content">
+    <span class="eyebrow">Sorteo #13 · Oficial · En vivo</span>
+    <h1>Gana el auto<br>de <span class="red">tus sueños</span></h1>
+    <p class="hero-sub">Acelerando tus sueños<span class="dot">.</span></p>
+
+    <!-- Countdown -->
+    <div class="countdown" id="countdown" aria-label="Tiempo restante para el sorteo">
+      <div class="cd-block"><div class="cd-num" id="cdDays">00</div><div class="cd-label">Días</div></div>
+      <div class="cd-block"><div class="cd-num" id="cdHours">00</div><div class="cd-label">Horas</div></div>
+      <div class="cd-block"><div class="cd-num" id="cdMins">00</div><div class="cd-label">Minutos</div></div>
+      <div class="cd-block"><div class="cd-num" id="cdSecs">00</div><div class="cd-label">Segundos</div></div>
+    </div>
+
+    <!-- Progreso de tickets -->
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span><strong id="ticketsSoldLabel">1.247</strong> / 2.000 tickets vendidos</span>
+        <span class="pct" id="progressPct">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="heroProgress"></div></div>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="#checkout" class="btn btn-primary">Comprar Ticket Ahora</a>
+      <a href="#premios" class="btn btn-ghost">Ver el Premio</a>
+    </div>
+  </div>
+
+  <div class="hero-overlay-bottom"></div>
+  <div class="scroll-indicator">
+    <div class="mouse"></div>
+    <span>Desliza</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     SECCIÓN 2 — SORTEO ACTIVO
+     ============================================================ -->
+<section class="section" id="sorteo">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Adrenalina legítima</span>
+      <h2 class="section-title">Sorteo en curso</h2>
+      <div class="title-line"></div>
+    </div>
+
+    <div class="sorteo-grid">
+      <div class="car-visual reveal">
+        <span class="tag">● Sorteo #13 Activo</span>
+        <!-- Silueta del BMW M4 -->
+        <svg viewBox="0 0 600 190" aria-hidden="true">
+          <path d="M30 140c0-6 8-12 26-15 16-20 46-44 96-51 60-9 138-7 198 5 35 7 68 24 89 38 42 5 98 9 118 19 9 4 12 9 12 14v16c0 5-3 9-9 9H49c-12 0-19-7-19-16v-19z" fill="#0d0d0d" stroke="#CC0000" stroke-opacity=".6" stroke-width="2"/>
+          <path d="M160 80c44-7 112-7 164 2 22 3 48 15 63 26H134c4-10 13-23 26-28z" fill="#000" stroke="#4D4D4D" stroke-width="1.5"/>
+          <circle cx="145" cy="158" r="27" fill="#000" stroke="#CC0000" stroke-width="4"/>
+          <circle cx="145" cy="158" r="11" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
+          <circle cx="475" cy="158" r="27" fill="#000" stroke="#CC0000" stroke-width="4"/>
+          <circle cx="475" cy="158" r="11" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
+          <path d="M540 122l30 5" stroke="#CC0000" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div class="sorteo-info reveal">
+        <h3 class="sorteo-name">BMW M4<br>Competition 2025</h3>
+        <p class="sorteo-value">Valor comercial: $85.000.000</p>
+
+        <div class="specs">
+          <div class="spec"><span class="ico">⚙️</span><div><div class="spec-label">Motor</div><div class="spec-val">3.0L Twin-Turbo · 510 HP</div></div></div>
+          <div class="spec"><span class="ico">📅</span><div><div class="spec-label">Año</div><div class="spec-val">2025 · 0 km</div></div></div>
+          <div class="spec"><span class="ico">🎨</span><div><div class="spec-label">Color</div><div class="spec-val">Negro Sapphire</div></div></div>
+          <div class="spec"><span class="ico">⚡</span><div><div class="spec-label">0–100 km/h</div><div class="spec-val">3,9 segundos</div></div></div>
+        </div>
+
+        <div class="progress-bar"><div class="progress-fill js-progress"></div></div>
+        <div class="sorteo-meta">
+          <span><strong>2.000</strong> tickets disponibles</span>
+          <span><strong id="ticketsLeft">753</strong> restantes</span>
+        </div>
+
+        <div class="sorteo-price-row">
+          <span class="sorteo-price">$9.990 <small>/ por ticket</small></span>
+        </div>
+        <p class="sorteo-date" id="sorteoFecha">🏁 Sorteo en vivo: 11 de julio, 2026 — 21:00 hrs</p>
+        <br>
+        <a href="#checkout" class="btn btn-primary">Participar Ahora</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN 3 — CÓMO FUNCIONA
+     ============================================================ -->
+<section class="section como-funciona" id="como-funciona">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="eyebrow">Simple. Rápido. Real.</span>
+      <h2 class="section-title">¿Cómo funciona?</h2>
+      <div class="title-line center"></div>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-ico">🎟️</div>
+        <h3>Elige tu ticket</h3>
+        <p>Selecciona cuántos números quieres. Más tickets, más chances de sentir el rugido del motor en tus manos.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.15s">
+        <div class="step-num">02</div>
+        <div class="step-ico">🔒</div>
+        <h3>Paga seguro</h3>
+        <p>Webpay, transferencia o Fintoc. Pago 100% protegido y tu número llega directo a tu email en segundos.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.3s">
+        <div class="step-num">03</div>
+        <div class="step-ico">📺</div>
+        <h3>Espera el sorteo en vivo</h3>
+        <p>Transmitimos por Instagram y YouTube. Número aleatorio, verificable y en tiempo real. Sin trucos.</p>
+      </div>
+    </div>
+
+    <div class="como-cta reveal">
+      <p>¿Listo para <span>ganar</span>?</p>
+      <a href="#checkout" class="btn btn-primary">Comprar Ticket</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN 4 — PREMIOS
+     ============================================================ -->
+<section class="section" id="premios">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Potencia que se siente</span>
+      <h2 class="section-title">El premio</h2>
+      <div class="title-line"></div>
+    </div>
+
+    <!-- Premio principal -->
+    <div class="premio-main reveal">
+      <span class="premio-badge">Avaluado en $85.000.000</span>
+      <h3>BMW M4<br>Competition</h3>
+      <svg class="premio-car" viewBox="0 0 600 190" aria-hidden="true">
+        <path d="M30 140c0-6 8-12 26-15 16-20 46-44 96-51 60-9 138-7 198 5 35 7 68 24 89 38 42 5 98 9 118 19 9 4 12 9 12 14v16c0 5-3 9-9 9H49c-12 0-19-7-19-16v-19z" fill="#111" stroke="#CC0000" stroke-width="2"/>
+        <path d="M160 80c44-7 112-7 164 2 22 3 48 15 63 26H134c4-10 13-23 26-28z" fill="#000" stroke="#4D4D4D" stroke-width="1.5"/>
+        <circle cx="145" cy="158" r="27" fill="#000" stroke="#CC0000" stroke-width="4"/>
+        <circle cx="475" cy="158" r="27" fill="#000" stroke="#CC0000" stroke-width="4"/>
+      </svg>
+
+      <div class="premio-specs">
+        <div class="spec"><span class="ico">⚙️</span><div><div class="spec-label">Motor</div><div class="spec-val">3.0L Twin-Turbo I6</div></div></div>
+        <div class="spec"><span class="ico">🏎️</span><div><div class="spec-label">Potencia</div><div class="spec-val">510 HP / 650 Nm</div></div></div>
+        <div class="spec"><span class="ico">⚡</span><div><div class="spec-label">0–100 km/h</div><div class="spec-val">3,9 segundos</div></div></div>
+        <div class="spec"><span class="ico">🛣️</span><div><div class="spec-label">Velocidad máx.</div><div class="spec-val">290 km/h</div></div></div>
+      </div>
+    </div>
+
+    <!-- Premios secundarios -->
+    <div class="premios-secundarios">
+      <div class="premio-card reveal">
+        <div class="place">🥈 2° Lugar</div>
+        <h4>Moto Ducati Monster</h4>
+        <p>937cc de pura adrenalina italiana. Avaluada en $14.000.000.</p>
+      </div>
+      <div class="premio-card reveal" style="transition-delay:.15s">
+        <div class="place">🥉 3° Lugar</div>
+        <h4>$2.000.000 en efectivo</h4>
+        <p>Transferencia directa a tu cuenta. Sin letra chica, sin esperas.</p>
+      </div>
+    </div>
+
+    <!-- Galería -->
+    <div class="galeria reveal">
+      <div class="galeria-item"><span class="gal-num">01</span><span class="gal-label">Exterior · Negro Sapphire</span></div>
+      <div class="galeria-item"><span class="gal-num">02</span><span class="gal-label">Interior · Cuero Merino</span></div>
+      <div class="galeria-item"><span class="gal-num">03</span><span class="gal-label">Motor · S58 Twin-Turbo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN 5 — CHECKOUT
+     ============================================================ -->
+<section class="section checkout" id="checkout">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Tu ticket al éxito</span>
+      <h2 class="section-title">Compra tu ticket</h2>
+      <div class="title-line"></div>
+    </div>
+
+    <div class="checkout-grid">
+      <div>
+        <!-- Selector de paquetes -->
+        <div class="paquetes">
+          <div class="paquete" data-qty="1" data-price="9990" role="button" tabindex="0" aria-pressed="false">
+            <div class="pq-qty">1</div>
+            <div class="pq-unit">Ticket</div>
+            <div class="pq-price">$9.990</div>
+          </div>
+          <div class="paquete featured selected" data-qty="5" data-price="44950" role="button" tabindex="0" aria-pressed="true">
+            <span class="pq-badge">Más popular</span>
+            <div class="pq-qty">5</div>
+            <div class="pq-unit">Tickets</div>
+            <div class="pq-price">$44.950</div>
+          </div>
+          <div class="paquete" data-qty="10" data-price="84990" role="button" tabindex="0" aria-pressed="false">
+            <span class="pq-badge alt">Mejor valor</span>
+            <div class="pq-qty">10</div>
+            <div class="pq-unit">Tickets</div>
+            <div class="pq-price">$84.990</div>
+          </div>
+        </div>
+
+        <!-- Cantidad manual -->
+        <div class="qty-row">
+          <span class="qty-label">O elige tu cantidad:</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" id="qtyMinus" aria-label="Quitar un ticket">−</button>
+            <input type="number" class="qty-input" id="qtyInput" value="5" min="1" max="753" aria-label="Cantidad de tickets">
+            <button type="button" class="qty-btn" id="qtyPlus" aria-label="Agregar un ticket">+</button>
+          </div>
+          <span class="qty-total">Total: <span id="qtyTotal">$44.950</span></span>
+        </div>
+
+        <!-- Formulario -->
+        <form id="checkoutForm" novalidate>
+          <div class="form-grid">
+            <div class="form-field full">
+              <label for="fNombre">Nombre completo</label>
+              <input type="text" id="fNombre" placeholder="Ej: Catalina Rojas Fuentes" autocomplete="name" required>
+              <span class="field-error">Ingresa tu nombre completo.</span>
+            </div>
+            <div class="form-field">
+              <label for="fEmail">Email</label>
+              <input type="email" id="fEmail" placeholder="tu@email.cl" autocomplete="email" required>
+              <span class="field-error">Ingresa un email válido.</span>
+            </div>
+            <div class="form-field">
+              <label for="fFono">Teléfono</label>
+              <input type="tel" id="fFono" placeholder="+56 9 1234 5678" autocomplete="tel" required>
+              <span class="field-error">Ingresa un teléfono válido.</span>
+            </div>
+            <div class="form-field full">
+              <label for="fRut">RUT</label>
+              <input type="text" id="fRut" placeholder="12.345.678-9" required>
+              <span class="field-error">Ingresa un RUT chileno válido.</span>
+            </div>
+          </div>
+
+          <!-- Métodos de pago -->
+          <div class="pay-tabs" role="tablist" aria-label="Método de pago">
+            <button type="button" class="pay-tab active" data-pay="webpay" role="tab" aria-selected="true">Webpay</button>
+            <button type="button" class="pay-tab" data-pay="transferencia" role="tab" aria-selected="false">Transferencia</button>
+            <button type="button" class="pay-tab" data-pay="fintoc" role="tab" aria-selected="false">Fintoc</button>
+          </div>
+          <div class="pay-panel active" data-panel="webpay">
+            💳 <strong>Pago con tarjeta de crédito o débito</strong> — procesado de forma segura por Transbank.
+          </div>
+          <div class="pay-panel" data-panel="transferencia">
+            🏦 <strong>Datos para transferencia:</strong>
+            <ul>
+              <li>Banco: <strong>Santander</strong></li>
+              <li>Cuenta corriente: <strong>00-123456-7</strong></li>
+              <li>RUT: <strong>76.XXX.XXX-X</strong></li>
+              <li>Email: <strong>pagos@edupartner.cl</strong></li>
+            </ul>
+          </div>
+          <div class="pay-panel" data-panel="fintoc">
+            ⚡ <strong>Transferencia bancaria instantánea</strong> — conecta tu banco y paga en segundos con Fintoc.
+          </div>
+
+          <!-- Términos -->
+          <div class="terms-row">
+            <input type="checkbox" id="fTerms">
+            <label for="fTerms">Acepto los <a href="#">Términos y Bases del sorteo</a> y confirmo que soy mayor de 18 años.</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="payBtn" style="width:100%" disabled>Confirmar y Pagar →</button>
+
+          <div class="trust-badges">
+            <span>🔒 Pago SSL Seguro</span><span>·</span>
+            <span>✓ Sorteo EN VIVO</span><span>·</span>
+            <span>🏆 Premios Reales Entregados</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- Resumen sticky -->
+      <aside class="order-summary reveal">
+        <h3>Tu pedido</h3>
+        <div class="summary-row"><span>Sorteo</span><strong>#13 — BMW M4 Competition</strong></div>
+        <div class="summary-row"><span>Tickets</span><strong id="sumQty">5</strong></div>
+        <div class="summary-row"><span>Precio unitario ref.</span><strong>$9.990</strong></div>
+        <div class="summary-total">
+          <span class="lbl">Total</span>
+          <span class="amt" id="sumTotal">$44.950</span>
+        </div>
+        <p class="summary-note">Tu número de ticket llega a tu email apenas se confirme el pago.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN 6 — GANADORES
+     ============================================================ -->
+<section class="section" id="ganadores">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="eyebrow">Hecho para ganar</span>
+      <h2 class="section-title">Nuestros ganadores</h2>
+      <div class="title-line center"></div>
+    </div>
+
+    <div class="stats-row reveal" id="statsRow">
+      <div class="stat">
+        <div class="stat-num"><span class="countup" data-target="500" data-prefix="+">0</span></div>
+        <div class="stat-label">Ganadores</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span class="countup" data-target="2.3" data-prefix="$" data-suffix="B" data-decimals="1">0</span></div>
+        <div class="stat-label">Billones en premios</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span class="countup" data-target="100" data-suffix="%">0</span></div>
+        <div class="stat-label">Transparente</div>
+      </div>
+    </div>
+
+    <div class="ganadores-grid">
+      <div class="ganador-card reveal">
+        <div class="ganador-photo g1">C</div>
+        <div class="ganador-body">
+          <div class="g-name">Carlos M.</div>
+          <div class="g-city">Santiago, Chile</div>
+          <div class="g-prize">BMW M3 2024</div>
+          <div class="g-sorteo">Sorteo #12 — Enero 2025</div>
+        </div>
+      </div>
+      <div class="ganador-card reveal" style="transition-delay:.15s">
+        <div class="ganador-photo g2">F</div>
+        <div class="ganador-body">
+          <div class="g-name">Fernanda T.</div>
+          <div class="g-city">Viña del Mar, Chile</div>
+          <div class="g-prize">Audi RS3 2024</div>
+          <div class="g-sorteo">Sorteo #11 — Octubre 2024</div>
+        </div>
+      </div>
+      <div class="ganador-card reveal" style="transition-delay:.3s">
+        <div class="ganador-photo g3">J</div>
+        <div class="ganador-body">
+          <div class="g-name">Javier R.</div>
+          <div class="g-city">Concepción, Chile</div>
+          <div class="g-prize">Mercedes-AMG A45</div>
+          <div class="g-sorteo">Sorteo #10 — Julio 2024</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="como-cta reveal">
+      <p>Tú podrías ser <span>el próximo</span></p>
+      <a href="#checkout" class="btn btn-primary">Participar</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN 7 — TRANSPARENCIA
+     ============================================================ -->
+<section class="section transparencia" id="transparencia">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="eyebrow">Sin trucos. Sin letra chica.</span>
+      <h2 class="section-title">Por qué confiar en nosotros</h2>
+      <div class="title-line center"></div>
+    </div>
+
+    <div class="trust-cols">
+      <div class="trust-col reveal">
+        <div class="t-ico">🏆</div>
+        <h3>Premios exclusivos</h3>
+        <p>Autos de lujo 0 km, comprados y verificables. Lo que ves en la foto es exactamente lo que entregamos.</p>
+      </div>
+      <div class="trust-col reveal" style="transition-delay:.15s">
+        <div class="t-ico">✓</div>
+        <h3>Transparencia garantizada</h3>
+        <p>Cada número vendido queda registrado. El sorteo es público, en vivo y con resultado verificable al instante.</p>
+      </div>
+      <div class="trust-col reveal" style="transition-delay:.3s">
+        <div class="t-ico">🔒</div>
+        <h3>Seguridad y confianza</h3>
+        <p>Pagos protegidos con SSL y procesadores certificados. Tus datos nunca se comparten con terceros.</p>
+      </div>
+    </div>
+
+    <div class="trust-statement reveal">
+      <p>Todos nuestros sorteos se realizan <strong>EN VIVO</strong> por Instagram y YouTube. El número ganador es seleccionado de forma <strong>aleatoria y verificable en tiempo real</strong>.</p>
+      <a href="#" class="yt-link">Ver sorteos anteriores en YouTube →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN 8 — TESTIMONIOS
+     ============================================================ -->
+<section class="section" id="testimonios">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="eyebrow">Voces reales</span>
+      <h2 class="section-title">Lo que dicen nuestros participantes</h2>
+      <div class="title-line center"></div>
+    </div>
+
+    <div class="slider reveal" id="slider">
+      <div class="slider-track" id="sliderTrack">
+        <div class="slide">
+          <div class="testimonio">
+            <div class="t-avatar">M</div>
+            <div class="t-stars">★★★★★</div>
+            <p class="t-text">"Compré 5 tickets sin esperar mucho y terminé pegada a la transmisión en vivo con el corazón a mil. Todo claro, todo transparente. Vuelvo a participar sí o sí."</p>
+            <div class="t-name">María José A.</div>
+            <div class="t-meta">La Serena · Participó en el Sorteo #12</div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="testimonio">
+            <div class="t-avatar">R</div>
+            <div class="t-stars">★★★★★</div>
+            <p class="t-text">"El ticket llegó a mi correo en menos de un minuto. El día del sorteo mostraron todo el proceso en pantalla. Así da gusto participar."</p>
+            <div class="t-name">Rodrigo P.</div>
+            <div class="t-meta">Temuco · Participó en el Sorteo #11</div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="testimonio">
+            <div class="t-avatar">V</div>
+            <div class="t-stars">★★★★★</div>
+            <p class="t-text">"Conozco al ganador del Audi del sorteo pasado, es de mi ciudad. Cuando vi que era real, compré mis tickets al tiro. La adrenalina del en vivo no se compara."</p>
+            <div class="t-name">Valentina S.</div>
+            <div class="t-meta">Viña del Mar · Participó en el Sorteo #12</div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="testimonio">
+            <div class="t-avatar">D</div>
+            <div class="t-stars">★★★★★</div>
+            <p class="t-text">"Pagué con Webpay y en segundos tenía mi número. La transmisión fue impecable: número aleatorio en vivo, sin cortes ni ediciones. Esto es serio."</p>
+            <div class="t-name">Diego C.</div>
+            <div class="t-meta">Santiago · Participó en el Sorteo #10</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slider-controls">
+        <button class="slider-arrow" id="prevSlide" aria-label="Testimonio anterior">‹</button>
+        <div class="slider-dots" id="sliderDots"></div>
+        <button class="slider-arrow" id="nextSlide" aria-label="Testimonio siguiente">›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN 9 — FAQ
+     ============================================================ -->
+<section class="section como-funciona" id="faq">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="eyebrow">Todo claro antes de partir</span>
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <div class="title-line center"></div>
+    </div>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Cómo sé que el sorteo es legítimo?<span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>Todos los sorteos se transmiten EN VIVO por Instagram y YouTube, con el número ganador seleccionado de forma aleatoria frente a miles de espectadores. Además, las transmisiones anteriores quedan publicadas para que las revises cuando quieras. Transparencia total, sin ediciones.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Cómo recibo mi número de ticket?<span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>Apenas se confirma tu pago, tu número de ticket llega automáticamente a tu email. Guárdalo: ese es tu pase al sorteo en vivo. Si no lo ves, revisa tu carpeta de spam o escríbenos a pagos@edupartner.cl.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Cuándo y cómo se realiza el sorteo?<span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>El sorteo se realiza en la fecha anunciada (o antes, si se agotan los tickets) mediante transmisión en vivo por Instagram y YouTube. Un sistema de selección aleatoria elige el número ganador en tiempo real, a la vista de todos.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Qué pasa si gano? ¿Cómo recibo el premio?<span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>Te contactamos de inmediato por teléfono y email para coordinar la entrega. El auto se entrega con todos sus documentos al día, transferencia incluida, en una ceremonia que también compartimos en nuestras redes. Tú solo preocúpate de elegir la primera ruta.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Puedo comprar más de un ticket?<span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>¡Por supuesto! Cada ticket es una chance más de ganar. Tenemos paquetes de 5 y 10 tickets con descuento, y puedes elegir la cantidad exacta que quieras desde el checkout.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Qué métodos de pago aceptan?<span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>Aceptamos Webpay (tarjetas de crédito y débito vía Transbank), transferencia bancaria tradicional y Fintoc para transferencias instantáneas. Todos los pagos están protegidos con cifrado SSL.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Hay devoluciones si no gano?<span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>No. Cada ticket es una participación válida en el sorteo y no es reembolsable una vez emitido, tal como se detalla en los Términos y Bases. Lo que sí garantizamos: el sorteo siempre se realiza y el premio siempre se entrega.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="#" class="nav-logo">
+          <svg width="36" height="36" viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="2" y="2" width="44" height="44" rx="8" fill="#1A1A1A" stroke="#CC0000" stroke-width="2"/>
+            <path d="M12 12h14v5H18v4h10v5H18v4h12v5H12z" fill="#FFFFFF"/>
+            <path d="M26 12h9c5 0 8 3 8 7.5S40 27 35 27h-3v8h-6V12zm6 5v5h2.6c1.8 0 2.8-1 2.8-2.5S36.4 17 34.6 17H32z" fill="#CC0000" opacity="0.92"/>
+          </svg>
+          <span class="wordmark">Edu <span>Partner</span></span>
+        </a>
+        <p>Acelerando tus sueños. Sorteos oficiales de autos de lujo, en vivo y 100% transparentes.</p>
+        <div class="social-row">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 3.25.15 4.77 1.7 4.92 4.92.06 1.26.07 1.64.07 4.81s-.01 3.55-.07 4.81c-.15 3.22-1.66 4.77-4.92 4.92-1.2.06-1.6.07-4.8.07s-3.6-.01-4.8-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.21 15.55 2.2 15.17 2.2 12s.01-3.55.08-4.81C2.43 3.97 3.94 2.42 7.2 2.27 8.4 2.21 8.8 2.2 12 2.2zm0 3.65a6.15 6.15 0 100 12.3 6.15 6.15 0 000-12.3zm0 10.15a4 4 0 110-8 4 4 0 010 8zm6.4-11.85a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99h-2.54V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.12-2.12C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.53A3 3 0 00.5 6.2 31.3 31.3 0 000 12a31.3 31.3 0 00.5 5.8 3 3 0 002.12 2.12c1.88.53 9.38.53 9.38.53s7.5 0 9.38-.53a3 3 0 002.12-2.12A31.3 31.3 0 0024 12a31.3 31.3 0 00-.5-5.8zM9.6 15.6V8.4L15.8 12l-6.2 3.6z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.9 2.9 0 11-2.31-2.84v-3.5a6.37 6.37 0 105.52 6.34V8.7a8.2 8.2 0 004.78 1.52v-3.45a4.85 4.85 0 01-.77-.08z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#sorteo">Sorteos</a></li>
+          <li><a href="#premios">Premios</a></li>
+          <li><a href="#ganadores">Ganadores</a></li>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Términos y Bases</a></li>
+          <li><a href="#">Política de Privacidad</a></li>
+          <li><a href="#">Contacto</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Entérate primero de cada sorteo</h4>
+        <form class="newsletter" id="newsletterForm">
+          <input type="email" placeholder="tu@email.cl" aria-label="Email para suscripción" required>
+          <button type="submit">Suscribirse</button>
+        </form>
+        <p class="newsletter-note">Cero spam. Solo sorteos, premios y ganadores.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © EduPartner 2025 · Todos los derechos reservados · RUT: 76.XXX.XXX-X
+  </div>
+</footer>
+
+<!-- ============================================================
+     MODAL TICKET CONFIRMADO
+     ============================================================ -->
+<div class="modal-overlay" id="ticketModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="ticket-modal">
+    <h2 id="modalTitle">¡Felicitaciones!</h2>
+    <p class="tm-sub">Ya eres parte del Sorteo #13 — BMW M4 Competition</p>
+    <div class="ticket-num-label">Tu número de ticket</div>
+    <div class="ticket-num" id="ticketNumber">001247</div>
+    <p class="tm-email">📩 Tu ticket ha sido enviado a tu email</p>
+    <div class="tm-btns">
+      <a href="#" class="btn btn-primary">Compartir en Instagram</a>
+      <button type="button" class="btn btn-ghost" id="closeModal">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   EDU PARTNER — JS
+   ============================================================ */
+(function(){
+  'use strict';
+
+  /* ---------- Datos del sorteo ---------- */
+  const SORTEO_FECHA = new Date('2026-07-11T21:00:00-04:00'); // sorteo en vivo
+  const TICKETS_TOTAL = 2000;
+  const TICKETS_VENDIDOS = 1247;
+  const PRECIO_UNITARIO = 9990;
+  const PAQUETES = { 1: 9990, 5: 44950, 10: 84990 };
+
+  const fmtCLP = n => '$' + n.toLocaleString('es-CL');
+  const pad = n => String(n).padStart(2, '0');
+
+  /* ============================================
+     1. COUNTDOWN
+     ============================================ */
+  const cd = {
+    d: document.getElementById('cdDays'),
+    h: document.getElementById('cdHours'),
+    m: document.getElementById('cdMins'),
+    s: document.getElementById('cdSecs')
+  };
+  function tickCountdown(){
+    let diff = SORTEO_FECHA - Date.now();
+    if (diff < 0) diff = 0;
+    cd.d.textContent = pad(Math.floor(diff / 864e5));
+    cd.h.textContent = pad(Math.floor(diff / 36e5) % 24);
+    cd.m.textContent = pad(Math.floor(diff / 6e4) % 60);
+    cd.s.textContent = pad(Math.floor(diff / 1e3) % 60);
+  }
+  tickCountdown();
+  setInterval(tickCountdown, 1000);
+
+  /* ============================================
+     2. BARRAS DE PROGRESO
+     ============================================ */
+  const pct = Math.round(TICKETS_VENDIDOS / TICKETS_TOTAL * 100);
+  document.getElementById('progressPct').textContent = pct + '%';
+  document.getElementById('ticketsSoldLabel').textContent = TICKETS_VENDIDOS.toLocaleString('es-CL');
+  document.getElementById('ticketsLeft').textContent = (TICKETS_TOTAL - TICKETS_VENDIDOS).toLocaleString('es-CL');
+  // Animación de 0 al valor real tras cargar
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      document.getElementById('heroProgress').style.width = pct + '%';
+      document.querySelectorAll('.js-progress').forEach(el => el.style.width = pct + '%');
+    }, 300);
+  });
+
+  /* ============================================
+     11. NAVBAR — transparente → sólido
+     ============================================ */
+  const navbar = document.getElementById('navbar');
+  function onScroll(){
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Menú móvil ---------- */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuOverlay = document.getElementById('menuOverlay');
+  function toggleMenu(force){
+    const open = force !== undefined ? force : !mobileMenu.classList.contains('open');
+    mobileMenu.classList.toggle('open', open);
+    menuOverlay.classList.toggle('open', open);
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+  }
+  hamburger.addEventListener('click', () => toggleMenu());
+  menuOverlay.addEventListener('click', () => toggleMenu(false));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+
+  /* ============================================
+     10. SCROLL ANIMATIONS — fade-in
+     ============================================ */
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ============================================
+     12. COUNTUP — stats de ganadores
+     ============================================ */
+  function countUp(el){
+    const target = parseFloat(el.dataset.target);
+    const decimals = parseInt(el.dataset.decimals || '0', 10);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const start = performance.now();
+    function frame(now){
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+      const val = (target * eased).toFixed(decimals);
+      el.textContent = prefix + (decimals ? val : Math.round(target * eased).toLocaleString('es-CL')) + suffix;
+      if (t < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  const statsObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.countup').forEach(countUp);
+        statsObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  statsObserver.observe(document.getElementById('statsRow'));
+
+  /* ============================================
+     3 + 4. PAQUETES + CANTIDAD + TOTAL
+     ============================================ */
+  const paquetes = document.querySelectorAll('.paquete');
+  const qtyInput = document.getElementById('qtyInput');
+  const qtyTotal = document.getElementById('qtyTotal');
+  const sumQty = document.getElementById('sumQty');
+  const sumTotal = document.getElementById('sumTotal');
+
+  function precioPara(qty){
+    // Aplica precio de paquete exacto si existe; si no, unitario
+    if (PAQUETES[qty]) return PAQUETES[qty];
+    return qty * PRECIO_UNITARIO;
+  }
+  function updateTotal(){
+    let qty = parseInt(qtyInput.value, 10);
+    if (isNaN(qty) || qty < 1) qty = 1;
+    if (qty > 753) qty = 753; // máximo: tickets restantes
+    qtyInput.value = qty;
+    const total = precioPara(qty);
+    qtyTotal.textContent = fmtCLP(total);
+    sumQty.textContent = qty;
+    sumTotal.textContent = fmtCLP(total);
+    // Sincroniza selección visual de paquetes
+    paquetes.forEach(p => {
+      const sel = parseInt(p.dataset.qty, 10) === qty;
+      p.classList.toggle('selected', sel);
+      p.setAttribute('aria-pressed', sel);
+    });
+  }
+  paquetes.forEach(p => {
+    function select(){
+      qtyInput.value = p.dataset.qty;
+      updateTotal();
+    }
+    p.addEventListener('click', select);
+    p.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }
+    });
+  });
+  document.getElementById('qtyMinus').addEventListener('click', () => {
+    qtyInput.value = parseInt(qtyInput.value, 10) - 1;
+    updateTotal();
+  });
+  document.getElementById('qtyPlus').addEventListener('click', () => {
+    qtyInput.value = parseInt(qtyInput.value, 10) + 1;
+    updateTotal();
+  });
+  qtyInput.addEventListener('input', updateTotal);
+  updateTotal();
+
+  /* ============================================
+     5. MÉTODOS DE PAGO — tabs
+     ============================================ */
+  const payTabs = document.querySelectorAll('.pay-tab');
+  payTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      payTabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      document.querySelectorAll('.pay-panel').forEach(p =>
+        p.classList.toggle('active', p.dataset.panel === tab.dataset.pay)
+      );
+    });
+  });
+
+  /* ============================================
+     6 + 7. FORMULARIO + VALIDACIÓN + MODAL
+     ============================================ */
+  const form = document.getElementById('checkoutForm');
+  const terms = document.getElementById('fTerms');
+  const payBtn = document.getElementById('payBtn');
+  const modal = document.getElementById('ticketModal');
+
+  terms.addEventListener('change', () => { payBtn.disabled = !terms.checked; });
+
+  // Validación de RUT chileno (módulo 11)
+  function validarRut(rut){
+    rut = rut.replace(/[.\s]/g, '').replace('-', '').toUpperCase();
+    if (!/^\d{7,8}[0-9K]$/.test(rut)) return false;
+    const cuerpo = rut.slice(0, -1);
+    const dv = rut.slice(-1);
+    let suma = 0, mult = 2;
+    for (let i = cuerpo.length - 1; i >= 0; i--) {
+      suma += parseInt(cuerpo[i], 10) * mult;
+      mult = mult === 7 ? 2 : mult + 1;
+    }
+    const resto = 11 - (suma % 11);
+    const dvCalc = resto === 11 ? '0' : resto === 10 ? 'K' : String(resto);
+    return dv === dvCalc;
+  }
+
+  // Formateo automático del RUT mientras se escribe
+  const rutInput = document.getElementById('fRut');
+  rutInput.addEventListener('input', () => {
+    let v = rutInput.value.replace(/[^0-9kK]/g, '').toUpperCase();
+    if (v.length > 1) {
+      const dv = v.slice(-1);
+      let cuerpo = v.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      v = cuerpo + '-' + dv;
+    }
+    rutInput.value = v;
+  });
+
+  function setFieldError(input, hasError){
+    input.classList.toggle('error', hasError);
+    input.closest('.form-field').classList.toggle('invalid', hasError);
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const nombre = document.getElementById('fNombre');
+    const email = document.getElementById('fEmail');
+    const fono = document.getElementById('fFono');
+
+    let valid = true;
+    const checkField = (input, ok) => { setFieldError(input, !ok); if (!ok) valid = false; };
+
+    checkField(nombre, nombre.value.trim().length >= 3);
+    checkField(email, /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim()));
+    checkField(fono, fono.value.replace(/\D/g, '').length >= 8);
+    checkField(rutInput, validarRut(rutInput.value));
+
+    if (!valid || !terms.checked) return;
+
+    // Número de ticket simulado entre 000001 y 002000
+    const num = Math.floor(Math.random() * TICKETS_TOTAL) + 1;
+    document.getElementById('ticketNumber').textContent = String(num).padStart(6, '0');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeModal(){
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('closeModal').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Newsletter (sin backend — feedback simple)
+  document.getElementById('newsletterForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = '✓ Listo';
+    setTimeout(() => { btn.textContent = 'Suscribirse'; e.target.reset(); }, 2500);
+  });
+
+  /* ============================================
+     8. ACCORDION FAQ — solo uno abierto
+     ============================================ */
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      // Cierra todas
+      faqItems.forEach(other => {
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = null;
+        other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      // Abre la clickeada (si estaba cerrada)
+      if (!isOpen) {
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+        q.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ============================================
+     9. SLIDER TESTIMONIOS — autoplay + controles
+     ============================================ */
+  const track = document.getElementById('sliderTrack');
+  const slides = track.children.length;
+  const dotsWrap = document.getElementById('sliderDots');
+  let current = 0;
+  let autoTimer;
+
+  for (let i = 0; i < slides; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Ir al testimonio ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  }
+  const dots = dotsWrap.children;
+
+  function goTo(i){
+    current = (i + slides) % slides;
+    track.style.transform = 'translateX(-' + current * 100 + '%)';
+    [...dots].forEach((d, j) => d.classList.toggle('active', j === current));
+  }
+  function startAuto(){ autoTimer = setInterval(() => goTo(current + 1), 4000); }
+  function stopAuto(){ clearInterval(autoTimer); }
+
+  document.getElementById('prevSlide').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nextSlide').addEventListener('click', () => goTo(current + 1));
+
+  const slider = document.getElementById('slider');
+  slider.addEventListener('mouseenter', stopAuto);
+  slider.addEventListener('mouseleave', startAuto);
+  startAuto();
+
+  /* ============================================
+     13. SMOOTH SCROLL — compensando navbar fija
+     ============================================ */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const id = link.getAttribute('href');
+      if (id.length < 2) return; // href="#" → links dummy
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      const y = target.getBoundingClientRect().top + window.scrollY - 64;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
