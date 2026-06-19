@@ -259,6 +259,11 @@ input{font-family:var(--font-secondary)}
   margin-top:16px;color:rgba(255,255,255,.85);
 }
 .hero-sub .dot{color:var(--red);font-size:1.4em}
+.hero-tagline{
+  font-family:var(--font-secondary);font-weight:300;
+  font-size:clamp(15px,1.6vw,18px);
+  letter-spacing:1px;margin-top:10px;color:rgba(255,255,255,.6);
+}
 
 /* Countdown */
 .countdown{
@@ -302,7 +307,7 @@ input{font-family:var(--font-secondary)}
   box-shadow:0 0 12px rgba(204,0,0,.8);
 }
 
-.hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:40px}
 
 /* Scroll indicator */
 .scroll-indicator{
@@ -1007,26 +1012,10 @@ input{font-family:var(--font-secondary)}
   </svg>
 
   <div class="hero-content">
-    <span class="eyebrow">Sorteo #13 · Oficial · En vivo</span>
-    <h1>Gana el auto<br>de <span class="red">tus sueños</span></h1>
-    <p class="hero-sub">Acelerando tus sueños<span class="dot">.</span></p>
-
-    <!-- Countdown -->
-    <div class="countdown" id="countdown" aria-label="Tiempo restante para el sorteo">
-      <div class="cd-block"><div class="cd-num" id="cdDays">00</div><div class="cd-label">Días</div></div>
-      <div class="cd-block"><div class="cd-num" id="cdHours">00</div><div class="cd-label">Horas</div></div>
-      <div class="cd-block"><div class="cd-num" id="cdMins">00</div><div class="cd-label">Minutos</div></div>
-      <div class="cd-block"><div class="cd-num" id="cdSecs">00</div><div class="cd-label">Segundos</div></div>
-    </div>
-
-    <!-- Progreso de tickets -->
-    <div class="progress-wrap">
-      <div class="progress-label">
-        <span><strong id="ticketsSoldLabel">1.247</strong> / 2.000 tickets vendidos</span>
-        <span class="pct" id="progressPct">0%</span>
-      </div>
-      <div class="progress-bar"><div class="progress-fill" id="heroProgress"></div></div>
-    </div>
+    <span class="eyebrow">Sorteo Partner • 17 de julio • En vivo</span>
+    <h1>Gana la Toyota<br><span class="red">Partner</span> que necesitas</h1>
+    <p class="hero-sub">Para tu pyme o el día a día<span class="dot">.</span></p>
+    <p class="hero-tagline">Rapidez, economía y comodidad.</p>
 
     <div class="hero-ctas">
       <a href="#checkout" class="btn btn-primary">Comprar Ticket Ahora</a>
@@ -1049,15 +1038,14 @@ input{font-family:var(--font-secondary)}
 <section class="section" id="sorteo">
   <div class="container">
     <div class="reveal">
-      <span class="eyebrow">Adrenalina legítima</span>
       <h2 class="section-title">Sorteo en curso</h2>
       <div class="title-line"></div>
     </div>
 
     <div class="sorteo-grid">
       <div class="car-visual reveal">
-        <span class="tag">● Sorteo #13 Activo</span>
-        <!-- Silueta del BMW M4 -->
+        <span class="tag">● Sorteo Partner Activo</span>
+        <!-- Silueta del vehículo -->
         <svg viewBox="0 0 600 190" aria-hidden="true">
           <path d="M30 140c0-6 8-12 26-15 16-20 46-44 96-51 60-9 138-7 198 5 35 7 68 24 89 38 42 5 98 9 118 19 9 4 12 9 12 14v16c0 5-3 9-9 9H49c-12 0-19-7-19-16v-19z" fill="#0d0d0d" stroke="#CC0000" stroke-opacity=".6" stroke-width="2"/>
           <path d="M160 80c44-7 112-7 164 2 22 3 48 15 63 26H134c4-10 13-23 26-28z" fill="#000" stroke="#4D4D4D" stroke-width="1.5"/>
@@ -1070,8 +1058,7 @@ input{font-family:var(--font-secondary)}
       </div>
 
       <div class="sorteo-info reveal">
-        <h3 class="sorteo-name">BMW M4<br>Competition 2025</h3>
-        <p class="sorteo-value">Valor comercial: $85.000.000</p>
+        <h3 class="sorteo-name">Toyota Partner</h3>
 
         <div class="specs">
           <div class="spec"><span class="ico">⚙️</span><div><div class="spec-label">Motor</div><div class="spec-val">3.0L Twin-Turbo · 510 HP</div></div></div>
@@ -1080,16 +1067,10 @@ input{font-family:var(--font-secondary)}
           <div class="spec"><span class="ico">⚡</span><div><div class="spec-label">0–100 km/h</div><div class="spec-val">3,9 segundos</div></div></div>
         </div>
 
-        <div class="progress-bar"><div class="progress-fill js-progress"></div></div>
-        <div class="sorteo-meta">
-          <span><strong>2.000</strong> tickets disponibles</span>
-          <span><strong id="ticketsLeft">753</strong> restantes</span>
-        </div>
-
         <div class="sorteo-price-row">
           <span class="sorteo-price">$9.990 <small>/ por ticket</small></span>
         </div>
-        <p class="sorteo-date" id="sorteoFecha">🏁 Sorteo en vivo: 11 de julio, 2026 — 21:00 hrs</p>
+        <p class="sorteo-date" id="sorteoFecha">🏁 Sorteo en vivo: 17 de julio — 21:00 hrs</p>
         <br>
         <a href="#checkout" class="btn btn-primary">Participar Ahora</a>
       </div>
@@ -1113,7 +1094,7 @@ input{font-family:var(--font-secondary)}
         <div class="step-num">01</div>
         <div class="step-ico">🎟️</div>
         <h3>Elige tu ticket</h3>
-        <p>Selecciona cuántos números quieres. Más tickets, más chances de sentir el rugido del motor en tus manos.</p>
+        <p>Selecciona cuántos números quieres. Más tickets, más chances de ganar la Partner que necesitas.</p>
       </div>
       <div class="step reveal" style="transition-delay:.15s">
         <div class="step-num">02</div>
@@ -1125,7 +1106,7 @@ input{font-family:var(--font-secondary)}
         <div class="step-num">03</div>
         <div class="step-ico">📺</div>
         <h3>Espera el sorteo en vivo</h3>
-        <p>Transmitimos por Instagram y YouTube. Número aleatorio, verificable y en tiempo real. Sin trucos.</p>
+        <p>Transmitimos por Instagram, TikTok y más. Número aleatorio, verificable y en tiempo real. Sin trucos.</p>
       </div>
     </div>
 
@@ -1149,8 +1130,8 @@ input{font-family:var(--font-secondary)}
 
     <!-- Premio principal -->
     <div class="premio-main reveal">
-      <span class="premio-badge">Avaluado en $85.000.000</span>
-      <h3>BMW M4<br>Competition</h3>
+      <span class="premio-badge">0 km · Lista para ti</span>
+      <h3>Toyota Partner</h3>
       <svg class="premio-car" viewBox="0 0 600 190" aria-hidden="true">
         <path d="M30 140c0-6 8-12 26-15 16-20 46-44 96-51 60-9 138-7 198 5 35 7 68 24 89 38 42 5 98 9 118 19 9 4 12 9 12 14v16c0 5-3 9-9 9H49c-12 0-19-7-19-16v-19z" fill="#111" stroke="#CC0000" stroke-width="2"/>
         <path d="M160 80c44-7 112-7 164 2 22 3 48 15 63 26H134c4-10 13-23 26-28z" fill="#000" stroke="#4D4D4D" stroke-width="1.5"/>
@@ -1300,7 +1281,7 @@ input{font-family:var(--font-secondary)}
       <!-- Resumen sticky -->
       <aside class="order-summary reveal">
         <h3>Tu pedido</h3>
-        <div class="summary-row"><span>Sorteo</span><strong>#13 — BMW M4 Competition</strong></div>
+        <div class="summary-row"><span>Sorteo</span><strong>Sorteo Partner — Toyota Partner</strong></div>
         <div class="summary-row"><span>Tickets</span><strong id="sumQty">5</strong></div>
         <div class="summary-row"><span>Precio unitario ref.</span><strong>$9.990</strong></div>
         <div class="summary-total">
@@ -1584,7 +1565,7 @@ input{font-family:var(--font-secondary)}
 <div class="modal-overlay" id="ticketModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="ticket-modal">
     <h2 id="modalTitle">¡Felicitaciones!</h2>
-    <p class="tm-sub">Ya eres parte del Sorteo #13 — BMW M4 Competition</p>
+    <p class="tm-sub">Ya eres parte del Sorteo Partner — Toyota Partner</p>
     <div class="ticket-num-label">Tu número de ticket</div>
     <div class="ticket-num" id="ticketNumber">001247</div>
     <p class="tm-email">📩 Tu ticket ha sido enviado a tu email</p>
@@ -1603,49 +1584,11 @@ input{font-family:var(--font-secondary)}
   'use strict';
 
   /* ---------- Datos del sorteo ---------- */
-  const SORTEO_FECHA = new Date('2026-07-11T21:00:00-04:00'); // sorteo en vivo
   const TICKETS_TOTAL = 2000;
-  const TICKETS_VENDIDOS = 1247;
   const PRECIO_UNITARIO = 9990;
   const PAQUETES = { 1: 9990, 5: 44950, 10: 84990 };
 
   const fmtCLP = n => '$' + n.toLocaleString('es-CL');
-  const pad = n => String(n).padStart(2, '0');
-
-  /* ============================================
-     1. COUNTDOWN
-     ============================================ */
-  const cd = {
-    d: document.getElementById('cdDays'),
-    h: document.getElementById('cdHours'),
-    m: document.getElementById('cdMins'),
-    s: document.getElementById('cdSecs')
-  };
-  function tickCountdown(){
-    let diff = SORTEO_FECHA - Date.now();
-    if (diff < 0) diff = 0;
-    cd.d.textContent = pad(Math.floor(diff / 864e5));
-    cd.h.textContent = pad(Math.floor(diff / 36e5) % 24);
-    cd.m.textContent = pad(Math.floor(diff / 6e4) % 60);
-    cd.s.textContent = pad(Math.floor(diff / 1e3) % 60);
-  }
-  tickCountdown();
-  setInterval(tickCountdown, 1000);
-
-  /* ============================================
-     2. BARRAS DE PROGRESO
-     ============================================ */
-  const pct = Math.round(TICKETS_VENDIDOS / TICKETS_TOTAL * 100);
-  document.getElementById('progressPct').textContent = pct + '%';
-  document.getElementById('ticketsSoldLabel').textContent = TICKETS_VENDIDOS.toLocaleString('es-CL');
-  document.getElementById('ticketsLeft').textContent = (TICKETS_TOTAL - TICKETS_VENDIDOS).toLocaleString('es-CL');
-  // Animación de 0 al valor real tras cargar
-  requestAnimationFrame(() => {
-    setTimeout(() => {
-      document.getElementById('heroProgress').style.width = pct + '%';
-      document.querySelectorAll('.js-progress').forEach(el => el.style.width = pct + '%');
-    }, 300);
-  });
 
   /* ============================================
      11. NAVBAR — transparente → sólido
