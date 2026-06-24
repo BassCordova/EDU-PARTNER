@@ -1001,14 +1001,21 @@ input{font-family:var(--font-secondary)}
      ============================================================ -->
 <header class="hero">
   <!-- Silueta de auto deportivo -->
-  <svg class="hero-car" viewBox="0 0 720 200" aria-hidden="true">
-    <path d="M40 150c0-6 8-12 30-16 18-22 52-50 110-58 70-10 160-8 230 6 40 8 80 28 104 44 50 6 116 10 140 22 10 5 14 10 14 16v18c0 6-4 10-10 10H62c-14 0-22-8-22-18v-24z" fill="#0a0a0a" stroke="#CC0000" stroke-opacity=".5" stroke-width="2"/>
-    <path d="M190 84c50-8 130-8 190 2 26 4 56 18 74 30H160c4-12 14-26 30-32z" fill="#000" stroke="#4D4D4D" stroke-width="1.5"/>
-    <circle cx="170" cy="178" r="32" fill="#000" stroke="#CC0000" stroke-width="4"/>
-    <circle cx="170" cy="178" r="14" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
-    <circle cx="560" cy="178" r="32" fill="#000" stroke="#CC0000" stroke-width="4"/>
-    <circle cx="560" cy="178" r="14" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
-    <path d="M640 138l36 6" stroke="#CC0000" stroke-width="3" stroke-linecap="round"/>
+  <svg class="hero-car" viewBox="0 0 600 190" aria-hidden="true">
+    <!-- Carrocería del furgón -->
+    <path d="M56 152 L56 72 Q56 50 78 50 L372 50 Q384 50 392 58 L468 94 L528 100 Q546 101 549 118 L553 140 Q554 152 543 152 Z" fill="#0a0a0a" stroke="#CC0000" stroke-opacity=".5" stroke-width="2"/>
+    <!-- Parabrisas / ventana cabina -->
+    <path d="M404 62 L424 62 L458 92 L404 92 Z" fill="#000" stroke="#4D4D4D" stroke-width="1.5"/>
+    <!-- Puerta corredera + manilla -->
+    <path d="M232 58 L232 150" stroke="#4D4D4D" stroke-width="1.5"/>
+    <path d="M248 104 L266 104" stroke="#4D4D4D" stroke-width="3" stroke-linecap="round"/>
+    <!-- Ruedas -->
+    <circle cx="156" cy="152" r="30" fill="#000" stroke="#CC0000" stroke-width="4"/>
+    <circle cx="156" cy="152" r="12" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
+    <circle cx="482" cy="152" r="30" fill="#000" stroke="#CC0000" stroke-width="4"/>
+    <circle cx="482" cy="152" r="12" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
+    <!-- Foco delantero -->
+    <path d="M549 112 L557 115" stroke="#CC0000" stroke-width="3" stroke-linecap="round"/>
   </svg>
 
   <div class="hero-content">
@@ -1047,13 +1054,20 @@ input{font-family:var(--font-secondary)}
         <span class="tag">● Sorteo Partner Activo</span>
         <!-- Silueta del vehículo -->
         <svg viewBox="0 0 600 190" aria-hidden="true">
-          <path d="M30 140c0-6 8-12 26-15 16-20 46-44 96-51 60-9 138-7 198 5 35 7 68 24 89 38 42 5 98 9 118 19 9 4 12 9 12 14v16c0 5-3 9-9 9H49c-12 0-19-7-19-16v-19z" fill="#0d0d0d" stroke="#CC0000" stroke-opacity=".6" stroke-width="2"/>
-          <path d="M160 80c44-7 112-7 164 2 22 3 48 15 63 26H134c4-10 13-23 26-28z" fill="#000" stroke="#4D4D4D" stroke-width="1.5"/>
-          <circle cx="145" cy="158" r="27" fill="#000" stroke="#CC0000" stroke-width="4"/>
-          <circle cx="145" cy="158" r="11" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
-          <circle cx="475" cy="158" r="27" fill="#000" stroke="#CC0000" stroke-width="4"/>
-          <circle cx="475" cy="158" r="11" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
-          <path d="M540 122l30 5" stroke="#CC0000" stroke-width="3" stroke-linecap="round"/>
+          <!-- Carrocería del furgón -->
+          <path d="M56 152 L56 72 Q56 50 78 50 L372 50 Q384 50 392 58 L468 94 L528 100 Q546 101 549 118 L553 140 Q554 152 543 152 Z" fill="#0d0d0d" stroke="#CC0000" stroke-opacity=".6" stroke-width="2"/>
+          <!-- Parabrisas / ventana cabina -->
+          <path d="M404 62 L424 62 L458 92 L404 92 Z" fill="#000" stroke="#4D4D4D" stroke-width="1.5"/>
+          <!-- Puerta corredera + manilla -->
+          <path d="M232 58 L232 150" stroke="#4D4D4D" stroke-width="1.5"/>
+          <path d="M248 104 L266 104" stroke="#4D4D4D" stroke-width="3" stroke-linecap="round"/>
+          <!-- Ruedas -->
+          <circle cx="156" cy="152" r="30" fill="#000" stroke="#CC0000" stroke-width="4"/>
+          <circle cx="156" cy="152" r="12" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
+          <circle cx="482" cy="152" r="30" fill="#000" stroke="#CC0000" stroke-width="4"/>
+          <circle cx="482" cy="152" r="12" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
+          <!-- Foco delantero -->
+          <path d="M549 112 L557 115" stroke="#CC0000" stroke-width="3" stroke-linecap="round"/>
         </svg>
       </div>
 
@@ -1133,10 +1147,20 @@ input{font-family:var(--font-secondary)}
       <span class="premio-badge">0 km · Lista para ti</span>
       <h3>Peugeot Partner</h3>
       <svg class="premio-car" viewBox="0 0 600 190" aria-hidden="true">
-        <path d="M30 140c0-6 8-12 26-15 16-20 46-44 96-51 60-9 138-7 198 5 35 7 68 24 89 38 42 5 98 9 118 19 9 4 12 9 12 14v16c0 5-3 9-9 9H49c-12 0-19-7-19-16v-19z" fill="#111" stroke="#CC0000" stroke-width="2"/>
-        <path d="M160 80c44-7 112-7 164 2 22 3 48 15 63 26H134c4-10 13-23 26-28z" fill="#000" stroke="#4D4D4D" stroke-width="1.5"/>
-        <circle cx="145" cy="158" r="27" fill="#000" stroke="#CC0000" stroke-width="4"/>
-        <circle cx="475" cy="158" r="27" fill="#000" stroke="#CC0000" stroke-width="4"/>
+        <!-- Carrocería del furgón -->
+        <path d="M56 152 L56 72 Q56 50 78 50 L372 50 Q384 50 392 58 L468 94 L528 100 Q546 101 549 118 L553 140 Q554 152 543 152 Z" fill="#111" stroke="#CC0000" stroke-width="2"/>
+        <!-- Parabrisas / ventana cabina -->
+        <path d="M404 62 L424 62 L458 92 L404 92 Z" fill="#000" stroke="#4D4D4D" stroke-width="1.5"/>
+        <!-- Puerta corredera + manilla -->
+        <path d="M232 58 L232 150" stroke="#4D4D4D" stroke-width="1.5"/>
+        <path d="M248 104 L266 104" stroke="#4D4D4D" stroke-width="3" stroke-linecap="round"/>
+        <!-- Ruedas -->
+        <circle cx="156" cy="152" r="30" fill="#000" stroke="#CC0000" stroke-width="4"/>
+        <circle cx="156" cy="152" r="12" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
+        <circle cx="482" cy="152" r="30" fill="#000" stroke="#CC0000" stroke-width="4"/>
+        <circle cx="482" cy="152" r="12" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
+        <!-- Foco delantero -->
+        <path d="M549 112 L557 115" stroke="#CC0000" stroke-width="3" stroke-linecap="round"/>
       </svg>
 
       <div class="premio-specs">
