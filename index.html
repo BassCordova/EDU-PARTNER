@@ -1779,7 +1779,7 @@ input{font-family:var(--font-secondary)}
     input.closest('.form-field').classList.toggle('invalid', hasError);
   }
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     const nombre = document.getElementById('fNombre');
     const email = document.getElementById('fEmail');
@@ -1795,11 +1795,34 @@ input{font-family:var(--font-secondary)}
 
     if (!valid || !terms.checked) return;
 
-    // Número de ticket simulado entre 000001 y 002000
-    const num = Math.floor(Math.random() * TICKETS_TOTAL) + 1;
-    document.getElementById('ticketNumber').textContent = String(num).padStart(6, '0');
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    const qty = parseInt(qtyInput.value, 10) || 1;
+    const prevLabel = payBtn.textContent;
+    payBtn.disabled = true;
+    payBtn.textContent = 'Redirigiendo a Mercado Pago…';
+
+    try {
+      const r = await fetch('/api/create-preference', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: nombre.value.trim(),
+          email: email.value.trim(),
+          phone: fono.value.trim(),
+          rut: rutInput.value.trim(),
+          quantity: qty
+        })
+      });
+      const data = await r.json();
+      if (r.ok && data.init_point) {
+        window.location.href = data.init_point; // redirige al checkout de Mercado Pago
+        return;
+      }
+      alert('No pudimos iniciar el pago en este momento. Inténtalo nuevamente en unos minutos.');
+    } catch (err) {
+      alert('Hubo un problema de conexión. Revisa tu internet e intenta otra vez.');
+    }
+    payBtn.disabled = false;
+    payBtn.textContent = prevLabel;
   });
 
   function closeModal(){
@@ -1809,6 +1832,46 @@ input{font-family:var(--font-secondary)}
   document.getElementById('closeModal').addEventListener('click', closeModal);
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* ---------- Regreso desde Mercado Pago ---------- */
+  (function handlePaymentReturn(){
+    const p = new URLSearchParams(location.search);
+    const estado = p.get('pago');
+    if (!estado) return;
+
+    if (estado === 'success') {
+      const ref = p.get('external_reference');
+      const pid = p.get('payment_id') || '';
+      const numEl = document.getElementById('ticketNumber');
+      const labelEl = document.querySelector('.ticket-num-label');
+      numEl.textContent = '…';
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      history.replaceState({}, '', location.pathname);
+
+      let tries = 0;
+      (async function poll(){
+        try {
+          const r = await fetch('/api/order?ref=' + encodeURIComponent(ref) + '&payment_id=' + encodeURIComponent(pid));
+          const d = await r.json();
+          if (d.status === 'approved' && d.tickets && d.tickets.length) {
+            const nums = d.tickets.map(n => String(n).padStart(6, '0'));
+            labelEl.textContent = nums.length > 1 ? 'Tus números de ticket' : 'Tu número de ticket';
+            numEl.textContent = nums.join(' · ');
+            return;
+          }
+        } catch (e) {}
+        if (tries++ < 8) setTimeout(poll, 1500);
+        else numEl.textContent = 'Confirmando pago…';
+      })();
+    } else if (estado === 'pending') {
+      history.replaceState({}, '', location.pathname);
+      alert('Tu pago quedó pendiente de confirmación. Apenas se acredite, te enviaremos tu número de ticket por email.');
+    } else if (estado === 'failure') {
+      history.replaceState({}, '', location.pathname);
+      alert('El pago no se completó. Puedes intentarlo nuevamente cuando quieras.');
+    }
+  })();
 
   // Newsletter (sin backend — feedback simple)
   document.getElementById('newsletterForm').addEventListener('submit', e => {

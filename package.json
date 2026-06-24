@@ -1,0 +1,10 @@
+{
+  "name": "edupartner",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "EduPartner — sorteos de autos con pago por Mercado Pago",
+  "dependencies": {
+    "@vercel/postgres": "^0.10.0"
+  }
+}
