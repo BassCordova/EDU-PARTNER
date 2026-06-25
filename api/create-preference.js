@@ -54,11 +54,14 @@ export default async function handler(req, res) {
     });
 
     const pref = await prefRes.json();
-    if (!prefRes.ok || !pref.init_point) {
+    // En modo de prueba (token TEST-…) Mercado Pago usa sandbox_init_point.
+    const isTest = (process.env.MP_ACCESS_TOKEN || '').startsWith('TEST-');
+    const redirectUrl = (isTest && pref.sandbox_init_point) ? pref.sandbox_init_point : pref.init_point;
+    if (!prefRes.ok || !redirectUrl) {
       res.status(502).json({ error: 'No se pudo crear el pago', detail: pref });
       return;
     }
-    res.status(200).json({ init_point: pref.init_point, ref });
+    res.status(200).json({ init_point: redirectUrl, ref });
   } catch (e) {
     res.status(500).json({ error: 'Error del servidor', detail: String(e && e.message || e) });
   }
