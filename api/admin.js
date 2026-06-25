@@ -1,5 +1,10 @@
 // GET /api/admin?key=TU_ADMIN_KEY
 // Lista los participantes con pago aprobado y sus números de ticket.
+//
+// Para BORRAR todos los datos (ej. limpiar pruebas antes de lanzar):
+//   GET /api/admin?key=TU_ADMIN_KEY&action=reset&confirm=BORRAR
+// Esto vacía órdenes y tickets y reinicia la numeración en 000001.
+//
 // Protegido con la variable de entorno ADMIN_KEY.
 import { ensureSchema } from './_lib.js';
 import { sql } from '@vercel/postgres';
@@ -10,6 +15,18 @@ export default async function handler(req, res) {
 
   try {
     await ensureSchema();
+
+    // Reset: borra todo y reinicia el contador de tickets.
+    if (req.query.action === 'reset') {
+      if (req.query.confirm !== 'BORRAR') {
+        res.status(400).json({ error: 'Para confirmar agrega &confirm=BORRAR a la URL' });
+        return;
+      }
+      await sql`TRUNCATE tickets, orders RESTART IDENTITY`;
+      res.status(200).json({ ok: true, mensaje: 'Datos borrados. La numeración vuelve a 000001.' });
+      return;
+    }
+
     const { rows: orders } = await sql`
       SELECT o.ref, o.name, o.email, o.phone, o.rut, o.quantity, o.amount, o.status,
              o.payment_id, o.created_at,

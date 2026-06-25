@@ -70,6 +70,61 @@ Te muestra cada comprador con sus números de ticket y el total vendido.
 
 ---
 
+---
+
+## Email de confirmación (Resend)
+
+Cuando un pago se aprueba, el comprador recibe su número de ticket por correo.
+
+1. Crea una cuenta gratis en **https://resend.com**.
+2. **API Keys → Create API Key** → copia la clave (empieza con `re_…`).
+3. En Vercel → Environment Variables, agrega:
+   - `RESEND_API_KEY` = la clave `re_…`
+4. **Para enviar desde tu dominio** (`sorteos@edupartner.cl`):
+   - En Resend → **Domains → Add Domain** → `edupartner.cl`.
+   - Te da unos registros DNS (DKIM/SPF) → agrégalos en NIC Chile.
+   - Cuando Resend lo marque verificado, agrega en Vercel:
+     `MAIL_FROM` = `EduPartner <sorteos@edupartner.cl>`
+5. Redeploy.
+
+> Mientras verificas el dominio, si dejas `MAIL_FROM` vacío usa el remitente de
+> prueba de Resend (`onboarding@resend.dev`), que **solo envía a tu propio correo**.
+> Sirve para probar, pero para enviar a los compradores reales necesitas el dominio verificado.
+
+---
+
+## Limpiar los datos de prueba (antes de lanzar)
+
+Para borrar las compras de prueba y que la numeración vuelva a `000001`, abre en el navegador:
+
+```
+https://TU-DOMINIO/api/admin?key=TU_ADMIN_KEY&action=reset&confirm=BORRAR
+```
+
+Hazlo **una vez, justo antes de salir a producción**. Después de eso, el primer
+comprador real recibe el ticket 000001.
+
+---
+
+## Pasar a PRODUCCIÓN (cobrar de verdad)
+
+1. Tu cuenta de Mercado Pago debe estar **habilitada para producción** (completar
+   datos del negocio/cuenta si te lo pide).
+2. En **Developers → tu app → Credenciales → "Credenciales de producción"**,
+   copia el **Access Token de producción**.
+3. En Vercel, reemplaza `MP_ACCESS_TOKEN` por el de producción. (El código detecta
+   solo que ya no es de prueba y enruta a pagos reales.)
+4. Asegúrate de tener `PUBLIC_BASE_URL = https://edupartner.cl`.
+5. **Redeploy.**
+6. Haz **una compra real chica** para verificar de punta a punta (te llega la plata
+   a tu cuenta de Mercado Pago y el email al comprador).
+7. **Limpia los datos** una última vez con el enlace de reset de arriba.
+
+> Orden recomendado: deja primero todo probado con credenciales de **prueba**.
+> El cambio a producción es el último paso del lanzamiento.
+
+---
+
 ## Qué se construyó (resumen técnico)
 
 ```

@@ -609,6 +609,24 @@ input{font-family:var(--font-secondary)}
 .pay-panel li{padding:4px 0;border-bottom:1px dashed rgba(255,255,255,.08)}
 .pay-panel li:last-child{border:none}
 
+/* Método de pago (Mercado Pago) */
+.pay-method{
+  background:var(--black);border:2px solid var(--red);
+  border-radius:10px;padding:18px 20px;margin-bottom:28px;
+  box-shadow:0 0 20px rgba(204,0,0,.18);
+}
+.pay-method-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.pay-method-name{
+  font-family:var(--font-primary);font-weight:700;font-size:15px;
+  letter-spacing:1px;text-transform:uppercase;color:var(--white);
+}
+.pay-method-check{
+  font-family:var(--font-primary);font-weight:700;font-size:12px;
+  letter-spacing:1px;color:var(--red);white-space:nowrap;
+}
+.pay-method-desc{font-size:13px;color:rgba(255,255,255,.7);line-height:1.6}
+.pay-method-desc strong{color:var(--white);font-family:var(--font-primary)}
+
 /* Checkbox términos */
 .terms-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:24px}
 .terms-row input[type=checkbox]{
@@ -1250,26 +1268,13 @@ input{font-family:var(--font-secondary)}
             </div>
           </div>
 
-          <!-- Métodos de pago -->
-          <div class="pay-tabs" role="tablist" aria-label="Método de pago">
-            <button type="button" class="pay-tab active" data-pay="webpay" role="tab" aria-selected="true">Webpay</button>
-            <button type="button" class="pay-tab" data-pay="transferencia" role="tab" aria-selected="false">Transferencia</button>
-            <button type="button" class="pay-tab" data-pay="fintoc" role="tab" aria-selected="false">Fintoc</button>
-          </div>
-          <div class="pay-panel active" data-panel="webpay">
-            💳 <strong>Pago con tarjeta de crédito o débito</strong> — procesado de forma segura por Transbank.
-          </div>
-          <div class="pay-panel" data-panel="transferencia">
-            🏦 <strong>Datos para transferencia:</strong>
-            <ul>
-              <li>Banco: <strong>Santander</strong></li>
-              <li>Cuenta corriente: <strong>00-123456-7</strong></li>
-              <li>RUT: <strong>76.XXX.XXX-X</strong></li>
-              <li>Email: <strong>pagos@edupartner.cl</strong></li>
-            </ul>
-          </div>
-          <div class="pay-panel" data-panel="fintoc">
-            ⚡ <strong>Transferencia bancaria instantánea</strong> — conecta tu banco y paga en segundos con Fintoc.
+          <!-- Método de pago -->
+          <div class="pay-method">
+            <div class="pay-method-head">
+              <span class="pay-method-name">Pago con Mercado Pago</span>
+              <span class="pay-method-check">✓ Seguro</span>
+            </div>
+            <p class="pay-method-desc">Al confirmar, te llevamos a Mercado Pago para pagar con <strong>tarjeta de crédito, débito, Webpay o transferencia</strong>. Tu número de ticket se genera apenas se aprueba el pago.</p>
           </div>
 
           <!-- Términos -->
@@ -1278,7 +1283,7 @@ input{font-family:var(--font-secondary)}
             <label for="fTerms">Acepto los <a href="#">Términos y Bases del sorteo</a> y confirmo que soy mayor de 18 años.</label>
           </div>
 
-          <button type="submit" class="btn btn-primary" id="payBtn" style="width:100%" disabled>Confirmar y Pagar →</button>
+          <button type="submit" class="btn btn-primary" id="payBtn" style="width:100%" disabled>Pagar con Mercado Pago →</button>
 
           <div class="trust-badges">
             <span>🔒 Pago SSL Seguro</span><span>·</span>
@@ -1717,24 +1722,6 @@ input{font-family:var(--font-secondary)}
   });
   qtyInput.addEventListener('input', updateTotal);
   updateTotal();
-
-  /* ============================================
-     5. MÉTODOS DE PAGO — tabs
-     ============================================ */
-  const payTabs = document.querySelectorAll('.pay-tab');
-  payTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      payTabs.forEach(t => {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-      });
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected', 'true');
-      document.querySelectorAll('.pay-panel').forEach(p =>
-        p.classList.toggle('active', p.dataset.panel === tab.dataset.pay)
-      );
-    });
-  });
 
   /* ============================================
      6 + 7. FORMULARIO + VALIDACIÓN + MODAL

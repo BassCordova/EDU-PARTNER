@@ -61,44 +61,91 @@ const pool = createPool();
 
 export async function finalizeOrder(ref, paymentId) {
   const client = await pool.connect();
+  let result = { status: 'not_found' };
+  let emailData = null; // se setea solo en la transición a aprobada (para no duplicar correos)
   try {
     await client.sql`BEGIN`;
     const { rows } = await client.sql`SELECT * FROM orders WHERE ref = ${ref} FOR UPDATE`;
     const order = rows[0];
-    if (!order) { await client.sql`ROLLBACK`; return { status: 'not_found' }; }
 
-    // Ya confirmada antes → devolver tickets existentes.
-    if (order.status === 'approved') {
+    if (!order) {
+      await client.sql`ROLLBACK`;
+    } else if (order.status === 'approved') {
+      // Ya confirmada antes → devolver tickets existentes (idempotente, sin reenviar email).
       const { rows: t } = await client.sql`SELECT number FROM tickets WHERE order_ref = ${ref} ORDER BY number`;
       await client.sql`COMMIT`;
-      return { status: 'approved', tickets: t.map(x => x.number), quantity: order.quantity };
+      result = { status: 'approved', tickets: t.map(x => x.number), quantity: order.quantity };
+    } else {
+      // Verificar el pago realmente en Mercado Pago.
+      const pay = paymentId ? await getPayment(paymentId) : null;
+      const ok = pay
+        && pay.status === 'approved'
+        && String(pay.external_reference) === String(ref)
+        && Math.round(Number(pay.transaction_amount)) === Number(order.amount);
+
+      if (!ok) {
+        await client.sql`ROLLBACK`;
+        result = { status: order.status }; // sigue pendiente/rechazada
+      } else {
+        const { rows: t } = await client.sql`
+          INSERT INTO tickets (order_ref)
+          SELECT ${ref} FROM generate_series(1, ${order.quantity})
+          RETURNING number`;
+        await client.sql`UPDATE orders SET status = 'approved', payment_id = ${String(paymentId)} WHERE ref = ${ref}`;
+        await client.sql`COMMIT`;
+        const tickets = t.map(x => x.number);
+        result = { status: 'approved', tickets, quantity: order.quantity };
+        emailData = { name: order.name, email: order.email, tickets, quantity: order.quantity };
+      }
     }
-
-    // Verificar el pago realmente en Mercado Pago.
-    const pay = paymentId ? await getPayment(paymentId) : null;
-    const ok = pay
-      && pay.status === 'approved'
-      && String(pay.external_reference) === String(ref)
-      && Math.round(Number(pay.transaction_amount)) === Number(order.amount);
-
-    if (!ok) {
-      await client.sql`ROLLBACK`;
-      return { status: order.status }; // sigue pendiente/rechazada
-    }
-
-    const { rows: t } = await client.sql`
-      INSERT INTO tickets (order_ref)
-      SELECT ${ref} FROM generate_series(1, ${order.quantity})
-      RETURNING number`;
-    await client.sql`UPDATE orders SET status = 'approved', payment_id = ${String(paymentId)} WHERE ref = ${ref}`;
-    await client.sql`COMMIT`;
-    return { status: 'approved', tickets: t.map(x => x.number), quantity: order.quantity };
   } catch (e) {
     try { await client.sql`ROLLBACK`; } catch (_) {}
     throw e;
   } finally {
     client.release();
   }
+
+  // Enviar el email FUERA de la transacción y solo en la transición (no bloquea la confirmación si falla).
+  if (emailData) {
+    try { await sendTicketEmail(emailData); }
+    catch (e) { console.error('Error enviando email:', e); }
+  }
+  return result;
+}
+
+// ---- Email (Resend) ----
+// Opcional: si no hay RESEND_API_KEY, simplemente no envía (no rompe el pago).
+export async function sendTicketEmail({ name, email, tickets, quantity }) {
+  if (!process.env.RESEND_API_KEY || !email) return;
+  const from = process.env.MAIL_FROM || 'EduPartner <onboarding@resend.dev>';
+  const nums = (tickets || []).map(n => String(n).padStart(6, '0'));
+  const lista = nums.map(n => '<span style="display:inline-block;font-family:monospace;font-size:22px;letter-spacing:4px;color:#fff;background:#1A1A1A;border:1px solid #CC0000;border-radius:8px;padding:10px 16px;margin:4px;">' + n + '</span>').join('');
+  const plural = nums.length > 1 ? 's' : '';
+  const html =
+    '<div style="background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif;padding:32px;border-radius:12px;max-width:560px;margin:auto;">' +
+      '<h1 style="font-size:26px;margin:0 0 4px;">EDU <span style="color:#CC0000;">PARTNER</span></h1>' +
+      '<p style="color:#CC0000;font-weight:bold;letter-spacing:1px;margin:0 0 24px;">¡Pago confirmado!</p>' +
+      '<p style="font-size:16px;line-height:1.6;">Hola ' + (name || '') + ', ya eres parte del <strong>Sorteo Partner — Peugeot Partner</strong>.</p>' +
+      '<p style="font-size:14px;color:#bbb;margin-top:24px;">Tu' + plural + ' número' + plural + ' de ticket:</p>' +
+      '<div style="margin:8px 0 24px;">' + lista + '</div>' +
+      '<p style="font-size:14px;color:#bbb;line-height:1.6;">Guarda este correo: ' + (nums.length > 1 ? 'estos son tus pases' : 'este es tu pase') + ' al sorteo en vivo. El sorteo se transmite por Instagram y TikTok, con número ganador aleatorio y verificable.</p>' +
+      '<p style="font-size:12px;color:#666;margin-top:28px;">EduPartner · Acelerando tus sueños.</p>' +
+    '</div>';
+
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + process.env.RESEND_API_KEY
+    },
+    body: JSON.stringify({
+      from,
+      to: [email],
+      subject: '🎟️ Tu' + plural + ' ticket' + plural + ' — Sorteo Partner EduPartner',
+      html
+    })
+  });
+  if (!r.ok) console.error('Resend respondió', r.status, await r.text());
 }
 
 // ---- Helpers HTTP ----
