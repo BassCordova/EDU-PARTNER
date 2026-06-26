@@ -138,5 +138,5 @@ comprador real recibe el ticket 000001.
 - El **monto siempre se calcula en el servidor** (no se confía en el navegador).
 - La asignación de números es **atómica e idempotente**: no hay duplicados ni
   doble cobro aunque el webhook llegue dos veces.
-- Precios: 1 = $9.990 · 5 = $44.950 · 10 = $84.990 · otras cantidades = $9.990 c/u.
-  (Se editan en `api/_lib.js`, constante `PAQUETES`.)
+- Precios: 1 = $3.000 · 2 = $5.000 · 5 = $10.000 · otras cantidades = $3.000 c/u.
+  (Se editan en `api/_lib.js`, constante `PAQUETES`, y en el JS de `index.html`.)

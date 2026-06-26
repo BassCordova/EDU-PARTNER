@@ -7,8 +7,8 @@ import { sql, createPool } from '@vercel/postgres';
 import crypto from 'crypto';
 
 export const TICKETS_TOTAL = 2000;
-export const PRECIO_UNITARIO = 9990;
-const PAQUETES = { 1: 9990, 5: 44950, 10: 84990 };
+export const PRECIO_UNITARIO = 3000;
+const PAQUETES = { 1: 3000, 2: 5000, 5: 10000 };
 
 // Calcula el monto en CLP a partir de la cantidad. Devuelve null si es inválida.
 // IMPORTANTE: el monto SIEMPRE se calcula en el servidor; nunca se confía en el cliente.
