@@ -125,7 +125,7 @@ export async function sendTicketEmail({ name, email, tickets, quantity }) {
     '<div style="background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif;padding:32px;border-radius:12px;max-width:560px;margin:auto;">' +
       '<h1 style="font-size:26px;margin:0 0 4px;">EDU <span style="color:#CC0000;">PARTNER</span></h1>' +
       '<p style="color:#CC0000;font-weight:bold;letter-spacing:1px;margin:0 0 24px;">¡Pago confirmado!</p>' +
-      '<p style="font-size:16px;line-height:1.6;">Hola ' + (name || '') + ', ya eres parte del <strong>Sorteo Partner — Peugeot Partner</strong>.</p>' +
+      '<p style="font-size:16px;line-height:1.6;">Hola ' + (name || '') + ', ya eres parte del <strong>Sorteo Tarmac SL7 105 Di2</strong>.</p>' +
       '<p style="font-size:14px;color:#bbb;margin-top:24px;">Tu' + plural + ' número' + plural + ' de ticket:</p>' +
       '<div style="margin:8px 0 24px;">' + lista + '</div>' +
       '<p style="font-size:14px;color:#bbb;line-height:1.6;">Guarda este correo: ' + (nums.length > 1 ? 'estos son tus pases' : 'este es tu pase') + ' al sorteo en vivo. El sorteo se transmite por Instagram y TikTok, con número ganador aleatorio y verificable.</p>' +
@@ -141,7 +141,7 @@ export async function sendTicketEmail({ name, email, tickets, quantity }) {
     body: JSON.stringify({
       from,
       to: [email],
-      subject: '🎟️ Tu' + plural + ' ticket' + plural + ' — Sorteo Partner EduPartner',
+      subject: '🎟️ Tu' + plural + ' ticket' + plural + ' — Sorteo Tarmac SL7 EduPartner',
       html
     })
   });

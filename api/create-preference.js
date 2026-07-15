@@ -34,7 +34,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         items: [{
-          title: 'Tickets Sorteo Partner — Peugeot Partner',
+          title: 'Tickets Sorteo Tarmac SL7 — Specialized 105 Di2',
           description: quantity + ' ticket(s) del sorteo',
           quantity: 1,
           unit_price: amount,

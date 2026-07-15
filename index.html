@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edu Partner — Acelerando tus sueños | Sorteos de Autos de Lujo</title>
-<meta name="description" content="Gana el auto de tus sueños. Sorteos oficiales de autos de lujo, en vivo y 100% transparentes. Tu ticket al éxito está aquí.">
+<title>Edu Partner — Acelerando tus sueños | Sorteo Specialized Tarmac SL7</title>
+<meta name="description" content="Gana una Specialized Tarmac SL7 105 Di2. Sorteo oficial, en vivo y 100% transparente. Tu ticket al éxito está aquí.">
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,7 @@
 
 <style>
 /* ============================================================
-   EDU PARTNER — DARK LUXURY AUTOMOTIVE
+   EDU PARTNER — DARK LUXURY CYCLING
    Paleta: #CC0000 / #8C0000 / #000000 / #1A1A1A / #4D4D4D / #FFFFFF
    ============================================================ */
 
@@ -239,9 +239,12 @@ input{font-family:var(--font-secondary)}
   pointer-events:none;
 }
 .hero-car{
-  position:absolute;bottom:6%;left:50%;transform:translateX(-50%);
-  width:min(720px,90vw);opacity:.35;pointer-events:none;
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:min(720px,90vw);height:60%;object-fit:cover;object-position:top;
+  opacity:.35;pointer-events:none;border-radius:12px 12px 0 0;
   filter:drop-shadow(0 0 60px rgba(204,0,0,.4));
+  -webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 55%,transparent 100%);
 }
 .hero-content{position:relative;z-index:2;padding:120px 24px 80px;max-width:980px}
 .hero h1{
@@ -479,23 +482,19 @@ input{font-family:var(--font-secondary)}
 }
 .premio-card p{font-size:14px;color:rgba(255,255,255,.6)}
 
-.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
 .galeria-item{
   position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;
   border:1px solid rgba(255,255,255,.07);
   display:flex;align-items:center;justify-content:center;
+  background:#000;
 }
-.galeria-item:nth-child(1){background:linear-gradient(135deg,#1a0405,#000 70%)}
-.galeria-item:nth-child(2){background:linear-gradient(135deg,#1A1A1A,#000 70%)}
-.galeria-item:nth-child(3){background:linear-gradient(135deg,#2a0608,#000 70%)}
-.galeria-item .gal-num{
-  font-family:var(--font-display);font-weight:900;font-size:64px;
-  color:rgba(255,255,255,.08);
-}
+.galeria-item img{width:100%;height:100%;object-fit:cover;display:block}
 .galeria-item .gal-label{
   position:absolute;bottom:12px;left:16px;
   font-family:var(--font-primary);font-weight:600;font-size:12px;
-  letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.5);
+  letter-spacing:1.5px;text-transform:uppercase;color:#fff;
+  text-shadow:0 2px 8px rgba(0,0,0,.9);
 }
 
 /* ============================================================
@@ -1018,29 +1017,13 @@ input{font-family:var(--font-secondary)}
      SECCIÓN 1 — HERO
      ============================================================ -->
 <header class="hero">
-  <!-- Silueta de auto deportivo -->
-  <svg class="hero-car" viewBox="0 0 600 190" aria-hidden="true">
-    <!-- Carrocería del furgón -->
-    <path d="M56 152 L56 72 Q56 50 78 50 L372 50 Q384 50 392 58 L468 94 L528 100 Q546 101 549 118 L553 140 Q554 152 543 152 Z" fill="#0a0a0a" stroke="#CC0000" stroke-opacity=".5" stroke-width="2"/>
-    <!-- Parabrisas / ventana cabina -->
-    <path d="M404 62 L424 62 L458 92 L404 92 Z" fill="#000" stroke="#4D4D4D" stroke-width="1.5"/>
-    <!-- Puerta corredera + manilla -->
-    <path d="M232 58 L232 150" stroke="#4D4D4D" stroke-width="1.5"/>
-    <path d="M248 104 L266 104" stroke="#4D4D4D" stroke-width="3" stroke-linecap="round"/>
-    <!-- Ruedas -->
-    <circle cx="156" cy="152" r="30" fill="#000" stroke="#CC0000" stroke-width="4"/>
-    <circle cx="156" cy="152" r="12" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
-    <circle cx="482" cy="152" r="30" fill="#000" stroke="#CC0000" stroke-width="4"/>
-    <circle cx="482" cy="152" r="12" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
-    <!-- Foco delantero -->
-    <path d="M549 112 L557 115" stroke="#CC0000" stroke-width="3" stroke-linecap="round"/>
-  </svg>
+  <img class="hero-car" src="/images/tarmac-2.jpg" alt="Specialized Tarmac SL7 105 Di2">
 
   <div class="hero-content">
-    <span class="eyebrow">Sorteo Partner • 10 de agosto • En vivo</span>
-    <h1>Gana la Peugeot<br><span class="red">Partner</span> que necesitas</h1>
-    <p class="hero-sub">Para el trabajo, tu pyme o el día a día<span class="dot">.</span></p>
-    <p class="hero-tagline">Rapidez, economía y comodidad.</p>
+    <span class="eyebrow">Sorteo Tarmac SL7 • 10 de agosto • En vivo</span>
+    <h1>Gana la Specialized<br><span class="red">Tarmac SL7</span> 105 Di2</h1>
+    <p class="hero-sub">Bici aero + liviana con cambio electrónico<span class="dot">.</span></p>
+    <p class="hero-tagline">Rendimiento de gama alta a precio más accesible.</p>
 
     <div class="hero-ctas">
       <a href="#checkout" class="btn btn-primary">Comprar Ticket Ahora</a>
@@ -1069,34 +1052,18 @@ input{font-family:var(--font-secondary)}
 
     <div class="sorteo-grid">
       <div class="car-visual reveal">
-        <span class="tag">● Sorteo Partner Activo</span>
-        <!-- Silueta del vehículo -->
-        <svg viewBox="0 0 600 190" aria-hidden="true">
-          <!-- Carrocería del furgón -->
-          <path d="M56 152 L56 72 Q56 50 78 50 L372 50 Q384 50 392 58 L468 94 L528 100 Q546 101 549 118 L553 140 Q554 152 543 152 Z" fill="#0d0d0d" stroke="#CC0000" stroke-opacity=".6" stroke-width="2"/>
-          <!-- Parabrisas / ventana cabina -->
-          <path d="M404 62 L424 62 L458 92 L404 92 Z" fill="#000" stroke="#4D4D4D" stroke-width="1.5"/>
-          <!-- Puerta corredera + manilla -->
-          <path d="M232 58 L232 150" stroke="#4D4D4D" stroke-width="1.5"/>
-          <path d="M248 104 L266 104" stroke="#4D4D4D" stroke-width="3" stroke-linecap="round"/>
-          <!-- Ruedas -->
-          <circle cx="156" cy="152" r="30" fill="#000" stroke="#CC0000" stroke-width="4"/>
-          <circle cx="156" cy="152" r="12" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
-          <circle cx="482" cy="152" r="30" fill="#000" stroke="#CC0000" stroke-width="4"/>
-          <circle cx="482" cy="152" r="12" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
-          <!-- Foco delantero -->
-          <path d="M549 112 L557 115" stroke="#CC0000" stroke-width="3" stroke-linecap="round"/>
-        </svg>
+        <span class="tag">● Sorteo Tarmac SL7 Activo</span>
+        <img src="/images/tarmac-4.jpg" alt="Specialized Tarmac SL7 105 Di2" style="width:100%;height:100%;object-fit:cover">
       </div>
 
       <div class="sorteo-info reveal">
-        <h3 class="sorteo-name">Peugeot Partner</h3>
+        <h3 class="sorteo-name">Tarmac SL7 105 Di2</h3>
 
         <div class="specs">
-          <div class="spec"><span class="ico">⚙️</span><div><div class="spec-label">Motor</div><div class="spec-val">1.6 HDi Turbodiésel</div></div></div>
-          <div class="spec"><span class="ico">🏎️</span><div><div class="spec-label">Potencia</div><div class="spec-val">90 HP · 215 Nm</div></div></div>
-          <div class="spec"><span class="ico">📅</span><div><div class="spec-label">Año</div><div class="spec-val">2025 · 0 km</div></div></div>
-          <div class="spec"><span class="ico">📦</span><div><div class="spec-label">Volumen de carga</div><div class="spec-val">3,3 m³</div></div></div>
+          <div class="spec"><span class="ico">🚴</span><div><div class="spec-label">Cuadro</div><div class="spec-val">FACT 10r Carbon · 800g</div></div></div>
+          <div class="spec"><span class="ico">⚙️</span><div><div class="spec-label">Grupo</div><div class="spec-val">Shimano 105 Di2 12v R7170</div></div></div>
+          <div class="spec"><span class="ico">🛞</span><div><div class="spec-label">Ruedas</div><div class="spec-val">DT R470 Disc · Turbo Pro 700x26</div></div></div>
+          <div class="spec"><span class="ico">🏆</span><div><div class="spec-label">Probada por</div><div class="spec-val">Equipos World Tour</div></div></div>
         </div>
 
         <div class="sorteo-price-row">
@@ -1126,7 +1093,7 @@ input{font-family:var(--font-secondary)}
         <div class="step-num">01</div>
         <div class="step-ico">🎟️</div>
         <h3>Elige tu ticket</h3>
-        <p>Selecciona cuántos números quieres. Más tickets, más chances de ganar la Partner que necesitas.</p>
+        <p>Selecciona cuántos números quieres. Más tickets, más chances de ganar la Tarmac SL7 que quieres.</p>
       </div>
       <div class="step reveal" style="transition-delay:.15s">
         <div class="step-num">02</div>
@@ -1162,38 +1129,25 @@ input{font-family:var(--font-secondary)}
 
     <!-- Premio principal -->
     <div class="premio-main reveal">
-      <span class="premio-badge">0 km · Lista para ti</span>
-      <h3>Peugeot Partner</h3>
-      <svg class="premio-car" viewBox="0 0 600 190" aria-hidden="true">
-        <!-- Carrocería del furgón -->
-        <path d="M56 152 L56 72 Q56 50 78 50 L372 50 Q384 50 392 58 L468 94 L528 100 Q546 101 549 118 L553 140 Q554 152 543 152 Z" fill="#111" stroke="#CC0000" stroke-width="2"/>
-        <!-- Parabrisas / ventana cabina -->
-        <path d="M404 62 L424 62 L458 92 L404 92 Z" fill="#000" stroke="#4D4D4D" stroke-width="1.5"/>
-        <!-- Puerta corredera + manilla -->
-        <path d="M232 58 L232 150" stroke="#4D4D4D" stroke-width="1.5"/>
-        <path d="M248 104 L266 104" stroke="#4D4D4D" stroke-width="3" stroke-linecap="round"/>
-        <!-- Ruedas -->
-        <circle cx="156" cy="152" r="30" fill="#000" stroke="#CC0000" stroke-width="4"/>
-        <circle cx="156" cy="152" r="12" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
-        <circle cx="482" cy="152" r="30" fill="#000" stroke="#CC0000" stroke-width="4"/>
-        <circle cx="482" cy="152" r="12" fill="#1A1A1A" stroke="#4D4D4D" stroke-width="2"/>
-        <!-- Foco delantero -->
-        <path d="M549 112 L557 115" stroke="#CC0000" stroke-width="3" stroke-linecap="round"/>
-      </svg>
+      <span class="premio-badge">Nueva · Lista para rodar</span>
+      <h3>Tarmac SL7 105 Di2</h3>
+      <img class="premio-car" src="/images/tarmac-3.jpg" alt="Specialized Tarmac SL7 105 Di2" style="border-radius:12px;object-fit:cover">
 
       <div class="premio-specs">
-        <div class="spec"><span class="ico">⚙️</span><div><div class="spec-label">Motor</div><div class="spec-val">1.6 HDi Turbodiésel</div></div></div>
-        <div class="spec"><span class="ico">🏎️</span><div><div class="spec-label">Potencia</div><div class="spec-val">90 HP / 215 Nm</div></div></div>
-        <div class="spec"><span class="ico">📦</span><div><div class="spec-label">Volumen de carga</div><div class="spec-val">3,3 m³</div></div></div>
-        <div class="spec"><span class="ico">📅</span><div><div class="spec-label">Año</div><div class="spec-val">2025 · 0 km</div></div></div>
+        <div class="spec"><span class="ico">🚴</span><div><div class="spec-label">Cuadro</div><div class="spec-val">FACT 10r Carbon · 800g</div></div></div>
+        <div class="spec"><span class="ico">⚙️</span><div><div class="spec-label">Grupo</div><div class="spec-val">Shimano 105 Di2 12v R7170</div></div></div>
+        <div class="spec"><span class="ico">🔗</span><div><div class="spec-label">Transmisión</div><div class="spec-val">Cassette 11-34t · Cadena SLX 12v</div></div></div>
+        <div class="spec"><span class="ico">🛑</span><div><div class="spec-label">Frenos</div><div class="spec-val">Hidráulicos a disco</div></div></div>
       </div>
     </div>
 
     <!-- Galería -->
     <div class="galeria reveal">
-      <div class="galeria-item"><span class="gal-num">01</span><span class="gal-label">Exterior · Furgón 0 km</span></div>
-      <div class="galeria-item"><span class="gal-num">02</span><span class="gal-label">Cabina · 3 plazas</span></div>
-      <div class="galeria-item"><span class="gal-num">03</span><span class="gal-label">Zona de carga · 3,3 m³</span></div>
+      <div class="galeria-item"><img src="/images/tarmac-1.jpg" alt="Cockpit Tarmac SL7"><span class="gal-label">Cockpit integrado</span></div>
+      <div class="galeria-item"><img src="/images/tarmac-2.jpg" alt="Tarmac SL7 de frente"><span class="gal-label">Vista frontal</span></div>
+      <div class="galeria-item"><img src="/images/tarmac-3.jpg" alt="Tarmac SL7 en montaña"><span class="gal-label">Cuadro FACT 10r Carbon</span></div>
+      <div class="galeria-item"><img src="/images/tarmac-4.jpg" alt="Tarmac SL7 lateral"><span class="gal-label">Ruedas DT R470 Disc</span></div>
+      <div class="galeria-item"><img src="/images/tarmac-5.jpg" alt="Tarmac SL7 perfil"><span class="gal-label">Perfil aero</span></div>
     </div>
   </div>
 </section>
@@ -1296,7 +1250,7 @@ input{font-family:var(--font-secondary)}
       <!-- Resumen sticky -->
       <aside class="order-summary reveal">
         <h3>Tu pedido</h3>
-        <div class="summary-row"><span>Sorteo</span><strong>Sorteo Partner — Peugeot Partner</strong></div>
+        <div class="summary-row"><span>Sorteo</span><strong>Sorteo Tarmac SL7 105 Di2</strong></div>
         <div class="summary-row"><span>Tickets</span><strong id="sumQty">2</strong></div>
         <div class="summary-row"><span>Precio unitario ref.</span><strong>$3.000</strong></div>
         <div class="summary-total">
@@ -1387,7 +1341,7 @@ input{font-family:var(--font-secondary)}
       <div class="trust-col reveal">
         <div class="t-ico">🏆</div>
         <h3>Premios exclusivos</h3>
-        <p>Autos de lujo 0 km, comprados y verificables. Lo que ves en la foto es exactamente lo que entregamos.</p>
+        <p>Bicicletas de alta gama, compradas y verificables. Lo que ves en la foto es exactamente lo que entregamos.</p>
       </div>
       <div class="trust-col reveal" style="transition-delay:.15s">
         <div class="t-ico">✓</div>
@@ -1494,7 +1448,7 @@ input{font-family:var(--font-secondary)}
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">¿Qué pasa si gano? ¿Cómo recibo el premio?<span class="faq-ico">+</span></button>
-        <div class="faq-a"><p>Te contactamos de inmediato por teléfono y email para coordinar la entrega. El auto se entrega con todos sus documentos al día, transferencia incluida, en una ceremonia que también compartimos en nuestras redes. Tú solo preocúpate de elegir la primera ruta.</p></div>
+        <div class="faq-a"><p>Te contactamos de inmediato por teléfono y email para coordinar la entrega. La bici se entrega nueva, con garantía oficial y lista para rodar, en una ceremonia que también compartimos en nuestras redes. Tú solo preocúpate de elegir la primera ruta.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">¿Puedo comprar más de un ticket?<span class="faq-ico">+</span></button>
@@ -1529,7 +1483,7 @@ input{font-family:var(--font-secondary)}
           </svg>
           <span class="wordmark">Edu <span>Partner</span></span>
         </a>
-        <p>Acelerando tus sueños. Sorteos oficiales de autos de lujo, en vivo y 100% transparentes.</p>
+        <p>Acelerando tus sueños. Sorteos oficiales, en vivo y 100% transparentes.</p>
         <div class="social-row">
           <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 3.25.15 4.77 1.7 4.92 4.92.06 1.26.07 1.64.07 4.81s-.01 3.55-.07 4.81c-.15 3.22-1.66 4.77-4.92 4.92-1.2.06-1.6.07-4.8.07s-3.6-.01-4.8-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.21 15.55 2.2 15.17 2.2 12s.01-3.55.08-4.81C2.43 3.97 3.94 2.42 7.2 2.27 8.4 2.21 8.8 2.2 12 2.2zm0 3.65a6.15 6.15 0 100 12.3 6.15 6.15 0 000-12.3zm0 10.15a4 4 0 110-8 4 4 0 010 8zm6.4-11.85a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg></a>
           <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99h-2.54V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg></a>
@@ -1580,7 +1534,7 @@ input{font-family:var(--font-secondary)}
 <div class="modal-overlay" id="ticketModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="ticket-modal">
     <h2 id="modalTitle">¡Felicitaciones!</h2>
-    <p class="tm-sub">Ya eres parte del Sorteo Partner — Peugeot Partner</p>
+    <p class="tm-sub">Ya eres parte del Sorteo Tarmac SL7 105 Di2</p>
     <div class="ticket-num-label">Tu número de ticket</div>
     <div class="ticket-num" id="ticketNumber">001247</div>
     <p class="tm-email">📩 Tu ticket ha sido enviado a tu email</p>
