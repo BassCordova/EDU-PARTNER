@@ -1,5 +1,5 @@
 // ============================================================
-// EDU PARTNER — utilidades compartidas del backend
+// EDU CYCLING — utilidades compartidas del backend
 // Base de datos (Vercel Postgres) + lógica de precios + confirmación
 // de pagos con Mercado Pago (Checkout Pro).
 // ============================================================
@@ -87,15 +87,25 @@ export async function finalizeOrder(ref, paymentId) {
         await client.sql`ROLLBACK`;
         result = { status: order.status }; // sigue pendiente/rechazada
       } else {
-        const { rows: t } = await client.sql`
-          INSERT INTO tickets (order_ref)
-          SELECT ${ref} FROM generate_series(1, ${order.quantity})
-          RETURNING number`;
-        await client.sql`UPDATE orders SET status = 'approved', payment_id = ${String(paymentId)} WHERE ref = ${ref}`;
-        await client.sql`COMMIT`;
-        const tickets = t.map(x => x.number);
-        result = { status: 'approved', tickets, quantity: order.quantity };
-        emailData = { name: order.name, email: order.email, tickets, quantity: order.quantity };
+        // Lock de asignación: serializa la emisión de tickets entre pagos concurrentes
+        // para poder verificar el cupo total sin condiciones de carrera.
+        await client.sql`SELECT pg_advisory_xact_lock(727001)`;
+        const { rows: sold } = await client.sql`SELECT COUNT(*)::int AS n FROM tickets`;
+        if (sold[0].n + order.quantity > TICKETS_TOTAL) {
+          await client.sql`UPDATE orders SET status = 'sold_out' WHERE ref = ${ref}`;
+          await client.sql`COMMIT`;
+          result = { status: 'sold_out', quantity: order.quantity };
+        } else {
+          const { rows: t } = await client.sql`
+            INSERT INTO tickets (order_ref)
+            SELECT ${ref} FROM generate_series(1, ${order.quantity})
+            RETURNING number`;
+          await client.sql`UPDATE orders SET status = 'approved', payment_id = ${String(paymentId)} WHERE ref = ${ref}`;
+          await client.sql`COMMIT`;
+          const tickets = t.map(x => x.number);
+          result = { status: 'approved', tickets, quantity: order.quantity };
+          emailData = { name: order.name, email: order.email, tickets, quantity: order.quantity };
+        }
       }
     }
   } catch (e) {
@@ -117,19 +127,19 @@ export async function finalizeOrder(ref, paymentId) {
 // Opcional: si no hay RESEND_API_KEY, simplemente no envía (no rompe el pago).
 export async function sendTicketEmail({ name, email, tickets, quantity }) {
   if (!process.env.RESEND_API_KEY || !email) return;
-  const from = process.env.MAIL_FROM || 'EduPartner <onboarding@resend.dev>';
+  const from = process.env.MAIL_FROM || 'EDU Cycling <onboarding@resend.dev>';
   const nums = (tickets || []).map(n => String(n).padStart(6, '0'));
-  const lista = nums.map(n => '<span style="display:inline-block;font-family:monospace;font-size:22px;letter-spacing:4px;color:#fff;background:#1A1A1A;border:1px solid #CC0000;border-radius:8px;padding:10px 16px;margin:4px;">' + n + '</span>').join('');
+  const lista = nums.map(n => '<span style="display:inline-block;font-family:monospace;font-size:22px;letter-spacing:4px;color:#fff;background:#1B3A4B;border:1px solid #FF5C00;border-radius:8px;padding:10px 16px;margin:4px;">' + n + '</span>').join('');
   const plural = nums.length > 1 ? 's' : '';
   const html =
-    '<div style="background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif;padding:32px;border-radius:12px;max-width:560px;margin:auto;">' +
-      '<h1 style="font-size:26px;margin:0 0 4px;">EDU <span style="color:#CC0000;">PARTNER</span></h1>' +
-      '<p style="color:#CC0000;font-weight:bold;letter-spacing:1px;margin:0 0 24px;">¡Pago confirmado!</p>' +
+    '<div style="background:#0D2B38;color:#fff;font-family:Arial,Helvetica,sans-serif;padding:32px;border-radius:12px;max-width:560px;margin:auto;">' +
+      '<h1 style="font-size:26px;margin:0 0 4px;font-style:italic;">EDU <span style="color:#FF5C00;">CYCLING</span></h1>' +
+      '<p style="color:#FF5C00;font-weight:bold;letter-spacing:1px;margin:0 0 24px;">¡Pago confirmado!</p>' +
       '<p style="font-size:16px;line-height:1.6;">Hola ' + (name || '') + ', ya eres parte del <strong>Sorteo Tarmac SL7 105 Di2</strong>.</p>' +
       '<p style="font-size:14px;color:#bbb;margin-top:24px;">Tu' + plural + ' número' + plural + ' de ticket:</p>' +
       '<div style="margin:8px 0 24px;">' + lista + '</div>' +
       '<p style="font-size:14px;color:#bbb;line-height:1.6;">Guarda este correo: ' + (nums.length > 1 ? 'estos son tus pases' : 'este es tu pase') + ' al sorteo en vivo. El sorteo se transmite por Instagram y TikTok, con número ganador aleatorio y verificable.</p>' +
-      '<p style="font-size:12px;color:#666;margin-top:28px;">EduPartner · Acelerando tus sueños.</p>' +
+      '<p style="font-size:12px;color:#8AA3AD;margin-top:28px;">EDU Cycling · Cada número es un pedaleo más cerca de tu sueño.</p>' +
     '</div>';
 
   const r = await fetch('https://api.resend.com/emails', {
@@ -141,7 +151,7 @@ export async function sendTicketEmail({ name, email, tickets, quantity }) {
     body: JSON.stringify({
       from,
       to: [email],
-      subject: '🎟️ Tu' + plural + ' ticket' + plural + ' — Sorteo Tarmac SL7 EduPartner',
+      subject: '🎟️ Tu' + plural + ' ticket' + plural + ' — Sorteo Tarmac SL7 EDU Cycling',
       html
     })
   });

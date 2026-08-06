@@ -1,4 +1,4 @@
-# Dejar EduPartner cobrando con Mercado Pago
+# Dejar EDU Cycling cobrando con Mercado Pago
 
 La página ya tiene todo el código de pagos listo (Checkout Pro + base de datos).
 Solo faltan **3 cosas que se configuran una vez** en Vercel y Mercado Pago.
@@ -21,7 +21,7 @@ Las tablas se crean solas la primera vez que entra un pago.
 
 1. Entra a **https://www.mercadopago.cl/developers/panel/app** con tu cuenta.
 2. **Crear aplicación**:
-   - Nombre: `EduPartner`
+   - Nombre: `EDU Cycling`
    - Producto: **Pagos online → Checkout Pro**
 3. Entra a la aplicación → menú **Credenciales**.
 4. Verás dos juegos de credenciales:
@@ -84,7 +84,7 @@ Cuando un pago se aprueba, el comprador recibe su número de ticket por correo.
    - En Resend → **Domains → Add Domain** → `edupartner.cl`.
    - Te da unos registros DNS (DKIM/SPF) → agrégalos en NIC Chile.
    - Cuando Resend lo marque verificado, agrega en Vercel:
-     `MAIL_FROM` = `EduPartner <sorteos@edupartner.cl>`
+     `MAIL_FROM` = `EDU Cycling <sorteos@edupartner.cl>`
 5. Redeploy.
 
 > Mientras verificas el dominio, si dejas `MAIL_FROM` vacío usa el remitente de
