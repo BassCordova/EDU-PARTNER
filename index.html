@@ -3,29 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edu Partner — Acelerando tus sueños | Sorteo Specialized Tarmac SL7</title>
+<title>EDU Cycling — Cada número es un pedaleo más cerca de tu sueño | Sorteo Tarmac SL7</title>
 <meta name="description" content="Gana una Specialized Tarmac SL7 105 Di2. Sorteo oficial, en vivo y 100% transparente. Tu ticket al éxito está aquí.">
+<meta name="theme-color" content="#1B3A4B">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%231B3A4B'/%3E%3Ccircle cx='24' cy='24' r='17' fill='none' stroke='%23FFFFFF' stroke-width='2.5'/%3E%3Ccircle cx='24' cy='24' r='3.5' fill='%23FF5C00'/%3E%3Cg stroke='%23FFFFFF' stroke-width='1.4'%3E%3Cline x1='24' y1='24' x2='24' y2='8'/%3E%3Cline x1='24' y1='24' x2='24' y2='40'/%3E%3Cline x1='24' y1='24' x2='10' y2='16'/%3E%3Cline x1='24' y1='24' x2='38' y2='16'/%3E%3Cline x1='24' y1='24' x2='10' y2='32'/%3E%3Cline x1='24' y1='24' x2='38' y2='32'/%3E%3C/g%3E%3C/svg%3E">
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
-   EDU PARTNER — DARK LUXURY CYCLING
-   Paleta: #CC0000 / #8C0000 / #000000 / #1A1A1A / #4D4D4D / #FFFFFF
+   EDU CYCLING — BRAND IDENTITY MANUAL 2025
+   Paleta: #FF5C00 (Coral) / #1B3A4B (Navy) / #0D2B38 (Deep Teal)
+           / #5C7A8A (muted) / #FFFFFF
    ============================================================ */
 
 :root{
-  --red:#CC0000;
-  --red-deep:#8C0000;
-  --black:#000000;
-  --near-black:#1A1A1A;
-  --slate:#4D4D4D;
+  --red:#FF5C00;        /* Coral Orange — acento primario */
+  --red-deep:#CC4900;   /* Coral profundo — hover */
+  --black:#0D2B38;      /* Deep Teal — fondo de página */
+  --near-black:#1B3A4B; /* Navy — paneles y tarjetas */
+  --slate:#5C7A8A;      /* gris-navy muteado — texto secundario */
   --white:#FFFFFF;
   --font-display:'Barlow Condensed',sans-serif;
-  --font-primary:'Montserrat',sans-serif;
+  --font-primary:'Inter',sans-serif;
   --font-secondary:'Inter',sans-serif;
 }
 
@@ -91,12 +94,12 @@ input{font-family:var(--font-secondary)}
 }
 .btn-primary{
   background:var(--red);color:var(--white);
-  box-shadow:0 0 24px rgba(204,0,0,.35);
+  box-shadow:0 0 24px rgba(255,92,0,.35);
 }
 .btn-primary:hover{
   background:var(--red-deep);
   transform:translateY(-2px);
-  box-shadow:0 6px 32px rgba(204,0,0,.5);
+  box-shadow:0 6px 32px rgba(255,92,0,.5);
 }
 .btn-ghost{
   background:transparent;color:var(--white);
@@ -125,7 +128,7 @@ input{font-family:var(--font-secondary)}
 .navbar.scrolled{
   background:var(--black);
   box-shadow:0 2px 20px rgba(0,0,0,.8);
-  border-bottom:1px solid rgba(204,0,0,.3);
+  border-bottom:1px solid rgba(255,92,0,.3);
 }
 .nav-inner{
   width:100%;max-width:1280px;margin:0 auto;padding:0 24px;
@@ -133,10 +136,11 @@ input{font-family:var(--font-secondary)}
 }
 .nav-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .nav-logo .wordmark{
-  font-family:var(--font-display);font-weight:800;
+  font-family:var(--font-display);font-weight:800;font-style:italic;
   font-size:22px;text-transform:uppercase;letter-spacing:1px;
 }
 .nav-logo .wordmark span{color:var(--red)}
+.wheel-mark{flex-shrink:0}
 
 .live-badge{
   display:inline-flex;align-items:center;gap:6px;
@@ -150,8 +154,8 @@ input{font-family:var(--font-secondary)}
   animation:pulse 1.2s infinite;
 }
 @keyframes pulse{
-  0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(204,0,0,.6)}
-  50%{opacity:.4;box-shadow:0 0 0 6px rgba(204,0,0,0)}
+  0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,92,0,.6)}
+  50%{opacity:.4;box-shadow:0 0 0 6px rgba(255,92,0,0)}
 }
 
 .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
@@ -222,9 +226,9 @@ input{font-family:var(--font-secondary)}
   display:flex;align-items:center;justify-content:center;
   text-align:center;
   background:
-    radial-gradient(ellipse 80% 50% at 50% 110%, rgba(140,0,0,.55) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(204,0,0,.12) 0%, transparent 70%),
-    linear-gradient(180deg,#000 0%,#0d0203 55%,#1a0405 100%);
+    radial-gradient(ellipse 80% 50% at 50% 110%, rgba(255,92,0,.55) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255,92,0,.12) 0%, transparent 70%),
+    linear-gradient(180deg,#0D2B38 0%,#0A2029 55%,#081820 100%);
   overflow:hidden;
 }
 /* Líneas de velocidad decorativas */
@@ -246,7 +250,7 @@ input{font-family:var(--font-secondary)}
 .hero-photo-tint{
   position:absolute;inset:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 80% 55% at 50% 100%, rgba(140,0,0,.55) 0%, transparent 65%),
+    radial-gradient(ellipse 80% 55% at 50% 100%, rgba(255,92,0,.55) 0%, transparent 65%),
     linear-gradient(180deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.4) 32%, rgba(0,0,0,.5) 65%, rgba(0,0,0,.94) 100%);
 }
 .hero-content{position:relative;z-index:2;padding:120px 24px 80px;max-width:980px}
@@ -281,12 +285,12 @@ input{font-family:var(--font-secondary)}
   border:2px solid var(--red);
   border-radius:8px;
   min-width:92px;padding:14px 10px 10px;
-  box-shadow:0 0 20px rgba(204,0,0,.25), inset 0 0 16px rgba(204,0,0,.08);
+  box-shadow:0 0 20px rgba(255,92,0,.25), inset 0 0 16px rgba(255,92,0,.08);
 }
 .cd-num{
   font-family:'Courier New',monospace;font-weight:700;
   font-size:clamp(34px,4.5vw,48px);line-height:1;
-  color:var(--white);text-shadow:0 0 14px rgba(204,0,0,.7);
+  color:var(--white);text-shadow:0 0 14px rgba(255,92,0,.7);
 }
 .cd-label{
   font-family:var(--font-primary);font-weight:600;font-size:11px;
@@ -303,14 +307,14 @@ input{font-family:var(--font-secondary)}
 .progress-label .pct{color:var(--red)}
 .progress-bar{
   height:10px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;
-  border:1px solid rgba(204,0,0,.4);
+  border:1px solid rgba(255,92,0,.4);
 }
 .progress-fill{
   height:100%;width:0;
   background:linear-gradient(90deg,var(--red-deep),var(--red));
   border-radius:99px;
   transition:width 1.6s cubic-bezier(.22,1,.36,1);
-  box-shadow:0 0 12px rgba(204,0,0,.8);
+  box-shadow:0 0 12px rgba(255,92,0,.8);
 }
 
 .hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:40px}
@@ -346,8 +350,8 @@ input{font-family:var(--font-secondary)}
 .car-visual{
   position:relative;border-radius:12px;overflow:hidden;
   background:
-    radial-gradient(ellipse 70% 60% at 50% 65%, rgba(204,0,0,.3) 0%, transparent 70%),
-    linear-gradient(145deg,#1A1A1A 0%,#000 60%,#1a0405 100%);
+    radial-gradient(ellipse 70% 60% at 50% 65%, rgba(255,92,0,.3) 0%, transparent 70%),
+    linear-gradient(145deg,#1B3A4B 0%,#0D2B38 60%,#081820 100%);
   border:1px solid rgba(255,255,255,.08);
   aspect-ratio:16/10;
   display:flex;align-items:center;justify-content:center;
@@ -407,8 +411,8 @@ input{font-family:var(--font-secondary)}
   background:
     repeating-linear-gradient(90deg,transparent 0 80px,rgba(255,255,255,.015) 80px 82px),
     var(--near-black);
-  border-top:1px solid rgba(204,0,0,.2);
-  border-bottom:1px solid rgba(204,0,0,.2);
+  border-top:1px solid rgba(255,92,0,.2);
+  border-bottom:1px solid rgba(255,92,0,.2);
 }
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:56px}
 .step{
@@ -417,7 +421,7 @@ input{font-family:var(--font-secondary)}
   border-radius:12px;
   transition:transform .3s,border-color .3s;
 }
-.step:hover{transform:translateY(-6px);border-color:rgba(204,0,0,.5)}
+.step:hover{transform:translateY(-6px);border-color:rgba(255,92,0,.5)}
 .step-num{
   font-family:var(--font-display);font-weight:900;font-size:72px;line-height:1;
   color:var(--red);opacity:.9;
@@ -444,9 +448,9 @@ input{font-family:var(--font-secondary)}
 .premio-main{
   position:relative;border-radius:16px;overflow:hidden;
   background:
-    radial-gradient(ellipse 80% 70% at 50% 80%, rgba(140,0,0,.5) 0%, transparent 65%),
-    linear-gradient(160deg,#111 0%,#000 70%);
-  border:1px solid rgba(204,0,0,.35);
+    radial-gradient(ellipse 80% 70% at 50% 80%, rgba(255,92,0,.5) 0%, transparent 65%),
+    linear-gradient(160deg,#1B3A4B 0%,#0D2B38 70%);
+  border:1px solid rgba(255,92,0,.35);
   padding:64px 40px 48px;text-align:center;margin-bottom:32px;
 }
 .premio-badge{
@@ -454,7 +458,7 @@ input{font-family:var(--font-secondary)}
   font-family:var(--font-primary);font-weight:800;font-size:14px;
   letter-spacing:2px;padding:10px 24px;border-radius:99px;
   margin-bottom:24px;text-transform:uppercase;
-  box-shadow:0 0 28px rgba(204,0,0,.5);
+  box-shadow:0 0 28px rgba(255,92,0,.5);
 }
 .premio-main h3{
   font-family:var(--font-display);font-weight:900;
@@ -468,13 +472,24 @@ input{font-family:var(--font-secondary)}
 }
 .premio-specs .spec{background:rgba(255,255,255,.04)}
 
+.trust-pills{
+  display:flex;justify-content:center;gap:10px;flex-wrap:wrap;
+  margin-top:24px;
+}
+.trust-pills span{
+  font-family:var(--font-primary);font-weight:600;font-size:12px;
+  letter-spacing:.5px;color:var(--white);
+  border:1px solid rgba(255,255,255,.25);border-radius:99px;
+  padding:6px 14px;
+}
+
 .premios-secundarios{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px}
 .premio-card{
   background:var(--near-black);border:1px solid rgba(255,255,255,.08);
   border-radius:12px;padding:32px;text-align:center;
   transition:border-color .3s,transform .3s;
 }
-.premio-card:hover{border-color:rgba(204,0,0,.5);transform:translateY(-4px)}
+.premio-card:hover{border-color:rgba(255,92,0,.5);transform:translateY(-4px)}
 .premio-card .place{
   font-family:var(--font-display);font-weight:900;font-size:20px;
   color:var(--red);letter-spacing:2px;text-transform:uppercase;
@@ -490,7 +505,7 @@ input{font-family:var(--font-secondary)}
   position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;
   border:1px solid rgba(255,255,255,.07);
   display:flex;align-items:center;justify-content:center;
-  background:#000;
+  background:#0D2B38;
 }
 .galeria-item img{width:100%;height:100%;object-fit:cover;display:block}
 .galeria-item .gal-label{
@@ -503,7 +518,7 @@ input{font-family:var(--font-secondary)}
 /* ============================================================
    SECCIÓN 5 — CHECKOUT
    ============================================================ */
-.checkout{background:var(--near-black);border-top:1px solid rgba(204,0,0,.2)}
+.checkout{background:var(--near-black);border-top:1px solid rgba(255,92,0,.2)}
 .checkout-grid{
   display:grid;grid-template-columns:1.5fr 1fr;gap:48px;align-items:start;margin-top:48px;
 }
@@ -516,13 +531,13 @@ input{font-family:var(--font-secondary)}
   padding:28px 16px 22px;text-align:center;cursor:pointer;
   transition:all .25s;
 }
-.paquete:hover{border-color:rgba(204,0,0,.6)}
+.paquete:hover{border-color:rgba(255,92,0,.6)}
 .paquete.selected{
   border-color:var(--red);
-  background:rgba(204,0,0,.08);
-  box-shadow:0 0 24px rgba(204,0,0,.25);
+  background:rgba(255,92,0,.08);
+  box-shadow:0 0 24px rgba(255,92,0,.25);
 }
-.paquete.featured{border-width:3px;border-color:rgba(204,0,0,.6)}
+.paquete.featured{border-width:3px;border-color:rgba(255,92,0,.6)}
 .paquete .pq-badge{
   position:absolute;top:-12px;left:50%;transform:translateX(-50%);
   background:var(--red);color:var(--white);
@@ -583,9 +598,9 @@ input{font-family:var(--font-secondary)}
 }
 .form-field input:focus{
   outline:none;border-color:var(--red);
-  box-shadow:0 0 0 3px rgba(204,0,0,.15);
+  box-shadow:0 0 0 3px rgba(255,92,0,.15);
 }
-.form-field input.error{border-color:var(--red);background:rgba(204,0,0,.06)}
+.form-field input.error{border-color:var(--red);background:rgba(255,92,0,.06)}
 .field-error{font-size:12px;color:var(--red);display:none}
 .form-field.invalid .field-error{display:block}
 
@@ -598,8 +613,8 @@ input{font-family:var(--font-secondary)}
   letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.7);
   transition:all .2s;
 }
-.pay-tab:hover{border-color:rgba(204,0,0,.5);color:var(--white)}
-.pay-tab.active{border-color:var(--red);background:rgba(204,0,0,.1);color:var(--white)}
+.pay-tab:hover{border-color:rgba(255,92,0,.5);color:var(--white)}
+.pay-tab.active{border-color:var(--red);background:rgba(255,92,0,.1);color:var(--white)}
 .pay-panel{
   display:none;background:var(--black);border:1px solid rgba(255,255,255,.08);
   border-radius:8px;padding:20px;font-size:14px;color:rgba(255,255,255,.75);
@@ -615,7 +630,7 @@ input{font-family:var(--font-secondary)}
 .pay-method{
   background:var(--black);border:2px solid var(--red);
   border-radius:10px;padding:18px 20px;margin-bottom:28px;
-  box-shadow:0 0 20px rgba(204,0,0,.18);
+  box-shadow:0 0 20px rgba(255,92,0,.18);
 }
 .pay-method-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
 .pay-method-name{
@@ -654,7 +669,7 @@ input{font-family:var(--font-secondary)}
 /* Resumen sticky */
 .order-summary{
   position:sticky;top:88px;
-  background:var(--black);border:1px solid rgba(204,0,0,.4);
+  background:var(--black);border:1px solid rgba(255,92,0,.4);
   border-radius:12px;padding:28px;
 }
 .order-summary h3{
@@ -697,15 +712,15 @@ input{font-family:var(--font-secondary)}
   border-radius:12px;overflow:hidden;
   transition:transform .3s,border-color .3s;
 }
-.ganador-card:hover{transform:translateY(-6px);border-color:rgba(204,0,0,.5)}
+.ganador-card:hover{transform:translateY(-6px);border-color:rgba(255,92,0,.5)}
 .ganador-photo{
   height:170px;display:flex;align-items:center;justify-content:center;
   font-family:var(--font-display);font-weight:900;font-size:72px;
   color:rgba(255,255,255,.9);text-shadow:0 4px 20px rgba(0,0,0,.6);
 }
-.ganador-photo.g1{background:linear-gradient(135deg,var(--red-deep),#2a0507)}
-.ganador-photo.g2{background:linear-gradient(135deg,#333,#0d0d0d)}
-.ganador-photo.g3{background:linear-gradient(135deg,#5e0000,#1a0405)}
+.ganador-photo.g1{background:linear-gradient(135deg,var(--red),var(--red-deep))}
+.ganador-photo.g2{background:linear-gradient(135deg,#2E4A5A,#16303F)}
+.ganador-photo.g3{background:linear-gradient(135deg,#0D2B38,#081820)}
 .ganador-body{padding:22px 24px 26px}
 .ganador-body .g-name{font-family:var(--font-primary);font-weight:700;font-size:18px}
 .ganador-body .g-city{font-size:13px;color:var(--slate);margin-bottom:12px}
@@ -721,12 +736,12 @@ input{font-family:var(--font-secondary)}
 /* ============================================================
    SECCIÓN 7 — TRANSPARENCIA
    ============================================================ */
-.transparencia{background:var(--near-black);border-top:1px solid rgba(204,0,0,.2)}
+.transparencia{background:var(--near-black);border-top:1px solid rgba(255,92,0,.2)}
 .trust-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin:48px 0}
 .trust-col{text-align:center;padding:32px 24px}
 .trust-col .t-ico{
   font-size:52px;line-height:1;margin-bottom:18px;
-  filter:drop-shadow(0 0 16px rgba(204,0,0,.4));
+  filter:drop-shadow(0 0 16px rgba(255,92,0,.4));
 }
 .trust-col h3{
   font-family:var(--font-display);font-weight:800;font-size:26px;
@@ -736,7 +751,7 @@ input{font-family:var(--font-secondary)}
 
 .trust-statement{
   max-width:760px;margin:0 auto;text-align:center;
-  background:rgba(204,0,0,.07);border:1px solid rgba(204,0,0,.35);
+  background:rgba(255,92,0,.07);border:1px solid rgba(255,92,0,.35);
   border-radius:12px;padding:36px 32px;
 }
 .trust-statement p{
@@ -852,7 +867,7 @@ input{font-family:var(--font-secondary)}
   display:flex;align-items:center;justify-content:center;
   transition:all .2s;
 }
-.social-row a:hover{border-color:var(--red);background:rgba(204,0,0,.12)}
+.social-row a:hover{border-color:var(--red);background:rgba(255,92,0,.12)}
 .social-row svg{width:17px;height:17px;fill:rgba(255,255,255,.8)}
 .social-row a:hover svg{fill:var(--red)}
 
@@ -896,7 +911,7 @@ input{font-family:var(--font-secondary)}
   border-radius:16px;
   padding:48px 36px 40px;text-align:center;
   transform:scale(0);transition:transform .4s cubic-bezier(.34,1.4,.64,1);
-  box-shadow:0 0 80px rgba(204,0,0,.4);
+  box-shadow:0 0 80px rgba(255,92,0,.4);
 }
 .modal-overlay.open .ticket-modal{transform:scale(1)}
 /* Perforaciones laterales tipo ticket */
@@ -924,10 +939,20 @@ input{font-family:var(--font-secondary)}
 .ticket-num{
   font-family:'Courier New',monospace;font-weight:700;
   font-size:clamp(48px,10vw,64px);letter-spacing:8px;
-  color:var(--white);text-shadow:0 0 24px rgba(204,0,0,.8);
+  color:var(--white);text-shadow:0 0 24px rgba(255,92,0,.8);
   margin:8px 0 6px;
 }
-.ticket-modal .tm-email{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:30px}
+.ticket-modal .tm-email{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:16px}
+.ticket-modal .tm-rules{
+  font-size:11px;color:var(--slate);line-height:1.7;text-align:left;
+  border-top:1px dashed rgba(255,255,255,.2);padding-top:14px;margin-bottom:24px;
+}
+.ticket-modal .tm-brand{
+  font-family:var(--font-display);font-weight:800;font-style:italic;
+  font-size:13px;letter-spacing:1px;text-transform:uppercase;
+  color:rgba(255,255,255,.5);margin-bottom:18px;
+}
+.ticket-modal .tm-brand span{color:var(--red)}
 .ticket-modal .tm-btns{display:flex;flex-direction:column;gap:12px}
 
 /* ============================================================
@@ -975,14 +1000,21 @@ input{font-family:var(--font-secondary)}
      ============================================================ -->
 <nav class="navbar" id="navbar">
   <div class="nav-inner">
-    <a href="#" class="nav-logo" aria-label="Edu Partner — Inicio">
-      <!-- Isotipo EP: E y P solapadas -->
-      <svg width="40" height="40" viewBox="0 0 48 48" aria-hidden="true">
-        <rect x="2" y="2" width="44" height="44" rx="8" fill="#1A1A1A" stroke="#CC0000" stroke-width="2"/>
-        <path d="M12 12h14v5H18v4h10v5H18v4h12v5H12z" fill="#FFFFFF"/>
-        <path d="M26 12h9c5 0 8 3 8 7.5S40 27 35 27h-3v8h-6V12zm6 5v5h2.6c1.8 0 2.8-1 2.8-2.5S36.4 17 34.6 17H32z" fill="#CC0000" opacity="0.92"/>
+    <a href="#" class="nav-logo" aria-label="EDU Cycling — Inicio">
+      <!-- Isotipo: rueda de bicicleta -->
+      <svg class="wheel-mark" width="34" height="34" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="21" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+        <circle cx="24" cy="24" r="4" fill="#FFFFFF"/>
+        <g stroke="#FFFFFF" stroke-width="1.4">
+          <line x1="24" y1="24" x2="24" y2="4"/>
+          <line x1="24" y1="24" x2="24" y2="44"/>
+          <line x1="24" y1="24" x2="6" y2="14"/>
+          <line x1="24" y1="24" x2="42" y2="14"/>
+          <line x1="24" y1="24" x2="6" y2="34"/>
+          <line x1="24" y1="24" x2="42" y2="34"/>
+        </g>
       </svg>
-      <span class="wordmark">Edu <span>Partner</span></span>
+      <span class="wordmark">EDU <span>CYCLING</span></span>
       <span class="live-badge"><span class="pulse"></span>EN VIVO</span>
     </a>
 
@@ -1143,6 +1175,12 @@ input{font-family:var(--font-secondary)}
         <div class="spec"><span class="ico">🔗</span><div><div class="spec-label">Transmisión</div><div class="spec-val">Cassette 11-34t · Cadena SLX 12v</div></div></div>
         <div class="spec"><span class="ico">🛑</span><div><div class="spec-label">Frenos</div><div class="spec-val">Hidráulicos a disco</div></div></div>
       </div>
+
+      <div class="trust-pills">
+        <span>✓ Sorteo certificado</span>
+        <span>✓ Pago seguro</span>
+        <span>✓ Resultado transparente</span>
+      </div>
     </div>
 
     <!-- Galería -->
@@ -1299,7 +1337,7 @@ input{font-family:var(--font-secondary)}
         <div class="ganador-body">
           <div class="g-name">Carlos M.</div>
           <div class="g-city">Santiago, Chile</div>
-          <div class="g-prize">BMW M3 2024</div>
+          <div class="g-prize">Trek Émonda SLR</div>
           <div class="g-sorteo">Sorteo #12 — Enero 2025</div>
         </div>
       </div>
@@ -1308,7 +1346,7 @@ input{font-family:var(--font-secondary)}
         <div class="ganador-body">
           <div class="g-name">Fernanda T.</div>
           <div class="g-city">Viña del Mar, Chile</div>
-          <div class="g-prize">Audi RS3 2024</div>
+          <div class="g-prize">Cannondale SuperSix EVO</div>
           <div class="g-sorteo">Sorteo #11 — Octubre 2024</div>
         </div>
       </div>
@@ -1317,7 +1355,7 @@ input{font-family:var(--font-secondary)}
         <div class="ganador-body">
           <div class="g-name">Javier R.</div>
           <div class="g-city">Concepción, Chile</div>
-          <div class="g-prize">Mercedes-AMG A45</div>
+          <div class="g-prize">Specialized Tarmac SL6</div>
           <div class="g-sorteo">Sorteo #10 — Julio 2024</div>
         </div>
       </div>
@@ -1401,7 +1439,7 @@ input{font-family:var(--font-secondary)}
           <div class="testimonio">
             <div class="t-avatar">V</div>
             <div class="t-stars">★★★★★</div>
-            <p class="t-text">"Conozco al ganador del Audi del sorteo pasado, es de mi ciudad. Cuando vi que era real, compré mis tickets al tiro. La adrenalina del en vivo no se compara."</p>
+            <p class="t-text">"Conozco al ganador de la Trek del sorteo pasado, es de mi ciudad. Cuando vi que era real, compré mis tickets al tiro. La emoción del en vivo no se compara."</p>
             <div class="t-name">Valentina S.</div>
             <div class="t-meta">Viña del Mar · Participó en el Sorteo #12</div>
           </div>
@@ -1480,14 +1518,21 @@ input{font-family:var(--font-secondary)}
     <div class="footer-grid">
       <div class="footer-col">
         <a href="#" class="nav-logo">
-          <svg width="36" height="36" viewBox="0 0 48 48" aria-hidden="true">
-            <rect x="2" y="2" width="44" height="44" rx="8" fill="#1A1A1A" stroke="#CC0000" stroke-width="2"/>
-            <path d="M12 12h14v5H18v4h10v5H18v4h12v5H12z" fill="#FFFFFF"/>
-            <path d="M26 12h9c5 0 8 3 8 7.5S40 27 35 27h-3v8h-6V12zm6 5v5h2.6c1.8 0 2.8-1 2.8-2.5S36.4 17 34.6 17H32z" fill="#CC0000" opacity="0.92"/>
+          <svg class="wheel-mark" width="30" height="30" viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="24" cy="24" r="21" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+            <circle cx="24" cy="24" r="4" fill="#FFFFFF"/>
+            <g stroke="#FFFFFF" stroke-width="1.4">
+              <line x1="24" y1="24" x2="24" y2="4"/>
+              <line x1="24" y1="24" x2="24" y2="44"/>
+              <line x1="24" y1="24" x2="6" y2="14"/>
+              <line x1="24" y1="24" x2="42" y2="14"/>
+              <line x1="24" y1="24" x2="6" y2="34"/>
+              <line x1="24" y1="24" x2="42" y2="34"/>
+            </g>
           </svg>
-          <span class="wordmark">Edu <span>Partner</span></span>
+          <span class="wordmark">EDU <span>CYCLING</span></span>
         </a>
-        <p>Acelerando tus sueños. Sorteos oficiales, en vivo y 100% transparentes.</p>
+        <p>Cada número es un pedaleo más cerca de tu sueño. Sorteo certificado, en vivo y 100% transparente.</p>
         <div class="social-row">
           <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 3.25.15 4.77 1.7 4.92 4.92.06 1.26.07 1.64.07 4.81s-.01 3.55-.07 4.81c-.15 3.22-1.66 4.77-4.92 4.92-1.2.06-1.6.07-4.8.07s-3.6-.01-4.8-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.21 15.55 2.2 15.17 2.2 12s.01-3.55.08-4.81C2.43 3.97 3.94 2.42 7.2 2.27 8.4 2.21 8.8 2.2 12 2.2zm0 3.65a6.15 6.15 0 100 12.3 6.15 6.15 0 000-12.3zm0 10.15a4 4 0 110-8 4 4 0 010 8zm6.4-11.85a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg></a>
           <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99h-2.54V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg></a>
@@ -1528,7 +1573,7 @@ input{font-family:var(--font-secondary)}
     </div>
   </div>
   <div class="footer-bottom">
-    © EduPartner 2025 · Todos los derechos reservados · RUT: 76.XXX.XXX-X
+    © EDU Cycling 2025 · Todos los derechos reservados · RUT: 76.XXX.XXX-X
   </div>
 </footer>
 
@@ -1537,11 +1582,13 @@ input{font-family:var(--font-secondary)}
      ============================================================ -->
 <div class="modal-overlay" id="ticketModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="ticket-modal">
+    <div class="tm-brand">EDU <span>CYCLING</span></div>
     <h2 id="modalTitle">¡Felicitaciones!</h2>
     <p class="tm-sub">Ya eres parte del Sorteo Tarmac SL7 105 Di2</p>
     <div class="ticket-num-label">Tu número de ticket</div>
     <div class="ticket-num" id="ticketNumber">001247</div>
     <p class="tm-email">📩 Tu ticket ha sido enviado a tu email</p>
+    <p class="tm-rules">Válido para mayores de 18 años · Un número por ticket · El premio no es transferible ni canjeable por dinero · Resultado publicado en nuestras redes sociales.</p>
     <div class="tm-btns">
       <a href="#" class="btn btn-primary">Compartir en Instagram</a>
       <button type="button" class="btn btn-ghost" id="closeModal">Cerrar</button>
@@ -1551,7 +1598,7 @@ input{font-family:var(--font-secondary)}
 
 <script>
 /* ============================================================
-   EDU PARTNER — JS
+   EDU CYCLING — JS
    ============================================================ */
 (function(){
   'use strict';
