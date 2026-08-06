@@ -6,7 +6,8 @@ import { sql } from '@vercel/postgres';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') { res.status(405).json({ error: 'Método no permitido' }); return; }
-  if (!process.env.MP_ACCESS_TOKEN) { res.status(500).json({ error: 'Mercado Pago no está configurado (falta MP_ACCESS_TOKEN)' }); return; }
+  const MP_TOKEN = (process.env.MP_ACCESS_TOKEN || '').trim();
+  if (!MP_TOKEN) { res.status(500).json({ error: 'Mercado Pago no está configurado (falta MP_ACCESS_TOKEN)' }); return; }
 
   try {
     const body = await readJson(req);
@@ -39,7 +40,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + process.env.MP_ACCESS_TOKEN
+        Authorization: 'Bearer ' + MP_TOKEN
       },
       body: JSON.stringify({
         items: [{
@@ -62,11 +63,27 @@ export default async function handler(req, res) {
       })
     });
 
-    const pref = await prefRes.json();
+    // Leer como texto primero: si Mercado Pago responde con un body vacío o
+    // no-JSON (token inválido, error de cuenta, etc.), evita que .json()
+    // reviente con "Unexpected end of JSON input" y esconda la causa real.
+    const rawText = await prefRes.text();
+    let pref = null;
+    try { pref = rawText ? JSON.parse(rawText) : null; } catch (_) { pref = null; }
+
+    if (!pref) {
+      console.error('Mercado Pago devolvió una respuesta no-JSON:', prefRes.status, rawText.slice(0, 500));
+      res.status(502).json({
+        error: 'Mercado Pago no devolvió una respuesta válida',
+        detail: { status: prefRes.status, raw: rawText.slice(0, 300) }
+      });
+      return;
+    }
+
     // En modo de prueba (token TEST-…) Mercado Pago usa sandbox_init_point.
-    const isTest = (process.env.MP_ACCESS_TOKEN || '').startsWith('TEST-');
+    const isTest = MP_TOKEN.startsWith('TEST-');
     const redirectUrl = (isTest && pref.sandbox_init_point) ? pref.sandbox_init_point : pref.init_point;
     if (!prefRes.ok || !redirectUrl) {
+      console.error('Mercado Pago rechazó la preferencia:', prefRes.status, JSON.stringify(pref));
       res.status(502).json({ error: 'No se pudo crear el pago', detail: pref });
       return;
     }

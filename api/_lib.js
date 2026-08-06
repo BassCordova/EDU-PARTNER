@@ -46,11 +46,12 @@ export async function ensureSchema() {
 
 // ---- Mercado Pago ----
 export async function getPayment(paymentId) {
+  const token = (process.env.MP_ACCESS_TOKEN || '').trim();
   const r = await fetch('https://api.mercadopago.com/v1/payments/' + encodeURIComponent(paymentId), {
-    headers: { Authorization: 'Bearer ' + process.env.MP_ACCESS_TOKEN }
+    headers: { Authorization: 'Bearer ' + token }
   });
   if (!r.ok) return null;
-  return r.json();
+  try { return await r.json(); } catch (_) { return null; }
 }
 
 // ---- Confirmación de orden (idempotente y atómica) ----
