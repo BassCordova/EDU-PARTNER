@@ -1,7 +1,7 @@
 // POST /api/create-preference
 // Crea una preferencia de pago en Mercado Pago (Checkout Pro) y devuelve
 // el init_point al que el navegador debe redirigir.
-import { ensureSchema, calcAmount, baseUrl, readJson, uuid, TICKETS_TOTAL } from './_lib.js';
+import { ensureSchema, calcAmount, baseUrl, readJson, uuid } from './_lib.js';
 import { sql } from '@vercel/postgres';
 
 export default async function handler(req, res) {
@@ -25,8 +25,8 @@ export default async function handler(req, res) {
 
     // Aviso temprano si ya no quedan tickets suficientes (el cupo real se
     // vuelve a verificar de forma atómica al confirmar el pago en _lib.js).
-    const { rows: sold } = await sql`SELECT COUNT(*)::int AS n FROM tickets`;
-    if (sold[0].n + quantity > TICKETS_TOTAL) {
+    const { rows: avail } = await sql`SELECT COUNT(*)::int AS n FROM tickets WHERE order_ref IS NULL`;
+    if (avail[0].n < quantity) {
       res.status(409).json({ error: 'No quedan suficientes tickets disponibles para esta cantidad' });
       return;
     }

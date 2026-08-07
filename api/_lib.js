@@ -38,10 +38,32 @@ export async function ensureSchema() {
   )`;
   await sql`CREATE TABLE IF NOT EXISTS tickets (
     number      SERIAL PRIMARY KEY,
-    order_ref   TEXT NOT NULL REFERENCES orders(ref),
-    created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+    order_ref   TEXT REFERENCES orders(ref),
+    created_at  TIMESTAMPTZ
   )`;
+  // Migración segura para bases ya existentes (creadas antes de que el pool
+  // permitiera números sin dueño): la columna venía NOT NULL / con default.
+  await sql`ALTER TABLE tickets ALTER COLUMN order_ref DROP NOT NULL`;
+  await sql`ALTER TABLE tickets ALTER COLUMN created_at DROP NOT NULL`;
+  await sql`ALTER TABLE tickets ALTER COLUMN created_at DROP DEFAULT`;
+  await populateTicketPool();
   schemaReady = true;
+}
+
+// Rellena los números 1..TICKETS_TOTAL que aún no existan en el pool
+// (idempotente: no toca los que ya están, sea cual sea su estado).
+export async function populateTicketPool() {
+  await sql`
+    INSERT INTO tickets (number)
+    SELECT n FROM generate_series(1, ${TICKETS_TOTAL}) AS n
+    ON CONFLICT (number) DO NOTHING`;
+}
+
+// Borra todas las órdenes/tickets y repuebla el pool desde cero (000001..N,
+// todos disponibles). Usado por /api/admin?action=reset.
+export async function resetAllData() {
+  await sql`TRUNCATE tickets, orders`;
+  await populateTicketPool();
 }
 
 // ---- Mercado Pago ----
@@ -88,19 +110,29 @@ export async function finalizeOrder(ref, paymentId) {
         await client.sql`ROLLBACK`;
         result = { status: order.status }; // sigue pendiente/rechazada
       } else {
-        // Lock de asignación: serializa la emisión de tickets entre pagos concurrentes
-        // para poder verificar el cupo total sin condiciones de carrera.
-        await client.sql`SELECT pg_advisory_xact_lock(727001)`;
-        const { rows: sold } = await client.sql`SELECT COUNT(*)::int AS n FROM tickets`;
-        if (sold[0].n + order.quantity > TICKETS_TOTAL) {
-          await client.sql`UPDATE orders SET status = 'sold_out' WHERE ref = ${ref}`;
-          await client.sql`COMMIT`;
+        // Asigna números al azar entre los que quedan libres en el pool (no
+        // secuenciales). FOR UPDATE SKIP LOCKED hace la reserva atómica y
+        // segura ante pagos concurrentes, sin necesidad de un lock aparte:
+        // si dos compras se aprueban al mismo tiempo, cada una toma números
+        // distintos y ninguna espera a la otra.
+        const { rows: t } = await client.sql`
+          UPDATE tickets
+          SET order_ref = ${ref}, created_at = now()
+          WHERE number IN (
+            SELECT number FROM tickets
+            WHERE order_ref IS NULL
+            ORDER BY random()
+            LIMIT ${order.quantity}
+            FOR UPDATE SKIP LOCKED
+          )
+          RETURNING number`;
+
+        if (t.length < order.quantity) {
+          // No quedan suficientes números libres: no se puede completar esta
+          // compra (no debería pasar salvo que el sorteo se agote de verdad).
+          await client.sql`ROLLBACK`;
           result = { status: 'sold_out', quantity: order.quantity };
         } else {
-          const { rows: t } = await client.sql`
-            INSERT INTO tickets (order_ref)
-            SELECT ${ref} FROM generate_series(1, ${order.quantity})
-            RETURNING number`;
           await client.sql`UPDATE orders SET status = 'approved', payment_id = ${String(paymentId)} WHERE ref = ${ref}`;
           await client.sql`COMMIT`;
           const tickets = t.map(x => x.number);

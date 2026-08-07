@@ -6,7 +6,7 @@
 // Esto vacía órdenes y tickets y reinicia la numeración en 000001.
 //
 // Protegido con la variable de entorno ADMIN_KEY.
-import { ensureSchema } from './_lib.js';
+import { ensureSchema, resetAllData, TICKETS_TOTAL } from './_lib.js';
 import { sql } from '@vercel/postgres';
 
 export default async function handler(req, res) {
@@ -22,8 +22,8 @@ export default async function handler(req, res) {
         res.status(400).json({ error: 'Para confirmar agrega &confirm=BORRAR a la URL' });
         return;
       }
-      await sql`TRUNCATE tickets, orders RESTART IDENTITY`;
-      res.status(200).json({ ok: true, mensaje: 'Datos borrados. La numeración vuelve a 000001.' });
+      await resetAllData();
+      res.status(200).json({ ok: true, mensaje: 'Datos borrados. Los 2.000 números vuelven a estar disponibles.' });
       return;
     }
 
@@ -36,9 +36,10 @@ export default async function handler(req, res) {
       GROUP BY o.ref
       ORDER BY o.created_at DESC`;
 
-    const { rows: stats } = await sql`SELECT COUNT(*)::int AS vendidos FROM tickets`;
+    const { rows: stats } = await sql`SELECT COUNT(*)::int AS vendidos FROM tickets WHERE order_ref IS NOT NULL`;
     res.status(200).json({
       tickets_vendidos: stats[0].vendidos,
+      tickets_disponibles: TICKETS_TOTAL - stats[0].vendidos,
       total_ordenes: orders.length,
       ordenes: orders
     });
