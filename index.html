@@ -691,49 +691,6 @@ input{font-family:var(--font-secondary)}
 .summary-note{font-size:12px;color:var(--slate);margin-top:12px;text-align:center}
 
 /* ============================================================
-   SECCIÓN 6 — GANADORES
-   ============================================================ */
-.stats-row{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
-  margin:48px 0 64px;text-align:center;
-}
-.stat .stat-num{
-  font-family:var(--font-display);font-weight:900;
-  font-size:clamp(44px,5vw,64px);line-height:1;color:var(--red);
-}
-.stat .stat-label{
-  font-family:var(--font-primary);font-weight:600;font-size:13px;
-  letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:8px;
-}
-
-.ganadores-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.ganador-card{
-  background:var(--near-black);border:1px solid rgba(255,255,255,.08);
-  border-radius:12px;overflow:hidden;
-  transition:transform .3s,border-color .3s;
-}
-.ganador-card:hover{transform:translateY(-6px);border-color:rgba(255,92,0,.5)}
-.ganador-photo{
-  height:170px;display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-display);font-weight:900;font-size:72px;
-  color:rgba(255,255,255,.9);text-shadow:0 4px 20px rgba(0,0,0,.6);
-}
-.ganador-photo.g1{background:linear-gradient(135deg,var(--red),var(--red-deep))}
-.ganador-photo.g2{background:linear-gradient(135deg,#2E4A5A,#16303F)}
-.ganador-photo.g3{background:linear-gradient(135deg,#0D2B38,#081820)}
-.ganador-body{padding:22px 24px 26px}
-.ganador-body .g-name{font-family:var(--font-primary);font-weight:700;font-size:18px}
-.ganador-body .g-city{font-size:13px;color:var(--slate);margin-bottom:12px}
-.ganador-body .g-prize{
-  font-family:var(--font-display);font-weight:800;font-size:24px;
-  text-transform:uppercase;color:var(--red);line-height:1.1;
-}
-.ganador-body .g-sorteo{
-  font-size:12px;color:rgba(255,255,255,.5);margin-top:8px;
-  font-family:var(--font-primary);font-weight:600;letter-spacing:1px;text-transform:uppercase;
-}
-
-/* ============================================================
    SECCIÓN 7 — TRANSPARENCIA
    ============================================================ */
 .transparencia{background:var(--near-black);border-top:1px solid rgba(255,92,0,.2)}
@@ -748,65 +705,6 @@ input{font-family:var(--font-secondary)}
   text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;
 }
 .trust-col p{font-size:14px;color:rgba(255,255,255,.65)}
-
-.trust-statement{
-  max-width:760px;margin:0 auto;text-align:center;
-  background:rgba(255,92,0,.07);border:1px solid rgba(255,92,0,.35);
-  border-radius:12px;padding:36px 32px;
-}
-.trust-statement p{
-  font-size:17px;line-height:1.7;color:rgba(255,255,255,.85);
-}
-.trust-statement strong{color:var(--red);font-family:var(--font-primary)}
-.trust-statement .yt-link{
-  display:inline-block;margin-top:18px;
-  font-family:var(--font-primary);font-weight:700;font-size:14px;
-  letter-spacing:1px;color:var(--red);text-transform:uppercase;
-  border-bottom:2px solid var(--red);padding-bottom:2px;
-  transition:opacity .2s;
-}
-.trust-statement .yt-link:hover{opacity:.7}
-
-/* ============================================================
-   SECCIÓN 8 — TESTIMONIOS
-   ============================================================ */
-.slider{position:relative;max-width:820px;margin:48px auto 0;overflow:hidden}
-.slider-track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1)}
-.slide{flex:0 0 100%;padding:0 8px}
-.testimonio{
-  background:var(--near-black);border:1px solid rgba(255,255,255,.08);
-  border-radius:14px;padding:44px 40px;text-align:center;
-}
-.testimonio .t-avatar{
-  width:72px;height:72px;border-radius:50%;margin:0 auto 16px;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-display);font-weight:900;font-size:32px;
-  background:linear-gradient(135deg,var(--red),var(--red-deep));
-  border:2px solid rgba(255,255,255,.15);
-}
-.testimonio .t-stars{color:var(--red);font-size:20px;letter-spacing:4px;margin-bottom:16px}
-.testimonio .t-text{
-  font-size:16px;line-height:1.8;color:rgba(255,255,255,.85);
-  max-width:560px;margin:0 auto 20px;font-style:italic;
-}
-.testimonio .t-name{font-family:var(--font-primary);font-weight:700;font-size:16px}
-.testimonio .t-meta{font-size:13px;color:var(--slate);margin-top:4px}
-
-.slider-controls{
-  display:flex;align-items:center;justify-content:center;gap:24px;margin-top:28px;
-}
-.slider-arrow{
-  width:44px;height:44px;border:1px solid var(--slate);border-radius:50%;
-  color:var(--white);font-size:18px;transition:all .2s;
-  display:flex;align-items:center;justify-content:center;
-}
-.slider-arrow:hover{border-color:var(--red);color:var(--red)}
-.slider-dots{display:flex;gap:10px}
-.slider-dot{
-  width:10px;height:10px;border-radius:50%;
-  background:rgba(255,255,255,.2);transition:all .25s;
-}
-.slider-dot.active{background:var(--red);transform:scale(1.3)}
 
 /* ============================================================
    SECCIÓN 9 — FAQ
@@ -973,8 +871,6 @@ input{font-family:var(--font-secondary)}
   .steps{grid-template-columns:1fr}
   .premios-secundarios{grid-template-columns:1fr}
   .galeria{grid-template-columns:1fr}
-  .stats-row{grid-template-columns:1fr;gap:36px}
-  .ganadores-grid{grid-template-columns:1fr}
   .trust-cols{grid-template-columns:1fr}
   .paquetes{grid-template-columns:1fr;gap:20px}
   .form-grid{grid-template-columns:1fr}
@@ -989,7 +885,6 @@ input{font-family:var(--font-secondary)}
   .footer-grid{grid-template-columns:1fr}
   .hero-ctas .btn{width:100%}
   .pay-tabs{grid-template-columns:1fr}
-  .testimonio{padding:32px 22px}
 }
 </style>
 </head>
@@ -1021,7 +916,6 @@ input{font-family:var(--font-secondary)}
     <ul class="nav-links">
       <li><a href="#sorteo">Sorteos</a></li>
       <li><a href="#premios">Premios</a></li>
-      <li><a href="#ganadores">Ganadores</a></li>
       <li><a href="#como-funciona">Cómo funciona</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
@@ -1041,7 +935,6 @@ input{font-family:var(--font-secondary)}
 <div class="mobile-menu" id="mobileMenu">
   <a href="#sorteo">Sorteos</a>
   <a href="#premios">Premios</a>
-  <a href="#ganadores">Ganadores</a>
   <a href="#como-funciona">Cómo funciona</a>
   <a href="#faq">FAQ</a>
   <a href="#">Mi Cuenta</a>
@@ -1306,69 +1199,6 @@ input{font-family:var(--font-secondary)}
 </section>
 
 <!-- ============================================================
-     SECCIÓN 6 — GANADORES
-     ============================================================ -->
-<section class="section" id="ganadores">
-  <div class="container">
-    <div class="text-center reveal">
-      <span class="eyebrow">Hecho para ganar</span>
-      <h2 class="section-title">Nuestros ganadores</h2>
-      <div class="title-line center"></div>
-    </div>
-
-    <div class="stats-row reveal" id="statsRow">
-      <div class="stat">
-        <div class="stat-num"><span class="countup" data-target="500" data-prefix="+">0</span></div>
-        <div class="stat-label">Ganadores</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num"><span class="countup" data-target="2.3" data-prefix="$" data-suffix="B" data-decimals="1">0</span></div>
-        <div class="stat-label">Billones en premios</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num"><span class="countup" data-target="100" data-suffix="%">0</span></div>
-        <div class="stat-label">Transparente</div>
-      </div>
-    </div>
-
-    <div class="ganadores-grid">
-      <div class="ganador-card reveal">
-        <div class="ganador-photo g1">C</div>
-        <div class="ganador-body">
-          <div class="g-name">Carlos M.</div>
-          <div class="g-city">Santiago, Chile</div>
-          <div class="g-prize">Trek Émonda SLR</div>
-          <div class="g-sorteo">Sorteo #12 — Enero 2025</div>
-        </div>
-      </div>
-      <div class="ganador-card reveal" style="transition-delay:.15s">
-        <div class="ganador-photo g2">F</div>
-        <div class="ganador-body">
-          <div class="g-name">Fernanda T.</div>
-          <div class="g-city">Viña del Mar, Chile</div>
-          <div class="g-prize">Cannondale SuperSix EVO</div>
-          <div class="g-sorteo">Sorteo #11 — Octubre 2024</div>
-        </div>
-      </div>
-      <div class="ganador-card reveal" style="transition-delay:.3s">
-        <div class="ganador-photo g3">J</div>
-        <div class="ganador-body">
-          <div class="g-name">Javier R.</div>
-          <div class="g-city">Concepción, Chile</div>
-          <div class="g-prize">Specialized Tarmac SL6</div>
-          <div class="g-sorteo">Sorteo #10 — Julio 2024</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="como-cta reveal">
-      <p>Tú podrías ser <span>el próximo</span></p>
-      <a href="#checkout" class="btn btn-primary">Participar</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
      SECCIÓN 7 — TRANSPARENCIA
      ============================================================ -->
 <section class="section transparencia" id="transparencia">
@@ -1397,70 +1227,6 @@ input{font-family:var(--font-secondary)}
       </div>
     </div>
 
-    <div class="trust-statement reveal">
-      <p>Todos nuestros sorteos se realizan <strong>EN VIVO</strong> por Instagram y YouTube. El número ganador es seleccionado de forma <strong>aleatoria y verificable en tiempo real</strong>.</p>
-      <a href="#" class="yt-link">Ver sorteos anteriores en YouTube →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECCIÓN 8 — TESTIMONIOS
-     ============================================================ -->
-<section class="section" id="testimonios">
-  <div class="container">
-    <div class="text-center reveal">
-      <span class="eyebrow">Voces reales</span>
-      <h2 class="section-title">Lo que dicen nuestros participantes</h2>
-      <div class="title-line center"></div>
-    </div>
-
-    <div class="slider reveal" id="slider">
-      <div class="slider-track" id="sliderTrack">
-        <div class="slide">
-          <div class="testimonio">
-            <div class="t-avatar">M</div>
-            <div class="t-stars">★★★★★</div>
-            <p class="t-text">"Compré 5 tickets sin esperar mucho y terminé pegada a la transmisión en vivo con el corazón a mil. Todo claro, todo transparente. Vuelvo a participar sí o sí."</p>
-            <div class="t-name">María José A.</div>
-            <div class="t-meta">La Serena · Participó en el Sorteo #12</div>
-          </div>
-        </div>
-        <div class="slide">
-          <div class="testimonio">
-            <div class="t-avatar">R</div>
-            <div class="t-stars">★★★★★</div>
-            <p class="t-text">"El ticket llegó a mi correo en menos de un minuto. El día del sorteo mostraron todo el proceso en pantalla. Así da gusto participar."</p>
-            <div class="t-name">Rodrigo P.</div>
-            <div class="t-meta">Temuco · Participó en el Sorteo #11</div>
-          </div>
-        </div>
-        <div class="slide">
-          <div class="testimonio">
-            <div class="t-avatar">V</div>
-            <div class="t-stars">★★★★★</div>
-            <p class="t-text">"Conozco al ganador de la Trek del sorteo pasado, es de mi ciudad. Cuando vi que era real, compré mis tickets al tiro. La emoción del en vivo no se compara."</p>
-            <div class="t-name">Valentina S.</div>
-            <div class="t-meta">Viña del Mar · Participó en el Sorteo #12</div>
-          </div>
-        </div>
-        <div class="slide">
-          <div class="testimonio">
-            <div class="t-avatar">D</div>
-            <div class="t-stars">★★★★★</div>
-            <p class="t-text">"Pagué con Webpay y en segundos tenía mi número. La transmisión fue impecable: número aleatorio en vivo, sin cortes ni ediciones. Esto es serio."</p>
-            <div class="t-name">Diego C.</div>
-            <div class="t-meta">Santiago · Participó en el Sorteo #10</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="slider-controls">
-        <button class="slider-arrow" id="prevSlide" aria-label="Testimonio anterior">‹</button>
-        <div class="slider-dots" id="sliderDots"></div>
-        <button class="slider-arrow" id="nextSlide" aria-label="Testimonio siguiente">›</button>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1547,8 +1313,8 @@ input{font-family:var(--font-secondary)}
           <li><a href="#">Inicio</a></li>
           <li><a href="#sorteo">Sorteos</a></li>
           <li><a href="#premios">Premios</a></li>
-          <li><a href="#ganadores">Ganadores</a></li>
           <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
 
@@ -1648,34 +1414,6 @@ input{font-family:var(--font-secondary)}
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  /* ============================================
-     12. COUNTUP — stats de ganadores
-     ============================================ */
-  function countUp(el){
-    const target = parseFloat(el.dataset.target);
-    const decimals = parseInt(el.dataset.decimals || '0', 10);
-    const prefix = el.dataset.prefix || '';
-    const suffix = el.dataset.suffix || '';
-    const duration = 1800;
-    const start = performance.now();
-    function frame(now){
-      const t = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
-      const val = (target * eased).toFixed(decimals);
-      el.textContent = prefix + (decimals ? val : Math.round(target * eased).toLocaleString('es-CL')) + suffix;
-      if (t < 1) requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }
-  const statsObserver = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll('.countup').forEach(countUp);
-        statsObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.4 });
-  statsObserver.observe(document.getElementById('statsRow'));
 
   /* ============================================
      3 + 4. PAQUETES + CANTIDAD + TOTAL
@@ -1896,40 +1634,6 @@ input{font-family:var(--font-secondary)}
       }
     });
   });
-
-  /* ============================================
-     9. SLIDER TESTIMONIOS — autoplay + controles
-     ============================================ */
-  const track = document.getElementById('sliderTrack');
-  const slides = track.children.length;
-  const dotsWrap = document.getElementById('sliderDots');
-  let current = 0;
-  let autoTimer;
-
-  for (let i = 0; i < slides; i++) {
-    const dot = document.createElement('button');
-    dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', 'Ir al testimonio ' + (i + 1));
-    dot.addEventListener('click', () => goTo(i));
-    dotsWrap.appendChild(dot);
-  }
-  const dots = dotsWrap.children;
-
-  function goTo(i){
-    current = (i + slides) % slides;
-    track.style.transform = 'translateX(-' + current * 100 + '%)';
-    [...dots].forEach((d, j) => d.classList.toggle('active', j === current));
-  }
-  function startAuto(){ autoTimer = setInterval(() => goTo(current + 1), 4000); }
-  function stopAuto(){ clearInterval(autoTimer); }
-
-  document.getElementById('prevSlide').addEventListener('click', () => goTo(current - 1));
-  document.getElementById('nextSlide').addEventListener('click', () => goTo(current + 1));
-
-  const slider = document.getElementById('slider');
-  slider.addEventListener('mouseenter', stopAuto);
-  slider.addEventListener('mouseleave', startAuto);
-  startAuto();
 
   /* ============================================
      13. SMOOTH SCROLL — compensando navbar fija
