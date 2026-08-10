@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
     const { rows: orders } = await sql`
       SELECT o.ref, o.name, o.email, o.phone, o.rut, o.quantity, o.amount, o.status,
-             o.payment_id, o.created_at,
+             o.payment_id, o.created_at, o.email_status, o.email_sent_at,
              COALESCE(array_agg(t.number ORDER BY t.number) FILTER (WHERE t.number IS NOT NULL), '{}') AS tickets
       FROM orders o
       LEFT JOIN tickets t ON t.order_ref = o.ref
@@ -37,10 +37,13 @@ export default async function handler(req, res) {
       ORDER BY o.created_at DESC`;
 
     const { rows: stats } = await sql`SELECT COUNT(*)::int AS vendidos FROM tickets WHERE order_ref IS NOT NULL`;
+    const aprobadas = orders.filter(o => o.status === 'approved').length;
     res.status(200).json({
       tickets_vendidos: stats[0].vendidos,
       tickets_disponibles: TICKETS_TOTAL - stats[0].vendidos,
       total_ordenes: orders.length,
+      ordenes_aprobadas: aprobadas,
+      ordenes_pendientes: orders.length - aprobadas,
       ordenes: orders
     });
   } catch (e) {

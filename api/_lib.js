@@ -34,17 +34,23 @@ let schemaReady = false;
 export async function ensureSchema() {
   if (schemaReady) return;
   await sql`CREATE TABLE IF NOT EXISTS orders (
-    ref         TEXT PRIMARY KEY,
-    name        TEXT,
-    email       TEXT,
-    phone       TEXT,
-    rut         TEXT,
-    quantity    INT  NOT NULL,
-    amount      INT  NOT NULL,
-    status      TEXT NOT NULL DEFAULT 'pending',
-    payment_id  TEXT,
-    created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+    ref             TEXT PRIMARY KEY,
+    name            TEXT,
+    email           TEXT,
+    phone           TEXT,
+    rut             TEXT,
+    quantity        INT  NOT NULL,
+    amount          INT  NOT NULL,
+    status          TEXT NOT NULL DEFAULT 'pending',
+    payment_id      TEXT,
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+    email_status    TEXT,
+    email_sent_at   TIMESTAMPTZ
   )`;
+  // Migración segura para bases ya existentes (creadas antes de trackear el
+  // envío de emails).
+  await sql`ALTER TABLE orders ADD COLUMN IF NOT EXISTS email_status TEXT`;
+  await sql`ALTER TABLE orders ADD COLUMN IF NOT EXISTS email_sent_at TIMESTAMPTZ`;
   await sql`CREATE TABLE IF NOT EXISTS tickets (
     number      SERIAL PRIMARY KEY,
     order_ref   TEXT REFERENCES orders(ref),
@@ -146,7 +152,7 @@ export async function finalizeOrder(ref, paymentId) {
           await client.sql`COMMIT`;
           const tickets = t.map(x => x.number);
           result = { status: 'approved', tickets, quantity: order.quantity };
-          emailData = { name: order.name, email: order.email, tickets, quantity: order.quantity };
+          emailData = { ref, name: order.name, email: order.email, tickets, quantity: order.quantity };
         }
       }
     }
@@ -167,8 +173,13 @@ export async function finalizeOrder(ref, paymentId) {
 
 // ---- Email (Resend) ----
 // Opcional: si no hay RESEND_API_KEY, simplemente no envía (no rompe el pago).
-export async function sendTicketEmail({ name, email, tickets, quantity }) {
-  if (!process.env.RESEND_API_KEY || !email) return;
+// El resultado del envío (sent/failed/not_configured) queda registrado en la
+// orden para poder verlo en el dashboard de admin.
+export async function sendTicketEmail({ ref, name, email, tickets, quantity }) {
+  if (!process.env.RESEND_API_KEY || !email) {
+    if (ref) await sql`UPDATE orders SET email_status = 'not_configured' WHERE ref = ${ref}`;
+    return;
+  }
   const from = process.env.MAIL_FROM || 'EDU Cycling <onboarding@resend.dev>';
   const nums = (tickets || []).map(n => String(n).padStart(6, '0'));
   const lista = nums.map(n => '<span style="display:inline-block;font-family:monospace;font-size:22px;letter-spacing:4px;color:#fff;background:#1B3A4B;border:1px solid #FF5C00;border-radius:8px;padding:10px 16px;margin:4px;">' + n + '</span>').join('');
@@ -197,7 +208,12 @@ export async function sendTicketEmail({ name, email, tickets, quantity }) {
       html
     })
   });
-  if (!r.ok) console.error('Resend respondió', r.status, await r.text());
+  if (!r.ok) {
+    console.error('Resend respondió', r.status, await r.text());
+    if (ref) await sql`UPDATE orders SET email_status = 'failed', email_sent_at = now() WHERE ref = ${ref}`;
+  } else if (ref) {
+    await sql`UPDATE orders SET email_status = 'sent', email_sent_at = now() WHERE ref = ${ref}`;
+  }
 }
 
 // ---- Helpers HTTP ----
