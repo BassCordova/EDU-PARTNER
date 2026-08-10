@@ -77,6 +77,22 @@ a{color:inherit}
 .gate input:focus{outline:none;border-color:var(--red)}
 .gate .error{color:var(--red);font-size:13px;margin-top:12px;display:none}
 
+/* ---------- Ingresos totales ---------- */
+.revenue-wrap{padding:24px 24px 0}
+.revenue-card{
+  background:linear-gradient(135deg,var(--red),var(--red-deep));
+  border-radius:14px;padding:24px 28px;
+  box-shadow:0 8px 30px rgba(255,92,0,.25);
+}
+.revenue-card .num{
+  font-family:var(--font-display);font-weight:900;font-size:44px;
+  color:var(--white);line-height:1;
+}
+.revenue-card .lbl{
+  font-size:12px;color:rgba(255,255,255,.85);text-transform:uppercase;
+  letter-spacing:1px;font-weight:700;margin-top:6px;
+}
+
 /* ---------- Stats ---------- */
 .stats{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;
@@ -209,6 +225,9 @@ tbody tr:hover{background:rgba(255,255,255,.03)}
     </div>
   </div>
 
+  <div class="revenue-wrap">
+    <div class="revenue-card" id="revenueCard"></div>
+  </div>
   <div class="stats" id="statsRow"></div>
 
   <div class="toolbar">
@@ -272,6 +291,19 @@ tbody tr:hover{background:rgba(255,255,255,.03)}
 
   let currentData = null;
 
+  // Cuentas de prueba usadas para probar el checkout durante el desarrollo:
+  // sus intentos fallidos/abandonados ("pending") se ocultan del panel para
+  // no ensuciarlo. Las compras APROBADAS de estas mismas cuentas SÍ se
+  // muestran igual (son tickets reales asignados).
+  const TEST_EMAILS_PENDING = [
+    'bastian@heat.cl',
+    'rhcp.bc@gmail.com',
+    'caceres77dedes44@gmail.com'
+  ];
+  function isHiddenTestNoise(o){
+    return o.status === 'pending' && TEST_EMAILS_PENDING.includes((o.email || '').toLowerCase());
+  }
+
   function getKey(){ return sessionStorage.getItem('edu_admin_key') || ''; }
   function setKey(k){ sessionStorage.setItem('edu_admin_key', k); }
   function clearKey(){ sessionStorage.removeItem('edu_admin_key'); }
@@ -306,6 +338,10 @@ tbody tr:hover{background:rgba(255,255,255,.03)}
   }
 
   function renderStats(d){
+    document.getElementById('revenueCard').innerHTML =
+      '<div class="num">' + fmtCLP(d.ingresos_totales) + '</div>' +
+      '<div class="lbl">Ingresos totales (órdenes aprobadas)</div>';
+
     const cards = [
       { num: d.total_ordenes, lbl: 'Total órdenes' },
       { num: d.ordenes_aprobadas, lbl: 'Aprobadas' },
@@ -378,6 +414,13 @@ tbody tr:hover{background:rgba(255,255,255,.03)}
     document.getElementById('errorState').classList.add('hidden');
     try {
       const data = await fetchAdmin();
+      data.ordenes = data.ordenes.filter(o => !isHiddenTestNoise(o));
+      data.total_ordenes = data.ordenes.length;
+      data.ordenes_aprobadas = data.ordenes.filter(o => o.status === 'approved').length;
+      data.ordenes_pendientes = data.ordenes.filter(o => o.status === 'pending').length;
+      data.ingresos_totales = data.ordenes
+        .filter(o => o.status === 'approved')
+        .reduce((sum, o) => sum + Number(o.amount || 0), 0);
       currentData = data;
       document.getElementById('loadingState').classList.add('hidden');
       renderStats(data);
