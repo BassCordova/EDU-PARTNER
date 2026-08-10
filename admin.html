@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDU Cycling — Centro de Control</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%231B3A4B'/%3E%3Ccircle cx='24' cy='24' r='17' fill='none' stroke='%23FFFFFF' stroke-width='2.5'/%3E%3Ccircle cx='24' cy='24' r='3.5' fill='%23FF5C00'/%3E%3Cg stroke='%23FFFFFF' stroke-width='1.4'%3E%3Cline x1='24' y1='24' x2='24' y2='8'/%3E%3Cline x1='24' y1='24' x2='24' y2='40'/%3E%3Cline x1='24' y1='24' x2='10' y2='16'/%3E%3Cline x1='24' y1='24' x2='38' y2='16'/%3E%3Cline x1='24' y1='24' x2='10' y2='32'/%3E%3Cline x1='24' y1='24' x2='38' y2='32'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#FF5C00; --red-deep:#CC4900;
+  --black:#0D2B38; --near-black:#1B3A4B;
+  --slate:#5C7A8A; --white:#FFFFFF;
+  --green:#2E9E5B; --yellow:#D9A400;
+  --font-display:'Barlow Condensed',sans-serif;
+  --font-primary:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--black);color:var(--white);
+  font-family:var(--font-primary);font-weight:400;line-height:1.5;
+  min-height:100vh;
+}
+a{color:inherit}
+.container{max-width:1400px;margin:0 auto;padding:24px}
+
+/* ---------- Header ---------- */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.1);
+  flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .wordmark{
+  font-family:var(--font-display);font-weight:800;font-style:italic;
+  font-size:20px;text-transform:uppercase;letter-spacing:1px;
+}
+.brand .wordmark span{color:var(--red)}
+.brand .tag{
+  font-family:var(--font-primary);font-weight:600;font-size:12px;
+  color:var(--slate);text-transform:uppercase;letter-spacing:1px;
+  border-left:1px solid rgba(255,255,255,.15);padding-left:10px;margin-left:2px;
+}
+.topbar-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- Botones ---------- */
+.btn{
+  font-family:var(--font-primary);font-weight:700;font-size:13px;
+  padding:9px 16px;border-radius:6px;border:1px solid rgba(255,255,255,.15);
+  background:var(--near-black);color:var(--white);cursor:pointer;
+  transition:all .15s;display:inline-flex;align-items:center;gap:6px;
+}
+.btn:hover{border-color:rgba(255,255,255,.35)}
+.btn-primary{background:var(--red);border-color:var(--red)}
+.btn-primary:hover{background:var(--red-deep);border-color:var(--red-deep)}
+.btn-danger{background:transparent;border-color:rgba(255,92,0,.4);color:var(--red)}
+.btn-danger:hover{background:rgba(255,92,0,.1)}
+.btn-sm{padding:5px 10px;font-size:11px;border-radius:5px}
+
+/* ---------- Login gate ---------- */
+.gate{
+  max-width:420px;margin:12vh auto;padding:40px 32px;text-align:center;
+  background:var(--near-black);border-radius:16px;border:1px solid rgba(255,255,255,.08);
+}
+.gate h1{
+  font-family:var(--font-display);font-weight:900;font-size:28px;
+  text-transform:uppercase;margin:16px 0 8px;
+}
+.gate p{color:var(--slate);font-size:14px;margin-bottom:24px}
+.gate input{
+  width:100%;padding:12px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.15);
+  background:var(--black);color:var(--white);font-size:14px;margin-bottom:14px;
+}
+.gate input:focus{outline:none;border-color:var(--red)}
+.gate .error{color:var(--red);font-size:13px;margin-top:12px;display:none}
+
+/* ---------- Stats ---------- */
+.stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;
+  padding:24px;
+}
+.stat-card{
+  background:var(--near-black);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:18px 20px;
+}
+.stat-card .num{
+  font-family:var(--font-display);font-weight:900;font-size:32px;
+  color:var(--red);line-height:1;
+}
+.stat-card .lbl{
+  font-size:11px;color:var(--slate);text-transform:uppercase;
+  letter-spacing:1px;font-weight:700;margin-top:6px;
+}
+
+/* ---------- Toolbar ---------- */
+.toolbar{
+  display:flex;gap:12px;flex-wrap:wrap;align-items:center;
+  padding:0 24px 16px;
+}
+.toolbar input[type=search]{
+  flex:1;min-width:220px;padding:10px 14px;border-radius:8px;
+  border:1px solid rgba(255,255,255,.15);background:var(--near-black);
+  color:var(--white);font-size:13px;
+}
+.toolbar input[type=search]:focus{outline:none;border-color:var(--red)}
+.toolbar select{
+  padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.15);
+  background:var(--near-black);color:var(--white);font-size:13px;
+}
+.result-count{font-size:12px;color:var(--slate);white-space:nowrap}
+
+/* ---------- Tabla ---------- */
+.table-wrap{
+  overflow-x:auto;padding:0 24px 24px;
+}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:1100px}
+thead th{
+  text-align:left;padding:10px 12px;
+  font-family:var(--font-primary);font-weight:700;font-size:11px;
+  text-transform:uppercase;letter-spacing:.5px;color:var(--slate);
+  border-bottom:1px solid rgba(255,255,255,.1);white-space:nowrap;
+}
+tbody td{
+  padding:12px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top;
+}
+tbody tr:hover{background:rgba(255,255,255,.03)}
+.name{font-weight:700}
+.muted{color:var(--slate);font-size:12px}
+.links{display:flex;gap:8px;margin-top:4px}
+.links a{font-size:11px;color:var(--red);text-decoration:none;font-weight:600}
+.links a:hover{text-decoration:underline}
+
+.badge{
+  display:inline-block;padding:3px 10px;border-radius:99px;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+  white-space:nowrap;
+}
+.badge-approved{background:rgba(46,158,91,.15);color:var(--green)}
+.badge-pending{background:rgba(217,164,0,.15);color:var(--yellow)}
+.badge-sold_out{background:rgba(255,92,0,.15);color:var(--red)}
+.badge-sent{background:rgba(46,158,91,.15);color:var(--green)}
+.badge-failed{background:rgba(255,92,0,.15);color:var(--red)}
+.badge-not_configured{background:rgba(217,164,0,.15);color:var(--yellow)}
+.badge-none{background:rgba(255,255,255,.06);color:var(--slate)}
+
+.tickets-cell{font-family:monospace;font-size:12px;max-width:220px}
+
+/* ---------- Estados ---------- */
+.state-msg{padding:60px 24px;text-align:center;color:var(--slate)}
+.hidden{display:none !important}
+
+/* ---------- Danger zone ---------- */
+.danger-zone{
+  margin:24px;padding:20px 24px;border:1px dashed rgba(255,92,0,.4);
+  border-radius:12px;display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:14px;
+}
+.danger-zone h3{font-family:var(--font-display);font-weight:800;font-size:18px;text-transform:uppercase}
+.danger-zone p{color:var(--slate);font-size:12px;margin-top:4px}
+
+@media (max-width:640px){
+  .topbar{padding:14px 16px}
+  .stats,.toolbar,.table-wrap,.danger-zone{padding-left:16px;padding-right:16px}
+}
+</style>
+</head>
+<body>
+
+<div id="gate" class="gate">
+  <svg width="40" height="40" viewBox="0 0 48 48" style="margin:0 auto">
+    <circle cx="24" cy="24" r="21" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+    <circle cx="24" cy="24" r="4" fill="#FF5C00"/>
+    <g stroke="#FFFFFF" stroke-width="1.4">
+      <line x1="24" y1="24" x2="24" y2="4"/><line x1="24" y1="24" x2="24" y2="44"/>
+      <line x1="24" y1="24" x2="6" y2="14"/><line x1="24" y1="24" x2="42" y2="14"/>
+      <line x1="24" y1="24" x2="6" y2="34"/><line x1="24" y1="24" x2="42" y2="34"/>
+    </g>
+  </svg>
+  <h1>Centro de Control</h1>
+  <p>Ingresa la clave de administrador para ver las órdenes del sorteo.</p>
+  <input type="password" id="keyInput" placeholder="Admin key" autocomplete="off">
+  <button class="btn btn-primary" id="loginBtn" style="width:100%;justify-content:center">Entrar</button>
+  <p class="error" id="gateError">Clave incorrecta. Intenta de nuevo.</p>
+</div>
+
+<div id="dashboard" class="hidden">
+
+  <div class="topbar">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="21" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+        <circle cx="24" cy="24" r="4" fill="#FF5C00"/>
+        <g stroke="#FFFFFF" stroke-width="1.4">
+          <line x1="24" y1="24" x2="24" y2="4"/><line x1="24" y1="24" x2="24" y2="44"/>
+          <line x1="24" y1="24" x2="6" y2="14"/><line x1="24" y1="24" x2="42" y2="14"/>
+          <line x1="24" y1="24" x2="6" y2="34"/><line x1="24" y1="24" x2="42" y2="34"/>
+        </g>
+      </svg>
+      <span class="wordmark">EDU <span>CYCLING</span></span>
+      <span class="tag">Centro de control</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn" id="refreshBtn">↻ Actualizar</button>
+      <button class="btn" id="exportBtn">⬇ Exportar CSV</button>
+      <button class="btn" id="logoutBtn">Salir</button>
+    </div>
+  </div>
+
+  <div class="stats" id="statsRow"></div>
+
+  <div class="toolbar">
+    <input type="search" id="searchInput" placeholder="Buscar por nombre, email, RUT o número de ticket...">
+    <select id="statusFilter">
+      <option value="">Todos los estados</option>
+      <option value="approved">Aprobadas</option>
+      <option value="pending">Pendientes</option>
+      <option value="sold_out">Sold out</option>
+    </select>
+    <select id="emailFilter">
+      <option value="">Cualquier email</option>
+      <option value="sent">Enviado</option>
+      <option value="failed">Falló</option>
+      <option value="not_configured">Sin configurar</option>
+      <option value="none">No aplica (pendiente)</option>
+    </select>
+    <span class="result-count" id="resultCount"></span>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Nombre</th>
+          <th>Contacto</th>
+          <th>RUT</th>
+          <th>Cant.</th>
+          <th>Monto</th>
+          <th>Estado</th>
+          <th>Tickets</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="ordersBody"></tbody>
+    </table>
+    <div id="emptyState" class="state-msg hidden">Sin resultados para ese filtro.</div>
+    <div id="loadingState" class="state-msg">Cargando órdenes...</div>
+    <div id="errorState" class="state-msg hidden"></div>
+  </div>
+
+  <div class="danger-zone">
+    <div>
+      <h3>Zona de peligro</h3>
+      <p>Borra todas las órdenes y tickets, y repuebla el sorteo desde 000001. Úsalo solo antes de lanzar o para limpiar pruebas.</p>
+    </div>
+    <button class="btn btn-danger" id="resetBtn">Borrar todos los datos</button>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  const gate = document.getElementById('gate');
+  const dashboard = document.getElementById('dashboard');
+  const keyInput = document.getElementById('keyInput');
+  const gateError = document.getElementById('gateError');
+
+  let currentData = null;
+
+  function getKey(){ return sessionStorage.getItem('edu_admin_key') || ''; }
+  function setKey(k){ sessionStorage.setItem('edu_admin_key', k); }
+  function clearKey(){ sessionStorage.removeItem('edu_admin_key'); }
+
+  async function fetchAdmin(extraParams){
+    const key = getKey();
+    const params = new URLSearchParams({ key, ...(extraParams || {}) });
+    const r = await fetch('/api/admin?' + params.toString());
+    if (r.status === 401) { throw { unauthorized: true }; }
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Error del servidor');
+    return data;
+  }
+
+  function fmtCLP(n){ return '$' + Number(n || 0).toLocaleString('es-CL'); }
+  function fmtDate(iso){
+    const d = new Date(iso);
+    return d.toLocaleString('es-CL', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+  }
+
+  const STATUS_LABEL = { approved:'Aprobada', pending:'Pendiente', sold_out:'Sold out' };
+  const EMAIL_LABEL = { sent:'Enviado', failed:'Falló', not_configured:'Sin configurar' };
+
+  function waLink(phone){
+    if (!phone) return null;
+    let digits = String(phone).replace(/[^\d]/g, '');
+    digits = digits.replace(/^0+/, '');
+    if (digits.length === 9 && digits.startsWith('9')) digits = '56' + digits;
+    else if (digits.length === 8) digits = '569' + digits;
+    if (!digits.startsWith('56')) return null;
+    return 'https://wa.me/' + digits;
+  }
+
+  function renderStats(d){
+    const cards = [
+      { num: d.total_ordenes, lbl: 'Total órdenes' },
+      { num: d.ordenes_aprobadas, lbl: 'Aprobadas' },
+      { num: d.ordenes_pendientes, lbl: 'Pendientes' },
+      { num: d.tickets_vendidos, lbl: 'Tickets vendidos' },
+      { num: d.tickets_disponibles, lbl: 'Tickets disponibles' }
+    ];
+    document.getElementById('statsRow').innerHTML = cards.map(c =>
+      '<div class="stat-card"><div class="num">' + c.num.toLocaleString('es-CL') + '</div><div class="lbl">' + c.lbl + '</div></div>'
+    ).join('');
+  }
+
+  function matchesFilters(o, q, statusF, emailF){
+    if (statusF && o.status !== statusF) return false;
+    const effectiveEmailStatus = o.email_status || 'none';
+    if (emailF && effectiveEmailStatus !== emailF) return false;
+    if (q) {
+      const hay = [o.name, o.email, o.rut, (o.tickets || []).join(' ')].join(' ').toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  }
+
+  function renderTable(){
+    if (!currentData) return;
+    const q = document.getElementById('searchInput').value.trim().toLowerCase();
+    const statusF = document.getElementById('statusFilter').value;
+    const emailF = document.getElementById('emailFilter').value;
+    const filtered = currentData.ordenes.filter(o => matchesFilters(o, q, statusF, emailF));
+
+    document.getElementById('resultCount').textContent = filtered.length + ' de ' + currentData.ordenes.length + ' órdenes';
+    document.getElementById('emptyState').classList.toggle('hidden', filtered.length !== 0);
+
+    document.getElementById('ordersBody').innerHTML = filtered.map(o => {
+      const wa = waLink(o.phone);
+      const emailStatus = o.email_status || 'none';
+      const emailLabel = o.status !== 'approved' ? '—' : (EMAIL_LABEL[emailStatus] || 'No enviado');
+      const emailBadgeClass = o.status !== 'approved' ? 'badge-none' : ('badge-' + emailStatus);
+      return '<tr>' +
+        '<td class="muted">' + fmtDate(o.created_at) + '</td>' +
+        '<td class="name">' + escapeHtml(o.name || '—') + '</td>' +
+        '<td>' + escapeHtml(o.email || '—') +
+          '<div class="links">' +
+            (o.email ? '<a href="mailto:' + encodeURIComponent(o.email) + '">Email</a>' : '') +
+            (wa ? '<a href="' + wa + '" target="_blank" rel="noopener">WhatsApp</a>' : '') +
+          '</div>' +
+        '</td>' +
+        '<td class="muted">' + escapeHtml(o.rut || '—') + '</td>' +
+        '<td>' + o.quantity + '</td>' +
+        '<td>' + fmtCLP(o.amount) + '</td>' +
+        '<td><span class="badge badge-' + o.status + '">' + (STATUS_LABEL[o.status] || o.status) + '</span></td>' +
+        '<td class="tickets-cell">' + ((o.tickets && o.tickets.length) ? o.tickets.map(n => String(n).padStart(6,'0')).join(', ') : '—') + '</td>' +
+        '<td><span class="badge ' + emailBadgeClass + '">' + emailLabel + '</span></td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function showError(msg){
+    document.getElementById('loadingState').classList.add('hidden');
+    document.getElementById('errorState').classList.remove('hidden');
+    document.getElementById('errorState').textContent = msg;
+  }
+
+  async function loadDashboard(){
+    document.getElementById('loadingState').classList.remove('hidden');
+    document.getElementById('errorState').classList.add('hidden');
+    try {
+      const data = await fetchAdmin();
+      currentData = data;
+      document.getElementById('loadingState').classList.add('hidden');
+      renderStats(data);
+      renderTable();
+      gate.classList.add('hidden');
+      dashboard.classList.remove('hidden');
+    } catch (e) {
+      if (e && e.unauthorized) {
+        clearKey();
+        gate.classList.remove('hidden');
+        dashboard.classList.add('hidden');
+        gateError.style.display = 'block';
+        return;
+      }
+      showError('No se pudo cargar: ' + (e.message || e));
+      gate.classList.add('hidden');
+      dashboard.classList.remove('hidden');
+    }
+  }
+
+  function exportCsv(){
+    if (!currentData) return;
+    const headers = ['Fecha','Nombre','Email','Telefono','RUT','Cantidad','Monto','Estado','Tickets','EstadoEmail'];
+    const rows = currentData.ordenes.map(o => [
+      o.created_at, o.name, o.email, o.phone, o.rut, o.quantity, o.amount, o.status,
+      (o.tickets || []).map(n => String(n).padStart(6,'0')).join(' '),
+      o.email_status || ''
+    ]);
+    const csv = [headers, ...rows].map(r =>
+      r.map(v => '"' + String(v == null ? '' : v).replace(/"/g,'""') + '"').join(',')
+    ).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'edu-cycling-ordenes-' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+  }
+
+  document.getElementById('loginBtn').addEventListener('click', () => {
+    const k = keyInput.value.trim();
+    if (!k) return;
+    setKey(k);
+    gateError.style.display = 'none';
+    loadDashboard();
+  });
+  keyInput.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginBtn').click(); });
+
+  document.getElementById('refreshBtn').addEventListener('click', loadDashboard);
+  document.getElementById('exportBtn').addEventListener('click', exportCsv);
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    clearKey();
+    dashboard.classList.add('hidden');
+    gate.classList.remove('hidden');
+    keyInput.value = '';
+  });
+
+  document.getElementById('searchInput').addEventListener('input', renderTable);
+  document.getElementById('statusFilter').addEventListener('change', renderTable);
+  document.getElementById('emailFilter').addEventListener('change', renderTable);
+
+  document.getElementById('resetBtn').addEventListener('click', async () => {
+    const typed = prompt('Esto borra TODAS las órdenes y tickets, sin vuelta atrás.\nEscribe BORRAR para confirmar:');
+    if (typed !== 'BORRAR') return;
+    try {
+      await fetchAdmin({ action: 'reset', confirm: 'BORRAR' });
+      alert('Datos borrados. Los 2.000 números vuelven a estar disponibles.');
+      loadDashboard();
+    } catch (e) {
+      alert('No se pudo borrar: ' + (e.message || e));
+    }
+  });
+
+  // Si ya hay una key guardada en esta sesión del navegador, entra directo.
+  if (getKey()) loadDashboard();
+})();
+</script>
+</body>
+</html>
