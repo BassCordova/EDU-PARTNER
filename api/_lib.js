@@ -10,12 +10,21 @@ export const TICKETS_TOTAL = 2000;
 export const PRECIO_UNITARIO = 3000;
 const PAQUETES = { 1: 3000, 2: 5000, 5: 10000 };
 
+// Precio por ticket según tramo de cantidad (descuento por volumen).
+// 1 = $3.000 c/u · 2 a 4 = $2.500 c/u (precio del pack de 2) · 5+ = $2.000 c/u (precio del pack de 5).
+function precioPorUnidad(qty) {
+  if (qty >= 5) return PAQUETES[5] / 5;
+  if (qty >= 2) return PAQUETES[2] / 2;
+  return PAQUETES[1];
+}
+
 // Calcula el monto en CLP a partir de la cantidad. Devuelve null si es inválida.
 // IMPORTANTE: el monto SIEMPRE se calcula en el servidor; nunca se confía en el cliente.
 export function calcAmount(qtyRaw) {
   const qty = parseInt(qtyRaw, 10);
   if (!Number.isInteger(qty) || qty < 1 || qty > TICKETS_TOTAL) return null;
-  return PAQUETES[qty] || qty * PRECIO_UNITARIO;
+  if (PAQUETES[qty]) return PAQUETES[qty];
+  return qty * precioPorUnidad(qty);
 }
 
 export const uuid = () => crypto.randomUUID();

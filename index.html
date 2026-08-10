@@ -1424,10 +1424,17 @@ input{font-family:var(--font-secondary)}
   const sumQty = document.getElementById('sumQty');
   const sumTotal = document.getElementById('sumTotal');
 
+  // Precio por ticket según tramo de cantidad (descuento por volumen).
+  // 1 = $3.000 c/u · 2 a 4 = $2.500 c/u (precio del pack de 2) · 5+ = $2.000 c/u (precio del pack de 5).
+  function precioPorUnidad(qty){
+    if (qty >= 5) return PAQUETES[5] / 5;
+    if (qty >= 2) return PAQUETES[2] / 2;
+    return PAQUETES[1];
+  }
   function precioPara(qty){
-    // Aplica precio de paquete exacto si existe; si no, unitario
+    // Aplica precio de paquete exacto si existe; si no, el del tramo correspondiente
     if (PAQUETES[qty]) return PAQUETES[qty];
-    return qty * PRECIO_UNITARIO;
+    return qty * precioPorUnidad(qty);
   }
   function updateTotal(){
     let qty = parseInt(qtyInput.value, 10);
