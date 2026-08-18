@@ -68,6 +68,10 @@ https://TU-DOMINIO/api/admin?key=TU_ADMIN_KEY
 ```
 Te muestra cada comprador con sus números de ticket y el total vendido.
 
+También existe un panel visual completo en `https://TU-DOMINIO/admin.html`
+(pide la misma `ADMIN_KEY`), con órdenes, estado de envío de correo, ingresos
+totales y un botón para reenviar el correo de confirmación por orden.
+
 ---
 
 ---
@@ -90,6 +94,13 @@ Cuando un pago se aprueba, el comprador recibe su número de ticket por correo.
 > Mientras verificas el dominio, si dejas `MAIL_FROM` vacío usa el remitente de
 > prueba de Resend (`onboarding@resend.dev`), que **solo envía a tu propio correo**.
 > Sirve para probar, pero para enviar a los compradores reales necesitas el dominio verificado.
+
+Si algún comprador no recibió el correo (falla puntual de envío), puedes
+reenviarlo sin tocar la base de datos desde el panel `/admin.html` (botón
+"Reenviar correo" en cada orden aprobada), o directo por URL:
+```
+https://TU-DOMINIO/api/admin-resend-email?key=TU_ADMIN_KEY&ref=REF_DE_LA_ORDEN
+```
 
 ---
 
@@ -123,6 +134,32 @@ comprador real recibe el ticket 000001.
 > Orden recomendado: deja primero todo probado con credenciales de **prueba**.
 > El cambio a producción es el último paso del lanzamiento.
 
+También registra el webhook en **Mercado Pago → Developers → tu app → Webhooks**
+(sección aparte de la URL de notificación dinámica que ya manda el código):
+agrega `https://edupartner.cl/api/webhook` para el evento **Pagos**. Esto es
+la vía principal para confirmar pagos; el cron de reconciliación (ver abajo)
+es el respaldo si esa notificación no llega.
+
+---
+
+## Reconciliación automática (respaldo si el webhook no llega)
+
+Además del webhook, hay un cron job (`/api/cron-reconcile`, cada 10 minutos,
+configurado en `vercel.json`) que revisa las órdenes que quedaron en
+`pending` por más de 5 minutos, busca el pago directo en Mercado Pago por
+`external_reference` y, si está aprobado, confirma la orden igual que lo
+haría el webhook. Las que llevan más de 24 horas sin pagarse se marcan como
+`expired` para no ensuciar el panel. No requiere configuración: funciona
+apenas se despliega. Vercel lo debe mostrar en **Settings → Cron Jobs**
+(en el plan Hobby, Vercel puede forzar la frecuencia a una vez al día).
+
+### Variables opcionales (endurecen la plataforma, no son obligatorias)
+
+| Nombre | Para qué sirve | Si no la configuras |
+|---|---|---|
+| `CRON_SECRET` | Exige que solo el scheduler de Vercel pueda llamar `/api/cron-reconcile` | El endpoint sigue funcionando igual, sin ese candado extra |
+| `MP_WEBHOOK_SECRET` | Verifica la firma que manda Mercado Pago en cada webhook (Developers → tu app → Webhooks → "Firma secreta") | El webhook sigue funcionando igual; cada pago de todas formas se re-verifica contra la API real de Mercado Pago antes de emitir tickets |
+
 ---
 
 ## Qué se construyó (resumen técnico)
@@ -130,13 +167,17 @@ comprador real recibe el ticket 000001.
 ```
 /api/create-preference   → crea el pago en Mercado Pago y redirige
 /api/webhook             → recibe la confirmación de MP y asigna tickets
+/api/cron-reconcile      → respaldo automático si el webhook no llega (cada 10 min)
 /api/order               → consulta estado + números de ticket (pantalla de éxito)
-/api/admin               → lista de participantes (protegida con ADMIN_KEY)
+/api/admin               → lista de participantes en JSON (protegida con ADMIN_KEY)
+/api/admin-resend-email  → reenvía el correo de confirmación de una orden
 /api/_lib.js             → base de datos, precios y verificación de pagos
+admin.html               → panel visual (centro de control) del sorteo
 ```
 
 - El **monto siempre se calcula en el servidor** (no se confía en el navegador).
-- La asignación de números es **atómica e idempotente**: no hay duplicados ni
-  doble cobro aunque el webhook llegue dos veces.
+- El **RUT también se valida en el servidor** (dígito verificador), no solo en el navegador.
+- La asignación de números es **atómica, aleatoria e idempotente**: no hay
+  duplicados ni doble cobro aunque el webhook llegue dos veces.
 - Precios: 1 = $3.000 · 2 = $5.000 · 5 = $10.000 · otras cantidades = $3.000 c/u.
   (Se editan en `api/_lib.js`, constante `PAQUETES`, y en el JS de `index.html`.)
