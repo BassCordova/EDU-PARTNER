@@ -1,7 +1,7 @@
 // POST /api/create-preference
 // Crea una preferencia de pago en Mercado Pago (Checkout Pro) y devuelve
 // el init_point al que el navegador debe redirigir.
-import { ensureSchema, calcAmount, baseUrl, readJson, uuid } from './_lib.js';
+import { ensureSchema, calcAmount, baseUrl, readJson, uuid, validarRut } from './_lib.js';
 import { sql } from '@vercel/postgres';
 
 export default async function handler(req, res) {
@@ -20,6 +20,7 @@ export default async function handler(req, res) {
 
     if (!amount) { res.status(400).json({ error: 'Cantidad inválida' }); return; }
     if (name.length < 3 || !email) { res.status(400).json({ error: 'Datos incompletos' }); return; }
+    if (!validarRut(rut)) { res.status(400).json({ error: 'RUT inválido' }); return; }
 
     await ensureSchema();
 
