@@ -29,6 +29,23 @@ export function calcAmount(qtyRaw) {
 
 export const uuid = () => crypto.randomUUID();
 
+// Validación de RUT chileno (módulo 11). Mismo algoritmo que ya corría solo
+// en el navegador; ahora también se exige en el servidor antes de cobrar.
+export function validarRut(rutRaw) {
+  const rut = String(rutRaw || '').replace(/[.\s]/g, '').replace('-', '').toUpperCase();
+  if (!/^\d{7,8}[0-9K]$/.test(rut)) return false;
+  const cuerpo = rut.slice(0, -1);
+  const dv = rut.slice(-1);
+  let suma = 0, mult = 2;
+  for (let i = cuerpo.length - 1; i >= 0; i--) {
+    suma += parseInt(cuerpo[i], 10) * mult;
+    mult = mult === 7 ? 2 : mult + 1;
+  }
+  const resto = 11 - (suma % 11);
+  const dvCalc = resto === 11 ? '0' : resto === 10 ? 'K' : String(resto);
+  return dv === dvCalc;
+}
+
 // ---- Esquema (idempotente, se asegura en cada request) ----
 let schemaReady = false;
 export async function ensureSchema() {
@@ -81,6 +98,18 @@ export async function resetAllData() {
   await populateTicketPool();
 }
 
+// Marca como 'expired' las órdenes que llevan mucho tiempo en 'pending' (el
+// comprador nunca pagó, o pagó pero ni el webhook ni la reconciliación
+// encontraron el pago). Se llama desde el cron, después de reintentar
+// confirmarlas — mantiene el panel limpio sin depender de filtros a mano.
+export async function expireStaleOrders(hoursOld) {
+  const { rows } = await sql`
+    UPDATE orders SET status = 'expired'
+    WHERE status = 'pending' AND created_at < now() - (${hoursOld} || ' hours')::interval
+    RETURNING ref`;
+  return rows.length;
+}
+
 // ---- Mercado Pago ----
 export async function getPayment(paymentId) {
   const token = (process.env.MP_ACCESS_TOKEN || '').trim();
@@ -89,6 +118,26 @@ export async function getPayment(paymentId) {
   });
   if (!r.ok) return null;
   try { return await r.json(); } catch (_) { return null; }
+}
+
+// Busca en Mercado Pago si existe un pago APROBADO para una orden, usando el
+// external_reference (nuestro `ref`) — no requiere conocer el payment_id de
+// antemano. Lo usa el cron de reconciliación para rescatar órdenes que se
+// quedaron en 'pending' porque el webhook nunca llegó y el comprador no
+// volvió a la página de éxito.
+export async function findApprovedPaymentByRef(ref) {
+  const token = (process.env.MP_ACCESS_TOKEN || '').trim();
+  const url = 'https://api.mercadopago.com/v1/payments/search?' + new URLSearchParams({
+    external_reference: ref,
+    sort: 'date_created',
+    criteria: 'desc'
+  });
+  const r = await fetch(url, { headers: { Authorization: 'Bearer ' + token } });
+  if (!r.ok) return null;
+  let data;
+  try { data = await r.json(); } catch (_) { return null; }
+  const results = (data && data.results) || [];
+  return results.find(p => p.status === 'approved') || null;
 }
 
 // ---- Confirmación de orden (idempotente y atómica) ----
