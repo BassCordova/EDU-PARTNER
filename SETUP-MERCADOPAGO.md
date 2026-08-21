@@ -144,14 +144,20 @@ es el respaldo si esa notificación no llega.
 
 ## Reconciliación automática (respaldo si el webhook no llega)
 
-Además del webhook, hay un cron job (`/api/cron-reconcile`, cada 10 minutos,
+Además del webhook, hay un cron job (`/api/cron-reconcile`, **una vez al día**,
 configurado en `vercel.json`) que revisa las órdenes que quedaron en
 `pending` por más de 5 minutos, busca el pago directo en Mercado Pago por
 `external_reference` y, si está aprobado, confirma la orden igual que lo
 haría el webhook. Las que llevan más de 24 horas sin pagarse se marcan como
 `expired` para no ensuciar el panel. No requiere configuración: funciona
-apenas se despliega. Vercel lo debe mostrar en **Settings → Cron Jobs**
-(en el plan Hobby, Vercel puede forzar la frecuencia a una vez al día).
+apenas se despliega. Vercel lo muestra en **Settings → Cron Jobs**.
+
+> El plan **Hobby** de Vercel solo permite cron jobs con frecuencia diaria —
+> una frecuencia menor (ej. cada 10 minutos) hace que Vercel **rechace el
+> deployment completo** antes de crearlo (ni siquiera aparece como fallido
+> en la lista de Deployments). Si más adelante se sube a un plan de pago y
+> se quiere una reconciliación más frecuente, se puede ajustar el `schedule`
+> en `vercel.json` (ej. `*/10 * * * *`).
 
 ### Variables opcionales (endurecen la plataforma, no son obligatorias)
 
@@ -167,7 +173,7 @@ apenas se despliega. Vercel lo debe mostrar en **Settings → Cron Jobs**
 ```
 /api/create-preference   → crea el pago en Mercado Pago y redirige
 /api/webhook             → recibe la confirmación de MP y asigna tickets
-/api/cron-reconcile      → respaldo automático si el webhook no llega (cada 10 min)
+/api/cron-reconcile      → respaldo automático si el webhook no llega (diario)
 /api/order               → consulta estado + números de ticket (pantalla de éxito)
 /api/admin               → lista de participantes en JSON (protegida con ADMIN_KEY)
 /api/admin-resend-email  → reenvía el correo de confirmación de una orden
