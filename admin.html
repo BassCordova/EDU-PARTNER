@@ -528,8 +528,8 @@ tbody tr:hover{background:rgba(255,255,255,.03)}
     const typed = prompt('Esto borra TODAS las órdenes y tickets, sin vuelta atrás.\nEscribe BORRAR para confirmar:');
     if (typed !== 'BORRAR') return;
     try {
-      await fetchAdmin({ action: 'reset', confirm: 'BORRAR' });
-      alert('Datos borrados. Los 2.000 números vuelven a estar disponibles.');
+      const r = await fetchAdmin({ action: 'reset', confirm: 'BORRAR' });
+      alert(r.mensaje || 'Datos borrados.');
       loadDashboard();
     } catch (e) {
       alert('No se pudo borrar: ' + (e.message || e));

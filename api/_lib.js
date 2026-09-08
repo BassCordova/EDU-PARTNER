@@ -6,7 +6,7 @@
 import { sql, createPool } from '@vercel/postgres';
 import crypto from 'crypto';
 
-export const TICKETS_TOTAL = 2000;
+export const TICKETS_TOTAL = 3000;
 export const PRECIO_UNITARIO = 3000;
 const PAQUETES = { 1: 3000, 2: 5000, 5: 10000 };
 

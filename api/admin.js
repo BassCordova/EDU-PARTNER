@@ -23,7 +23,7 @@ export default async function handler(req, res) {
         return;
       }
       await resetAllData();
-      res.status(200).json({ ok: true, mensaje: 'Datos borrados. Los 2.000 números vuelven a estar disponibles.' });
+      res.status(200).json({ ok: true, mensaje: `Datos borrados. Los ${TICKETS_TOTAL} números vuelven a estar disponibles.` });
       return;
     }
 
