@@ -4,8 +4,14 @@
 import { ensureSchema, calcAmount, baseUrl, readJson, uuid, validarRut } from './_lib.js';
 import { sql } from '@vercel/postgres';
 
+// Ventas cerradas: se pone en true al terminar el período de venta de un
+// sorteo (ver protocolo de cierre). Deja pasar cualquier lógica de
+// reconciliación/reenvío de correo intacta; solo bloquea compras nuevas.
+const VENTAS_CERRADAS = true;
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') { res.status(405).json({ error: 'Método no permitido' }); return; }
+  if (VENTAS_CERRADAS) { res.status(403).json({ error: 'Las ventas de tickets para este sorteo ya están cerradas' }); return; }
   const MP_TOKEN = (process.env.MP_ACCESS_TOKEN || '').trim();
   if (!MP_TOKEN) { res.status(500).json({ error: 'Mercado Pago no está configurado (falta MP_ACCESS_TOKEN)' }); return; }
 

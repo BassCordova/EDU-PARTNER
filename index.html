@@ -1098,6 +1098,10 @@ input{font-family:var(--font-secondary)}
       <div class="title-line"></div>
     </div>
 
+    <div style="background:rgba(255,92,0,.12);border:1px solid rgba(255,92,0,.4);border-radius:12px;padding:16px 20px;margin-bottom:24px;text-align:center;font-weight:700;">
+      🔒 Las ventas de tickets para este sorteo están cerradas. ¡Gracias a todos los que participaron!
+    </div>
+
     <div class="checkout-grid">
       <div>
         <!-- Selector de paquetes -->
@@ -1370,6 +1374,7 @@ input{font-family:var(--font-secondary)}
   'use strict';
 
   /* ---------- Datos del sorteo ---------- */
+  const VENTAS_CERRADAS = true; // Poner en false para reabrir ventas de tickets.
   const TICKETS_TOTAL = 3000;
   const PRECIO_UNITARIO = 3000;
   const PAQUETES = { 1: 3000, 2: 5000, 5: 10000 };
@@ -1481,7 +1486,12 @@ input{font-family:var(--font-secondary)}
   const payBtn = document.getElementById('payBtn');
   const modal = document.getElementById('ticketModal');
 
-  terms.addEventListener('change', () => { payBtn.disabled = !terms.checked; });
+  if (VENTAS_CERRADAS) {
+    payBtn.disabled = true;
+    payBtn.textContent = 'Ventas cerradas';
+  } else {
+    terms.addEventListener('change', () => { payBtn.disabled = !terms.checked; });
+  }
 
   // Validación de RUT chileno (módulo 11)
   function validarRut(rut){
@@ -1518,6 +1528,10 @@ input{font-family:var(--font-secondary)}
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
+    if (VENTAS_CERRADAS) {
+      alert('Las ventas de tickets para este sorteo ya están cerradas.');
+      return;
+    }
     const nombre = document.getElementById('fNombre');
     const email = document.getElementById('fEmail');
     const fono = document.getElementById('fFono');
