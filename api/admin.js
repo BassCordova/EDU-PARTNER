@@ -6,7 +6,7 @@
 // Esto vacía órdenes y tickets y reinicia la numeración en 000001.
 //
 // Protegido con la variable de entorno ADMIN_KEY.
-import { ensureSchema, resetAllData, TICKETS_TOTAL } from './_lib.js';
+import { ensureSchema, resetAllData, TICKETS_TOTAL, SORTEO_ACTUAL } from './_lib.js';
 import { sql } from '@vercel/postgres';
 
 export default async function handler(req, res) {
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
     const { rows: orders } = await sql`
       SELECT o.ref, o.name, o.email, o.phone, o.rut, o.quantity, o.amount, o.status,
-             o.payment_id, o.created_at, o.email_status, o.email_sent_at,
+             o.payment_id, o.created_at, o.email_status, o.email_sent_at, o.sorteo,
              COALESCE(array_agg(t.number ORDER BY t.number) FILTER (WHERE t.number IS NOT NULL), '{}') AS tickets
       FROM orders o
       LEFT JOIN tickets t ON t.order_ref = o.ref
@@ -44,6 +44,7 @@ export default async function handler(req, res) {
       total_ordenes: orders.length,
       ordenes_aprobadas: aprobadas,
       ordenes_pendientes: orders.length - aprobadas,
+      sorteo_actual: SORTEO_ACTUAL,
       ordenes: orders
     });
   } catch (e) {

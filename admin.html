@@ -249,6 +249,9 @@ tbody tr:hover{background:rgba(255,255,255,.03)}
       <option value="not_configured">Sin configurar</option>
       <option value="none">No aplica (pendiente)</option>
     </select>
+    <select id="sorteoFilter">
+      <option value="">Todos los sorteos</option>
+    </select>
     <span class="result-count" id="resultCount"></span>
   </div>
 
@@ -265,6 +268,7 @@ tbody tr:hover{background:rgba(255,255,255,.03)}
           <th>Estado</th>
           <th>Tickets</th>
           <th>Email</th>
+          <th>Sorteo</th>
         </tr>
       </thead>
       <tbody id="ordersBody"></tbody>
@@ -364,10 +368,11 @@ tbody tr:hover{background:rgba(255,255,255,.03)}
     ).join('');
   }
 
-  function matchesFilters(o, q, statusF, emailF){
+  function matchesFilters(o, q, statusF, emailF, sorteoF){
     if (statusF && o.status !== statusF) return false;
     const effectiveEmailStatus = o.email_status || 'none';
     if (emailF && effectiveEmailStatus !== emailF) return false;
+    if (sorteoF && (o.sorteo || '') !== sorteoF) return false;
     if (q) {
       const hay = [o.name, o.email, o.rut, (o.tickets || []).join(' ')].join(' ').toLowerCase();
       if (!hay.includes(q)) return false;
@@ -380,7 +385,8 @@ tbody tr:hover{background:rgba(255,255,255,.03)}
     const q = document.getElementById('searchInput').value.trim().toLowerCase();
     const statusF = document.getElementById('statusFilter').value;
     const emailF = document.getElementById('emailFilter').value;
-    const filtered = currentData.ordenes.filter(o => matchesFilters(o, q, statusF, emailF));
+    const sorteoF = document.getElementById('sorteoFilter').value;
+    const filtered = currentData.ordenes.filter(o => matchesFilters(o, q, statusF, emailF, sorteoF));
 
     document.getElementById('resultCount').textContent = filtered.length + ' de ' + currentData.ordenes.length + ' órdenes';
     document.getElementById('emptyState').classList.toggle('hidden', filtered.length !== 0);
@@ -411,12 +417,25 @@ tbody tr:hover{background:rgba(255,255,255,.03)}
         '<td><span class="badge ' + statusBadgeClass + '">' + statusLabel + '</span></td>' +
         '<td class="tickets-cell">' + ((o.tickets && o.tickets.length) ? o.tickets.map(n => String(n).padStart(6,'0')).join(', ') : '—') + '</td>' +
         '<td><span class="badge ' + emailBadgeClass + '">' + emailLabel + '</span>' + resendBtn + '</td>' +
+        '<td class="muted">' + escapeHtml(o.sorteo || '—') + '</td>' +
       '</tr>';
     }).join('');
   }
 
   function escapeHtml(s){
     return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  // Rellena el filtro de sorteo con los valores que realmente existen en los
+  // datos (mantiene la selección actual si sigue siendo válida). Así el
+  // panel no necesita saber de antemano los nombres de los sorteos.
+  function populateSorteoFilter(data){
+    const sel = document.getElementById('sorteoFilter');
+    const prev = sel.value;
+    const sorteos = Array.from(new Set(data.ordenes.map(o => o.sorteo).filter(Boolean))).sort();
+    sel.innerHTML = '<option value="">Todos los sorteos</option>' +
+      sorteos.map(s => '<option value="' + escapeHtml(s) + '">' + escapeHtml(s) + '</option>').join('');
+    if (sorteos.includes(prev)) sel.value = prev;
   }
 
   function showError(msg){
@@ -440,6 +459,7 @@ tbody tr:hover{background:rgba(255,255,255,.03)}
       currentData = data;
       document.getElementById('loadingState').classList.add('hidden');
       renderStats(data);
+      populateSorteoFilter(data);
       renderTable();
       gate.classList.add('hidden');
       dashboard.classList.remove('hidden');
@@ -468,11 +488,12 @@ tbody tr:hover{background:rgba(255,255,255,.03)}
 
   function exportCsv(){
     if (!currentData) return;
-    const headers = ['Fecha','Nombre','Email','Telefono','RUT','Cantidad','Monto','Estado','Tickets','EstadoEmail'];
+    const headers = ['Fecha','Nombre','Email','Telefono','RUT','Cantidad','Monto','Estado','Tickets','EstadoEmail','Sorteo'];
     const rows = currentData.ordenes.map(o => [
       o.created_at, o.name, o.email, o.phone, o.rut, o.quantity, o.amount, o.status,
       (o.tickets || []).map(n => String(n).padStart(6,'0')).join(' '),
-      o.email_status || ''
+      o.email_status || '',
+      o.sorteo || ''
     ]);
     const csv = [headers, ...rows].map(r =>
       r.map(v => '"' + String(v == null ? '' : v).replace(/"/g,'""') + '"').join(',')
@@ -505,6 +526,7 @@ tbody tr:hover{background:rgba(255,255,255,.03)}
   document.getElementById('searchInput').addEventListener('input', renderTable);
   document.getElementById('statusFilter').addEventListener('change', renderTable);
   document.getElementById('emailFilter').addEventListener('change', renderTable);
+  document.getElementById('sorteoFilter').addEventListener('change', renderTable);
 
   document.getElementById('ordersBody').addEventListener('click', async e => {
     const btn = e.target.closest('[data-resend]');

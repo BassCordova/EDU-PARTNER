@@ -10,6 +10,11 @@ export const TICKETS_TOTAL = 3000;
 export const PRECIO_UNITARIO = 3000;
 const PAQUETES = { 1: 3000, 2: 5000, 5: 10000 };
 
+// Identificador del sorteo actual: se guarda en cada orden nueva (columna
+// orders.sorteo) para poder separar las estadísticas y el panel por sorteo
+// cuando se hacen varios seguidos sobre la misma base de datos.
+export const SORTEO_ACTUAL = 'epic-hardtail-comp';
+
 // Precio por ticket según tramo de cantidad (descuento por volumen).
 // 1 = $3.000 c/u · 2 a 4 = $2.500 c/u (precio del pack de 2) · 5+ = $2.000 c/u (precio del pack de 5).
 function precioPorUnidad(qty) {
@@ -68,6 +73,13 @@ export async function ensureSchema() {
   // envío de emails).
   await sql`ALTER TABLE orders ADD COLUMN IF NOT EXISTS email_status TEXT`;
   await sql`ALTER TABLE orders ADD COLUMN IF NOT EXISTS email_sent_at TIMESTAMPTZ`;
+  // Migración segura: columna para distinguir a qué sorteo pertenece cada
+  // orden (útil cuando se hacen varios sorteos seguidos sobre la misma
+  // base). Las órdenes previas a este cambio no tienen forma de saber a
+  // qué sorteo pertenecían, así que se etiquetan como 'tarmac-sl7-105-di2'
+  // (el único sorteo que existía antes de agregar esta columna).
+  await sql`ALTER TABLE orders ADD COLUMN IF NOT EXISTS sorteo TEXT`;
+  await sql`UPDATE orders SET sorteo = 'tarmac-sl7-105-di2' WHERE sorteo IS NULL`;
   await sql`CREATE TABLE IF NOT EXISTS tickets (
     number      SERIAL PRIMARY KEY,
     order_ref   TEXT REFERENCES orders(ref),
@@ -237,7 +249,7 @@ export async function sendTicketEmail({ ref, name, email, tickets, quantity }) {
     '<div style="background:#0D2B38;color:#fff;font-family:Arial,Helvetica,sans-serif;padding:32px;border-radius:12px;max-width:560px;margin:auto;">' +
       '<h1 style="font-size:26px;margin:0 0 4px;font-style:italic;">EDU <span style="color:#FF5C00;">CYCLING</span></h1>' +
       '<p style="color:#FF5C00;font-weight:bold;letter-spacing:1px;margin:0 0 24px;">¡Pago confirmado!</p>' +
-      '<p style="font-size:16px;line-height:1.6;">Hola ' + (name || '') + ', ya eres parte del <strong>Sorteo Tarmac SL7 105 Di2</strong>.</p>' +
+      '<p style="font-size:16px;line-height:1.6;">Hola ' + (name || '') + ', ya eres parte del <strong>Sorteo Epic Hardtail Comp</strong>.</p>' +
       '<p style="font-size:14px;color:#bbb;margin-top:24px;">Tu' + plural + ' número' + plural + ' de ticket:</p>' +
       '<div style="margin:8px 0 24px;">' + lista + '</div>' +
       '<p style="font-size:14px;color:#bbb;line-height:1.6;">Guarda este correo: ' + (nums.length > 1 ? 'estos son tus pases' : 'este es tu pase') + ' al sorteo en vivo. El sorteo se transmite por Instagram y TikTok, con número ganador aleatorio y verificable.</p>' +
@@ -253,7 +265,7 @@ export async function sendTicketEmail({ ref, name, email, tickets, quantity }) {
     body: JSON.stringify({
       from,
       to: [email],
-      subject: '🎟️ Tu' + plural + ' ticket' + plural + ' — Sorteo Tarmac SL7 EDU Cycling',
+      subject: '🎟️ Tu' + plural + ' ticket' + plural + ' — Sorteo Epic Hardtail Comp EDU Cycling',
       html
     })
   });

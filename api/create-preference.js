@@ -1,13 +1,13 @@
 // POST /api/create-preference
 // Crea una preferencia de pago en Mercado Pago (Checkout Pro) y devuelve
 // el init_point al que el navegador debe redirigir.
-import { ensureSchema, calcAmount, baseUrl, readJson, uuid, validarRut } from './_lib.js';
+import { ensureSchema, calcAmount, baseUrl, readJson, uuid, validarRut, SORTEO_ACTUAL } from './_lib.js';
 import { sql } from '@vercel/postgres';
 
 // Ventas cerradas: se pone en true al terminar el período de venta de un
 // sorteo (ver protocolo de cierre). Deja pasar cualquier lógica de
 // reconciliación/reenvío de correo intacta; solo bloquea compras nuevas.
-const VENTAS_CERRADAS = true;
+const VENTAS_CERRADAS = false;
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') { res.status(405).json({ error: 'Método no permitido' }); return; }
@@ -39,8 +39,8 @@ export default async function handler(req, res) {
     }
 
     const ref = uuid();
-    await sql`INSERT INTO orders (ref, name, email, phone, rut, quantity, amount)
-              VALUES (${ref}, ${name}, ${email}, ${phone}, ${rut}, ${quantity}, ${amount})`;
+    await sql`INSERT INTO orders (ref, name, email, phone, rut, quantity, amount, sorteo)
+              VALUES (${ref}, ${name}, ${email}, ${phone}, ${rut}, ${quantity}, ${amount}, ${SORTEO_ACTUAL})`;
 
     const base = baseUrl(req);
     const prefRes = await fetch('https://api.mercadopago.com/checkout/preferences', {
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         items: [{
-          title: 'Tickets Sorteo Tarmac SL7 — Specialized 105 Di2',
+          title: 'Tickets Sorteo Epic Hardtail Comp — Specialized',
           description: quantity + ' ticket(s) del sorteo',
           quantity: 1,
           unit_price: amount,
